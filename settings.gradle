@@ -1,0 +1,3 @@
+include ':basetools'
+include ':app'
+rootProject.name = "Baselibrary"

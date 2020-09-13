@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="CountDownTimeView">
+    <attr name="describeLocation" format="enum">
+      <enum name="left" value="0" />
+      <enum name="right" value="1" />
+    </attr>
+    <attr name="hourDescribe" format="string"/>
+    <attr name="minuteDescribe" format="string"/>
+    <attr name="secondDescribe" format="string"/>
+    <attr name="hasSecond" format="boolean"/>
+    <attr name="describe" format="string"/>
+    <attr name="errorTimeDescribe" format="string"/>
+    <attr name="defaultTimeDescribe" format="string"/>
+    <attr name="automatic" format="boolean"/>
+  </declare-styleable>
+
+  <declare-styleable name="DrawableTextView">
+    <attr name="tSelect" format="boolean" />
+    <attr name="tLeftDrawable" format="reference" />
+    <attr name="tLeftDrawableWidth" format="dimension" />
+    <attr name="tLeftDrawableHeight" format="dimension" />
+    <attr name="tRightDrawable" format="reference" />
+    <attr name="tRightDrawableWidth" format="dimension" />
+    <attr name="tRightDrawableHeight" format="dimension" />
+    <attr name="tTopDrawable" format="reference" />
+    <attr name="tTopDrawableWidth" format="dimension" />
+    <attr name="tTopDrawableHeight" format="dimension" />
+    <attr name="tBottomDrawable" format="reference" />
+    <attr name="tBottomDrawableWidth" format="dimension" />
+    <attr name="tBottomDrawableHeight" format="dimension" />
+    <attr name="tAlignDirection" format="enum">
+      <enum name="left" value="0" />
+      <enum name="right" value="1" />
+      <enum name="top" value="2" />
+      <enum name="bottom" value="3" />
+      <enum name="center" value="4" />
+      <enum name="none" value="5" />
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="OperateNumberView">
+    <attr name="plusImageRes" format="reference"/>
+    <attr name="reduceImageRes" format="reference"/>
+    <attr name="operateButtonWidth" format="dimension"/>
+    <attr name="operateButtonHeight" format="dimension"/>
+    <attr name="operateButtonReduceBackground" format="reference"/>
+    <attr name="operateButtonPlusBackground" format="reference"/>
+    <attr name="operateTextSize" format="dimension"/>
+    <attr name="operateTextColor" format="reference"/>
+    <attr name="numberViewWidth" format="dimension"/>
+    <attr name="numberViewHeight" format="dimension"/>
+    <attr name="numberViewBackground" format="reference"/>
+    <attr name="numberTextSize" format="dimension"/>
+    <attr name="numberTextColor" format="color|reference"/>
+    <attr name="maxNumber" format="integer"/>
+    <attr name="inputable" format="boolean"/>
+    <attr name="isAutoFill" format="boolean"/>
+  </declare-styleable>
+  <attr name="indexBarTextSize" format="dimension" />
+
+</resources>

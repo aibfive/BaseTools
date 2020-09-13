@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tv_reduce" type="id"/>
+    <item name="tv_plus" type="id"/>
+    <item name="et_number" type="id"/>
+</resources>
