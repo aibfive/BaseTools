@@ -36,20 +36,43 @@ public class OperateNumberView extends LinearLayout implements View.OnClickListe
     private OnNumberChangeListener onNumberChangeListener;
     private OnOperateNumberListener onOperateNumberListener;
 
-    private boolean isAutoFill = true;  //点击加减按钮是否自动修改数字视图文本
-    private Drawable operateButtonReduceBackground, operateButtonPlusBackground, numberViewBackground;
-    private float numberTextSize = 24;
-    private float operateTextSize = 24;
+    //数字输入框
+    private int numberViewWidth = LayoutParams.WRAP_CONTENT;//数字输入框宽度
+    private int numberViewHeight = LayoutParams.WRAP_CONTENT;//数字输入框高度
+    private Drawable numberViewBackground;//数字输入框背景
+    private float numberTextSize = 24;//数字输入框字体大小
+    private int numberTextColor = Color.BLACK;//数字输入框字体颜色
+
+    private OperateViewType currentType;//当前加减操作视图显示类型
+
+    private enum OperateViewType {//加减操作视图显示类型
+        text, //文本
+        image//图片
+    }
+
+    //加减操作视图宽度
     private int operateButtonWidth = LayoutParams.WRAP_CONTENT;
     private int operateButtonHeight = LayoutParams.WRAP_CONTENT;
-    private int numberViewWidth = LayoutParams.WRAP_CONTENT;
-    private int numberViewHeight = LayoutParams.WRAP_CONTENT;
-    private ColorStateList operateTextColor;
-    private int numberTextColor = Color.BLACK;
+
+    //图片类型加操作视图
+    private Drawable imagePlusSrc;//加操作视图图片
+    private Drawable imagePlusSrcUnenabled;//加操作视图不可操作图片
+    //图片类型减操作视图
+    private Drawable imageReduceSrc;//减操作视图图片
+    private Drawable imageReduceSrcUnenabled;//减操作视图不可操作图片
+
+    //文本类型加减操作视图
+    private Drawable textOperateBackground;//加减操作视图背景
+    private Drawable textOperateBackgroundUnenabled;//加减操作视图不可操作背景
+    private float textOperateTextSize = 24;//加减操作视图字体大小
+    private int textOperateTextColor = Color.BLACK;//加减操作视图字体颜色
+    private int textOperateTextColorUnenabled = Color.GRAY;//加减操作视图不可操作字体颜色
+
 
     private final int minNumber = 1;  //最小数值
     private int maxNumber = 999999999;  //最大数值
     private boolean inputable = false;  //是否可以编辑
+    private boolean isAutoFill = true;  //点击加减按钮是否自动修改数字视图文本
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -94,40 +117,59 @@ public class OperateNumberView extends LinearLayout implements View.OnClickListe
     public OperateNumberView(Context context) {
         super(context);
         initAttribute(null, 0);
-        initData();
         initView();
     }
 
     public OperateNumberView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initAttribute(attrs, 0);
-        initData();
         initView();
     }
 
     public OperateNumberView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttribute(attrs, defStyleAttr);
-        initData();
         initView();
     }
 
     private void initAttribute(AttributeSet attrs, int defStyle){
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.OperateNumberView, defStyle, 0);
-        numberTextColor = array.getColor(R.styleable.OperateNumberView_numberTextColor, numberTextColor);
-        numberTextSize = array.getDimension(R.styleable.OperateNumberView_numberTextSize, numberTextSize);
-        operateTextSize = array.getDimension(R.styleable.OperateNumberView_operateTextSize, operateTextSize);
-        operateTextColor = array.getColorStateList(R.styleable.OperateNumberView_operateTextColor);
-        maxNumber = array.getInteger(R.styleable.OperateNumberView_maxNumber, maxNumber);
+
+        numberViewWidth = array.getDimensionPixelSize(R.styleable.OperateNumberView_number_view_width, numberViewWidth);
+        numberViewHeight = array.getDimensionPixelSize(R.styleable.OperateNumberView_number_view_height, numberViewHeight);
+        numberViewBackground = array.getDrawable(R.styleable.OperateNumberView_number_view_background);
+        numberTextSize = array.getDimension(R.styleable.OperateNumberView_number_text_size, numberTextSize);
+        numberTextColor = array.getColor(R.styleable.OperateNumberView_number_text_color, numberTextColor);
+
+        int type = array.getInt(R.styleable.OperateNumberView_operate_button_type, OperateViewType.text.ordinal());
+        for (OperateViewType direction : OperateViewType.values()) {
+            if (direction.ordinal() == type) {
+                currentType = direction;
+                break;
+            }
+        }
+        operateButtonWidth = array.getDimensionPixelSize(R.styleable.OperateNumberView_operate_button_width, operateButtonWidth);
+        operateButtonHeight = array.getDimensionPixelSize(R.styleable.OperateNumberView_operate_button_height, operateButtonHeight);
+
+        if(currentType == OperateViewType.text){
+            textOperateBackground = array.getDrawable(R.styleable.OperateNumberView_text_operate_background);
+            textOperateBackgroundUnenabled = array.getDrawable(R.styleable.OperateNumberView_text_operate_background_unenabled);
+            textOperateTextSize = array.getDimension(R.styleable.OperateNumberView_text_operate_text_size, textOperateTextSize);
+            textOperateTextColor = array.getColor(R.styleable.OperateNumberView_text_operate_text_color, textOperateTextColor);
+            textOperateTextColorUnenabled = array.getColor(R.styleable.OperateNumberView_text_operate_text_color_unenabled, textOperateTextColorUnenabled);
+        }else if(currentType == OperateViewType.image){
+            imagePlusSrc = array.getDrawable(R.styleable.OperateNumberView_image_plus_src);
+            imagePlusSrcUnenabled = array.getDrawable(R.styleable.OperateNumberView_image_plus_src_unenabled);
+            imageReduceSrc = array.getDrawable(R.styleable.OperateNumberView_image_reduce_src);
+            imageReduceSrcUnenabled = array.getDrawable(R.styleable.OperateNumberView_image_reduce_src_unenabled);
+        }
+
+        maxNumber = array.getInteger(R.styleable.OperateNumberView_max_number, maxNumber);
         inputable = array.getBoolean(R.styleable.OperateNumberView_inputable, inputable);
-        isAutoFill = array.getBoolean(R.styleable.OperateNumberView_isAutoFill, isAutoFill);
-        numberViewWidth = array.getDimensionPixelSize(R.styleable.OperateNumberView_numberViewWidth, numberViewWidth);
-        numberViewHeight = array.getDimensionPixelSize(R.styleable.OperateNumberView_numberViewHeight, numberViewHeight);
-        operateButtonWidth = array.getDimensionPixelSize(R.styleable.OperateNumberView_operateButtonWidth, operateButtonWidth);
-        operateButtonHeight = array.getDimensionPixelSize(R.styleable.OperateNumberView_operateButtonHeight, operateButtonHeight);
-        operateButtonReduceBackground = array.getDrawable(R.styleable.OperateNumberView_operateButtonReduceBackground);
-        operateButtonPlusBackground = array.getDrawable(R.styleable.OperateNumberView_operateButtonPlusBackground);
-        numberViewBackground = array.getDrawable(R.styleable.OperateNumberView_numberViewBackground);
+        isAutoFill = array.getBoolean(R.styleable.OperateNumberView_is_auto_fill, isAutoFill);
+
+        isAutoFill = inputable ? inputable : isAutoFill;   //若inputable为true，isAutoFill便为true，反之，则值为自己。
+
         array.recycle();
     }
 
@@ -137,12 +179,32 @@ public class OperateNumberView extends LinearLayout implements View.OnClickListe
     private void initReduceView(){
         reduceTv = new AppCompatTextView(getContext());
         reduceTv.setId(R.id.tv_reduce);
-        if(operateButtonReduceBackground != null) {
-            reduceTv.setBackground(operateButtonReduceBackground);
-        }
         reduceTv.setLayoutParams(new LayoutParams(operateButtonWidth, operateButtonHeight));
-        reduceTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, operateTextSize);
-        reduceTv.setTextColor(operateTextColor);
+        if(currentType == OperateViewType.text){
+            if(reduceTv.isEnabled()){
+                if(textOperateBackground != null) {
+                    reduceTv.setBackground(textOperateBackground);
+                }
+                reduceTv.setTextColor(textOperateTextColor);
+            }else{
+                if(textOperateBackgroundUnenabled != null) {
+                    reduceTv.setBackground(textOperateBackgroundUnenabled);
+                }
+                reduceTv.setTextColor(textOperateTextColorUnenabled);
+            }
+            reduceTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textOperateTextSize);
+
+        }else if(currentType == OperateViewType.image){
+            if(reduceTv.isEnabled()){
+                if(imageReduceSrc != null) {
+                    reduceTv.setBackground(imageReduceSrc);
+                }
+            }else{
+                if(imageReduceSrcUnenabled != null) {
+                    reduceTv.setBackground(imageReduceSrcUnenabled);
+                }
+            }
+        }
         reduceTv.setOnClickListener(this);
     }
 
@@ -173,27 +235,33 @@ public class OperateNumberView extends LinearLayout implements View.OnClickListe
     private void initPlusView(){
         plusTv = new AppCompatTextView(getContext());
         plusTv.setId(R.id.tv_plus);
-        if(operateButtonPlusBackground != null) {
-            plusTv.setBackground(operateButtonPlusBackground);
-        }
         plusTv.setLayoutParams(new LayoutParams(operateButtonWidth, operateButtonHeight));
-        plusTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, operateTextSize);
-        plusTv.setTextColor(operateTextColor);
-        plusTv.setOnClickListener(this);
-    }
+        if(currentType == OperateViewType.text){
+            if(plusTv.isEnabled()){
+                if(textOperateBackground != null) {
+                    plusTv.setBackground(textOperateBackground);
+                }
+                plusTv.setTextColor(textOperateTextColor);
+            }else{
+                if(textOperateBackgroundUnenabled != null) {
+                    plusTv.setBackground(textOperateBackgroundUnenabled);
+                }
+                plusTv.setTextColor(textOperateTextColorUnenabled);
+            }
+            plusTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textOperateTextSize);
 
-    /**
-     * 初始化数据
-     */
-    private void initData(){
-        if(operateTextColor == null) {
-            int[] colors = new int[] { Color.BLACK, Color.GRAY };
-            int[][] states = new int[2][];
-            states[0] = new int[] { android.R.attr.state_enabled };
-            states[1] = new int[] {};
-            operateTextColor = new ColorStateList(states,colors);
+        }else if(currentType == OperateViewType.image){
+            if(plusTv.isEnabled()){
+                if(imagePlusSrc != null) {
+                    plusTv.setBackground(imagePlusSrc);
+                }
+            }else{
+                if(imagePlusSrcUnenabled != null) {
+                    plusTv.setBackground(imagePlusSrcUnenabled);
+                }
+            }
         }
-        isAutoFill = inputable ? inputable : isAutoFill;   //若inputable为true，isAutoFill便为true，反之，则值为自己。
+        plusTv.setOnClickListener(this);
     }
 
     private void initView(){

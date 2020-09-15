@@ -41,22 +41,34 @@
   </declare-styleable>
 
   <declare-styleable name="OperateNumberView">
-    <attr name="plusImageRes" format="reference"/>
-    <attr name="reduceImageRes" format="reference"/>
-    <attr name="operateButtonWidth" format="dimension"/>
-    <attr name="operateButtonHeight" format="dimension"/>
-    <attr name="operateButtonReduceBackground" format="reference"/>
-    <attr name="operateButtonPlusBackground" format="reference"/>
-    <attr name="operateTextSize" format="dimension"/>
-    <attr name="operateTextColor" format="reference"/>
-    <attr name="numberViewWidth" format="dimension"/>
-    <attr name="numberViewHeight" format="dimension"/>
-    <attr name="numberViewBackground" format="reference"/>
-    <attr name="numberTextSize" format="dimension"/>
-    <attr name="numberTextColor" format="color|reference"/>
-    <attr name="maxNumber" format="integer"/>
+
+    <attr name="number_view_width" format="dimension"/>
+    <attr name="number_view_height" format="dimension"/>
+    <attr name="number_view_background" format="reference"/>
+    <attr name="number_text_size" format="dimension"/>
+    <attr name="number_text_color" format="color|reference"/>
+
+    <attr name="operate_button_type" format="enum">
+      <enum name="text" value="0"/>
+      <enum name="image" value="1"/>
+    </attr>
+    <attr name="operate_button_width" format="dimension"/>
+    <attr name="operate_button_height" format="dimension"/>
+
+    <attr name="image_plus_src" format="reference"/>
+    <attr name="image_plus_src_unenabled" format="reference"/>
+    <attr name="image_reduce_src" format="reference"/>
+    <attr name="image_reduce_src_unenabled" format="reference"/>
+
+    <attr name="text_operate_background" format="reference"/>
+    <attr name="text_operate_background_unenabled" format="reference"/>
+    <attr name="text_operate_text_size" format="dimension"/>
+    <attr name="text_operate_text_color" format="reference"/>
+    <attr name="text_operate_text_color_unenabled" format="reference"/>
+
+    <attr name="max_number" format="integer"/>
     <attr name="inputable" format="boolean"/>
-    <attr name="isAutoFill" format="boolean"/>
+    <attr name="is_auto_fill" format="boolean"/>
   </declare-styleable>
   <attr name="indexBarTextSize" format="dimension" />
 
