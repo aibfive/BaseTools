@@ -10,8 +10,9 @@ ext {
     ]
 
     library = [
-            supportV7              : 'com.android.support:appcompat-v7:28.0.0',
-            recyclerview           : 'com.android.support:recyclerview-v7:28.0.0',
+            supportV7                         : 'com.android.support:appcompat-v7:28.0.0',
+            recyclerview                      : 'com.android.support:recyclerview-v7:28.0.0',
+            baseRecyclerViewAdapterHelper     : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50',
     ]
 
 }
