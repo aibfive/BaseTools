@@ -28,6 +28,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible
     implementation library.supportV7
+    implementation library.recyclerview
     implementation library.baseRecyclerViewAdapterHelper
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

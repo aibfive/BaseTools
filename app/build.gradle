@@ -31,4 +31,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation library.supportV7
     implementation library.recyclerview
+    implementation library.constraint
+    implementation library.tencentMap
+    implementation library.tencentLocation
 }
