@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="tencent_map">腾讯地图</string>
+    <string name="send_location">发送定位</string>
+
+</resources>

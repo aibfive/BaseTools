@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 def ver = rootProject.ext.ver
 def library = rootProject.ext.library
+def tencent = rootProject.ext.tencent
 
 android {
     compileSdkVersion ver.compileSdkVersion
@@ -32,6 +33,7 @@ dependencies {
     implementation library.supportV7
     implementation library.recyclerview
     implementation library.constraint
-    implementation library.tencentMap
-    implementation library.tencentLocation
+    implementation library.baseRecyclerViewAdapterHelper
+    implementation tencent.tencentMap
+    implementation tencent.tencentLocation
 }
