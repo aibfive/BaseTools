@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.aibfive.sample">
 
     <!--腾讯地图 SDK 要求的权限(开始)-->
@@ -23,6 +24,9 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <!-- 支持A-GPS辅助定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 设备唯一标识符 -->
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
     <!--腾讯地图 SDK 要求的权限(结束)-->
 
     <application

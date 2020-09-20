@@ -28,6 +28,7 @@ import com.tencent.map.geolocation.TencentLocationManagerOptions;
 import com.tencent.map.geolocation.TencentLocationRequest;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
 import com.tencent.tencentmap.mapsdk.maps.LocationSource;
+import com.tencent.tencentmap.mapsdk.maps.SupportMapFragment;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap;
 import com.tencent.tencentmap.mapsdk.maps.TextureMapView;
 import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition;
@@ -51,7 +52,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     private SearchAddressAdapter addressAdapter;
 
     private final int zoomLevel = 19;//缩放等级
-    private final int radius = 1000;//搜索范围半径
+    private final int radius = 3000;//搜索范围半径
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SendLocationActivity.class);
@@ -73,8 +74,8 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
                 DisplayUtil.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.colorF5F5F5),
                 LinearItemDecoration.VERTICAL, LinearItemDecoration.VERTICAL_INCLUDE_BOTTOM));
         recyclerView.setAdapter(addressAdapter = new SearchAddressAdapter());
-        TextureMapView textureMapView = findViewById(R.id.texture_map_view);
-        tencentMap = textureMapView.getMap();
+        SupportMapFragment supportMapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_frag);
+        tencentMap = supportMapFragment.getMap();
         //地图上设置定位数据源
         tencentMap.setLocationSource(this);
         //设置当前位置可见
@@ -94,7 +95,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         //创建定位请求
         locationRequest = TencentLocationRequest.create();
         //设置定位周期（位置监听器回调周期）为3s
-        locationRequest.setInterval(3000);
+        locationRequest.setInterval(300000);
     }
 
     /**
@@ -110,8 +111,17 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     private void searchPoi(double latitude, double longitude){
         //圆形范围搜索
         LatLng latLng = new LatLng(latitude, longitude);
-        SearchParam.Nearby nearBy = new SearchParam.Nearby(latLng, radius);
-        SearchParam searchParam = new SearchParam("", nearBy);
+        /*SearchParam.Nearby nearBy = new SearchParam.Nearby(latLng, radius);
+        SearchParam searchParam = new SearchParam();
+        searchParam.boundary(nearBy);*/
+
+        SearchParam.Region region = new SearchParam.Region();
+        region.poi("广州");
+        region.autoExtend(false);//设置搜索范围不扩大
+        region.center(latLng);
+        SearchParam searchParam = new SearchParam();
+        searchParam.boundary(region);
+        searchParam.keyword("ktv");
         tencentSearch.search(searchParam, this);
     }
 
@@ -190,7 +200,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
      */
     @Override
     public void onLocationChanged(TencentLocation tencentLocation, int i, String s) {
-        L.i(TAG, "位置变化回调经纬度："+tencentLocation.getLatitude()+","+tencentLocation.getLongitude());
+        L.i(TAG, "位置变化回调经纬度："+i+","+tencentLocation.getLatitude()+","+tencentLocation.getLongitude());
         //其中 locationChangeListener 为 LocationSource.active 返回给用户的位置监听器
         //用户通过这个监听器就可以设置地图的定位点位置
         if(i == TencentLocation.ERROR_OK && locationChangedListener != null){
@@ -204,6 +214,8 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
             location.setBearing(tencentLocation.getBearing());
             //将位置信息返回给地图
             locationChangedListener.onLocationChanged(location);
+
+            //定位成功后，停止定位，这里只定位一次。
         }
     }
 
@@ -215,11 +227,6 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         //这里我们将地图返回的位置监听保存为当前 Activity 的成员变量
         locationChangedListener = onLocationChangedListener;
-        startLocation();
-    }
-
-    private void startLocation(){
-        //开启定位
         int err = locationManager.requestLocationUpdates(
                 locationRequest, this, Looper.myLooper());
         switch (err) {
