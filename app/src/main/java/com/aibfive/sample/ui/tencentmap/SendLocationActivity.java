@@ -1,5 +1,6 @@
 package com.aibfive.sample.ui.tencentmap;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -53,6 +54,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
 
     private final int zoomLevel = 19;//缩放等级
     private final int radius = 3000;//搜索范围半径
+    private final int interval = 3000;//定位周期3s
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SendLocationActivity.class);
@@ -71,7 +73,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     private void initView(){
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.addItemDecoration(new LinearItemDecoration(
-                DisplayUtil.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.colorF5F5F5),
+                DisplayUtil.dip2px(this, 1f), ContextCompat.getColor(this, R.color.colorF5F5F5),
                 LinearItemDecoration.VERTICAL, LinearItemDecoration.VERTICAL_INCLUDE_BOTTOM));
         recyclerView.setAdapter(addressAdapter = new SearchAddressAdapter());
         SupportMapFragment supportMapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_frag);
@@ -84,6 +86,8 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         tencentMap.setMyLocationClickListener(this);
         //监测地图画面的移动
         tencentMap.setOnCameraChangeListener(this);
+
+
     }
 
     /**
@@ -95,7 +99,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         //创建定位请求
         locationRequest = TencentLocationRequest.create();
         //设置定位周期（位置监听器回调周期）为3s
-        locationRequest.setInterval(300000);
+        locationRequest.setInterval(interval);
     }
 
     /**
@@ -111,17 +115,10 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     private void searchPoi(double latitude, double longitude){
         //圆形范围搜索
         LatLng latLng = new LatLng(latitude, longitude);
-        /*SearchParam.Nearby nearBy = new SearchParam.Nearby(latLng, radius);
+        SearchParam.Nearby nearBy = new SearchParam.Nearby(latLng, radius);
         SearchParam searchParam = new SearchParam();
-        searchParam.boundary(nearBy);*/
-
-        SearchParam.Region region = new SearchParam.Region();
-        region.poi("广州");
-        region.autoExtend(false);//设置搜索范围不扩大
-        region.center(latLng);
-        SearchParam searchParam = new SearchParam();
-        searchParam.boundary(region);
-        searchParam.keyword("ktv");
+        searchParam.boundary(nearBy);
+        //searchParam.keyword("天河区");
         tencentSearch.search(searchParam, this);
     }
 
@@ -137,10 +134,10 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
             return;
         }
         SearchResultObject obj = (SearchResultObject) baseObject;
-        if(obj.data == null){
+        if(obj.data == null || obj.data.size() == 0){
             return;
         }
-        tencentMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(obj.data.get(0).latLng,15f, 0, 0)));
+        tencentMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(obj.data.get(0).latLng, zoomLevel, 0, 0)));
         for(SearchResultObject.SearchResultData data : obj.data){
             L.i(TAG,"title:"+data.title + ";" + data.address);
         }
