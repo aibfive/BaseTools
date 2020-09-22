@@ -20,7 +20,10 @@ import com.aibfive.sample.adapter.SearchAddressAdapter;
 import com.tencent.lbssearch.TencentSearch;
 import com.tencent.lbssearch.httpresponse.BaseObject;
 import com.tencent.lbssearch.httpresponse.HttpResponseListener;
+import com.tencent.lbssearch.httpresponse.Poi;
+import com.tencent.lbssearch.object.param.Geo2AddressParam;
 import com.tencent.lbssearch.object.param.SearchParam;
+import com.tencent.lbssearch.object.result.Geo2AddressResultObject;
 import com.tencent.lbssearch.object.result.SearchResultObject;
 import com.tencent.map.geolocation.TencentLocation;
 import com.tencent.map.geolocation.TencentLocationListener;
@@ -34,6 +37,7 @@ import com.tencent.tencentmap.mapsdk.maps.TencentMap;
 import com.tencent.tencentmap.mapsdk.maps.TextureMapView;
 import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
+import com.tencent.tencentmap.mapsdk.maps.model.MarkerOptions;
 
 /**
  * 发送定位
@@ -52,7 +56,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
 
     private SearchAddressAdapter addressAdapter;
 
-    private final int zoomLevel = 19;//缩放等级
+    private float zoomLevel = 15;//缩放等级
     private final int radius = 3000;//搜索范围半径
     private final int interval = 3000;//定位周期3s
 
@@ -86,8 +90,6 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         tencentMap.setMyLocationClickListener(this);
         //监测地图画面的移动
         tencentMap.setOnCameraChangeListener(this);
-
-
     }
 
     /**
@@ -100,6 +102,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         locationRequest = TencentLocationRequest.create();
         //设置定位周期（位置监听器回调周期）为3s
         locationRequest.setInterval(interval);
+
     }
 
     /**
@@ -115,11 +118,14 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     private void searchPoi(double latitude, double longitude){
         //圆形范围搜索
         LatLng latLng = new LatLng(latitude, longitude);
-        SearchParam.Nearby nearBy = new SearchParam.Nearby(latLng, radius);
-        SearchParam searchParam = new SearchParam();
-        searchParam.boundary(nearBy);
-        //searchParam.keyword("天河区");
-        tencentSearch.search(searchParam, this);
+
+
+        Geo2AddressParam geo2AddressParam = new Geo2AddressParam(latLng).getPoi(true)
+                .setPoiOptions(new Geo2AddressParam.PoiOptions()
+                        .setRadius(radius)
+                        .setPolicy(Geo2AddressParam.PoiOptions.POLICY_SHARE));
+        tencentSearch.geo2address(geo2AddressParam, this);
+
     }
 
     /**
@@ -133,15 +139,14 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         if (baseObject == null) {
             return;
         }
-        SearchResultObject obj = (SearchResultObject) baseObject;
-        if(obj.data == null || obj.data.size() == 0){
+        Geo2AddressResultObject obj = (Geo2AddressResultObject) baseObject;
+        if(obj.result == null || obj.result.pois.size() == 0){
             return;
         }
-        tencentMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(obj.data.get(0).latLng, zoomLevel, 0, 0)));
-        for(SearchResultObject.SearchResultData data : obj.data){
-            L.i(TAG,"title:"+data.title + ";" + data.address);
+        for (Poi poi : obj.result.pois) {
+            L.i(TAG,"title:" + poi.title + ";" + poi.address);
         }
-        addressAdapter.setNewData(obj.data);
+        addressAdapter.setNewData(obj.result.pois);
     }
 
     /**
@@ -176,6 +181,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         if(cameraPosition == null || cameraPosition.target == null){
             return;
         }
+        zoomLevel = cameraPosition.zoom;
         L.i(TAG, "视图改变结束回调经纬度："+cameraPosition.target.latitude+","+cameraPosition.target.longitude+";zoom："+cameraPosition.zoom);
         searchPoi(cameraPosition.target.latitude, cameraPosition.target.longitude);
     }
@@ -213,6 +219,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
             locationChangedListener.onLocationChanged(location);
 
             //定位成功后，停止定位，这里只定位一次。
+            locationManager.removeUpdates(this);
         }
     }
 

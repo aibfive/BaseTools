@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.aibfive.sample.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.tencent.lbssearch.httpresponse.Poi;
 import com.tencent.lbssearch.object.result.SearchResultObject;
 
 import java.util.List;
@@ -15,14 +16,14 @@ import java.util.List;
  * Time : 13:45
  * author : Li
  */
-public class SearchAddressAdapter extends BaseQuickAdapter<SearchResultObject.SearchResultData, BaseViewHolder> {
+public class SearchAddressAdapter extends BaseQuickAdapter<Poi, BaseViewHolder> {
 
     public SearchAddressAdapter() {
         super(R.layout.item_search_address);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder helper, SearchResultObject.SearchResultData item) {
+    protected void convert(@NonNull BaseViewHolder helper, Poi item) {
         helper.setText(R.id.tv_name, item.title);
         helper.setText(R.id.tv_detail, item.address);
     }
