@@ -3,5 +3,5 @@
 
     <string name="tencent_map">腾讯地图</string>
     <string name="send_location">发送定位</string>
-
+    <string name="determine">确定</string>
 </resources>

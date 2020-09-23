@@ -1,9 +1,7 @@
 package com.aibfive.sample.ui.tencentmap;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -11,38 +9,35 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.aibfive.basetools.adapter.itemdecoration.LinearItemDecoration;
 import com.aibfive.basetools.util.DisplayUtil;
 import com.aibfive.basetools.util.L;
 import com.aibfive.sample.R;
 import com.aibfive.sample.adapter.SearchAddressAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tencent.lbssearch.TencentSearch;
 import com.tencent.lbssearch.httpresponse.BaseObject;
 import com.tencent.lbssearch.httpresponse.HttpResponseListener;
 import com.tencent.lbssearch.httpresponse.Poi;
 import com.tencent.lbssearch.object.param.Geo2AddressParam;
-import com.tencent.lbssearch.object.param.SearchParam;
 import com.tencent.lbssearch.object.result.Geo2AddressResultObject;
-import com.tencent.lbssearch.object.result.SearchResultObject;
 import com.tencent.map.geolocation.TencentLocation;
 import com.tencent.map.geolocation.TencentLocationListener;
 import com.tencent.map.geolocation.TencentLocationManager;
-import com.tencent.map.geolocation.TencentLocationManagerOptions;
 import com.tencent.map.geolocation.TencentLocationRequest;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
 import com.tencent.tencentmap.mapsdk.maps.LocationSource;
 import com.tencent.tencentmap.mapsdk.maps.SupportMapFragment;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap;
-import com.tencent.tencentmap.mapsdk.maps.TextureMapView;
 import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
-import com.tencent.tencentmap.mapsdk.maps.model.MarkerOptions;
 
 /**
  * 发送定位
  */
-public class SendLocationActivity extends AppCompatActivity implements LocationSource, TencentLocationListener, TencentMap.OnMyLocationClickListener, TencentMap.OnCameraChangeListener, HttpResponseListener<BaseObject> {
+public class SendLocationActivity extends AppCompatActivity implements LocationSource, TencentLocationListener, TencentMap.OnMyLocationClickListener, TencentMap.OnCameraChangeListener, HttpResponseListener<BaseObject>, BaseQuickAdapter.OnItemClickListener {
 
     private final String TAG = "SendLocationActivity";
 
@@ -56,9 +51,10 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
 
     private SearchAddressAdapter addressAdapter;
 
-    private float zoomLevel = 15;//缩放等级
+    private float zoomLevel = 13;//缩放等级
     private final int radius = 3000;//搜索范围半径
     private final int interval = 3000;//定位周期3s
+    private boolean poiSearchEnabled = true;//poi检索许可
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SendLocationActivity.class);
@@ -80,6 +76,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
                 DisplayUtil.dip2px(this, 1f), ContextCompat.getColor(this, R.color.colorF5F5F5),
                 LinearItemDecoration.VERTICAL, LinearItemDecoration.VERTICAL_INCLUDE_BOTTOM));
         recyclerView.setAdapter(addressAdapter = new SearchAddressAdapter());
+        addressAdapter.setOnItemClickListener(this);
         SupportMapFragment supportMapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_frag);
         tencentMap = supportMapFragment.getMap();
         //地图上设置定位数据源
@@ -88,8 +85,6 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         tencentMap.setMyLocationEnabled(true);
         //SDK版本4.3.5新增内置定位标点击回调监听
         tencentMap.setMyLocationClickListener(this);
-        //监测地图画面的移动
-        tencentMap.setOnCameraChangeListener(this);
     }
 
     /**
@@ -102,7 +97,6 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         locationRequest = TencentLocationRequest.create();
         //设置定位周期（位置监听器回调周期）为3s
         locationRequest.setInterval(interval);
-
     }
 
     /**
@@ -112,18 +106,31 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         tencentSearch = new TencentSearch(this);
     }
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        //点击列表地址，地图变换到指定的位置，这时会导致地图视图改变回调触发进行poi检索，为了防止列表被刷新，使用poiSearchEnabled关闭poi检索
+        poiSearchEnabled = false;
+        Poi poi = addressAdapter.getItem(position);
+        updateLocationCamera(poi.latLng.latitude, poi.latLng.longitude);
+    }
+
     /**
      * poi检索--搜索附近地址
      */
     private void searchPoi(double latitude, double longitude){
         //圆形范围搜索
         LatLng latLng = new LatLng(latitude, longitude);
-
-
-        Geo2AddressParam geo2AddressParam = new Geo2AddressParam(latLng).getPoi(true)
-                .setPoiOptions(new Geo2AddressParam.PoiOptions()
-                        .setRadius(radius)
-                        .setPolicy(Geo2AddressParam.PoiOptions.POLICY_SHARE));
+        Geo2AddressParam geo2AddressParam = new Geo2AddressParam(latLng);
+        Geo2AddressParam.PoiOptions poiOptions = new Geo2AddressParam.PoiOptions();
+        //设置搜索半径--3000
+        poiOptions.setRadius(radius);
+        //位置共享场景策略，用户经常用于发送位置、位置分享等场景的热门地点优先排序
+        poiOptions.setPolicy(Geo2AddressParam.PoiOptions.POLICY_SHARE);
+        //是否返回周边POI列表： true.返回；false 不返回(默认)
+        geo2AddressParam.getPoi(true);
+        //设置poi的设置选项
+        geo2AddressParam.setPoiOptions(poiOptions);
+        //逆地址解析。
         tencentSearch.geo2address(geo2AddressParam, this);
 
     }
@@ -144,7 +151,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
             return;
         }
         for (Poi poi : obj.result.pois) {
-            L.i(TAG,"title:" + poi.title + ";" + poi.address);
+            L.i(TAG,"poi检索成功：title:" + poi.title + ";" + poi.address);
         }
         addressAdapter.setNewData(obj.result.pois);
     }
@@ -181,9 +188,14 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         if(cameraPosition == null || cameraPosition.target == null){
             return;
         }
+        //设置当前缩放等级
         zoomLevel = cameraPosition.zoom;
         L.i(TAG, "视图改变结束回调经纬度："+cameraPosition.target.latitude+","+cameraPosition.target.longitude+";zoom："+cameraPosition.zoom);
-        searchPoi(cameraPosition.target.latitude, cameraPosition.target.longitude);
+        if(poiSearchEnabled) {
+            searchPoi(cameraPosition.target.latitude, cameraPosition.target.longitude);
+        }else{
+            poiSearchEnabled = true;
+        }
     }
 
     /**
@@ -217,7 +229,8 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
             location.setBearing(tencentLocation.getBearing());
             //将位置信息返回给地图
             locationChangedListener.onLocationChanged(location);
-
+            //监测地图画面的移动（定位成功后，才设置监测，避免一开始无效的北京周边地址的搜索）
+            tencentMap.setOnCameraChangeListener(this);
             //定位成功后，停止定位，这里只定位一次。
             locationManager.removeUpdates(this);
         }
@@ -291,4 +304,26 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     private void updateLocationCamera(double latitude, double longitude) {
         tencentMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(latitude, longitude), zoomLevel, 0, 0)));
     }
+
+    /**
+     * 关闭页面
+     * @param view
+     */
+    public void onBackClick(View view){
+        finish();
+    }
+
+    /**
+     * 确定并发送位置
+     * @param view
+     */
+    public void onDetermineClick(View view){
+        Poi poi = addressAdapter.getSelectedItem();
+        if(poi == null){
+            L.i(TAG,"请选择发送位置");
+            return;
+        }
+        L.i(TAG,"发送位置：title:" + poi.title + ";" + poi.address);
+    }
+
 }
