@@ -31,4 +31,12 @@ public class TencentMapActivity extends AppCompatActivity {
     public void onSendLocationClick(View view){
         SendLocationActivity.start(this);
     }
+
+    /**
+     * 搜索地址
+     * @param view
+     */
+    public void onSearchAddressClick(View view){
+        SearchAddressActivity.Companion.start(this);
+    }
 }

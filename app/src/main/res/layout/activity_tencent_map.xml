@@ -19,4 +19,16 @@
         android:background="@color/colorFFFFFF"
         android:onClick="onSendLocationClick"/>
 
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/search_address"
+        android:textColor="@color/color333333"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="13dp"
+        android:background="@color/colorFFFFFF"
+        android:onClick="onSearchAddressClick"/>
+
+
 </LinearLayout>

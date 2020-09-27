@@ -16,6 +16,7 @@ import com.aibfive.basetools.util.DisplayUtil;
 import com.aibfive.basetools.util.L;
 import com.aibfive.sample.R;
 import com.aibfive.sample.adapter.SearchAddressAdapter;
+import com.aibfive.sample.bean.tencentmap.AddressBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.tencent.lbssearch.TencentSearch;
 import com.tencent.lbssearch.httpresponse.BaseObject;
@@ -33,6 +34,9 @@ import com.tencent.tencentmap.mapsdk.maps.SupportMapFragment;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap;
 import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 发送定位
@@ -110,8 +114,8 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         //点击列表地址，地图变换到指定的位置，这时会导致地图视图改变回调触发进行poi检索，为了防止列表被刷新，使用poiSearchEnabled关闭poi检索
         poiSearchEnabled = false;
-        Poi poi = addressAdapter.getItem(position);
-        updateLocationCamera(poi.latLng.latitude, poi.latLng.longitude);
+        AddressBean bean = addressAdapter.getItem(position);
+        updateLocationCamera(bean.getLatitude(), bean.getLongitude());
     }
 
     /**
@@ -150,10 +154,12 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         if(obj.result == null || obj.result.pois.size() == 0){
             return;
         }
+        List<AddressBean> list = new ArrayList<>();
         for (Poi poi : obj.result.pois) {
             L.i(TAG,"poi检索成功：title:" + poi.title + ";" + poi.address);
+            list.add(new AddressBean(poi.title, poi.address, poi.latLng.latitude, poi.latLng.longitude));
         }
-        addressAdapter.setNewData(obj.result.pois);
+        addressAdapter.setNewData(list);
     }
 
     /**
@@ -318,12 +324,13 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
      * @param view
      */
     public void onDetermineClick(View view){
-        Poi poi = addressAdapter.getSelectedItem();
-        if(poi == null){
+        AddressBean bean = addressAdapter.getSelectedItem();
+        if(bean == null){
             L.i(TAG,"请选择发送位置");
             return;
         }
-        L.i(TAG,"发送位置：title:" + poi.title + ";" + poi.address);
+        L.i(TAG,"发送位置：title:" + bean.getTitle() + ";" + bean.getAddress());
+        Toast.makeText(this, "发送位置：title:" + bean.getTitle() + ";" + bean.getAddress(), Toast.LENGTH_LONG).show();
     }
 
 }
