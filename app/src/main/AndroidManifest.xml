@@ -17,7 +17,7 @@
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
-
+    <!-- 腾讯地图 SDK 要求的权限(结束) -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,19 +25,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.tencentmap.SearchAddressActivity"></activity>
-        <activity android:name=".ui.tencentmap.SendLocationActivity" />
-        <activity android:name=".ui.tencentmap.TencentMapActivity" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 腾讯地图配置(开始) -->
+        </activity>
+
+
+        <!-- 腾讯地图配置(开始) -->
+        <activity android:name=".ui.tencentmap.SearchAddressActivity"/>
+        <activity android:name=".ui.tencentmap.SendLocationActivity" />
+        <activity android:name=".ui.tencentmap.TencentMapActivity" />
         <meta-data
             android:name="TencentMapSDK"
             android:value="TRNBZ-GSTC3-3Z43E-3QNUD-ORA63-BPBJF" />
+        <!-- 腾讯地图配置(结束) -->
     </application>
 
 </manifest>

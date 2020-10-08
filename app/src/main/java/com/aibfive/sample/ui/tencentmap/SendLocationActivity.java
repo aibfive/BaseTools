@@ -238,7 +238,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
             //监测地图画面的移动（定位成功后，才设置监测，避免一开始无效的北京周边地址的搜索）
             tencentMap.setOnCameraChangeListener(this);
             //定位成功后，停止定位，这里只定位一次。
-            locationManager.removeUpdates(this);
+            deactivate();
         }
     }
 
