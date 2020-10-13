@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
+import com.aibfive.basetools.adapter.select.SelectItemEntity;
 import com.aibfive.sample.adapter.MainItemAdapter;
 import com.aibfive.sample.listener.OnItemClickLisenter;
 import com.aibfive.sample.ui.tencentmap.TencentMapActivity;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickLisent
     public void onItemClick(int position) {
         switch (position){
             case DataCreator.DATA_TYPE_TENCENT_MAP://腾讯地图
+                TencentMapActivity.start(this);
+                break;
+            case DataCreator.DATA_TYPE_ADAPTER://适配器
                 TencentMapActivity.start(this);
                 break;
         }

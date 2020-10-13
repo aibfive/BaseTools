@@ -12,6 +12,7 @@ public class DataCreator {
 
     //数据类型
     public static final int DATA_TYPE_TENCENT_MAP = 0;//腾讯地图
+    public static final int DATA_TYPE_ADAPTER = 1;//适配器
 
     /**
      * 创建主页数据
@@ -21,6 +22,7 @@ public class DataCreator {
     public static List<MainItemBean> buildMainItemData(Context context){
         List<MainItemBean> data = new ArrayList<>();
         data.add(new MainItemBean(DATA_TYPE_TENCENT_MAP, context.getString(R.string.tencent_map)));
+        data.add(new MainItemBean(DATA_TYPE_ADAPTER, context.getString(R.string.adapter)));
         return data;
     }
 
