@@ -4,19 +4,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
-import com.aibfive.basetools.adapter.select.SelectItemEntity;
+import com.aibfive.basetools.ui.BaseActivity;
+import com.aibfive.basetools.util.KeyboardUtil;
 import com.aibfive.sample.adapter.MainItemAdapter;
 import com.aibfive.sample.listener.OnItemClickLisenter;
 import com.aibfive.sample.ui.tencentmap.TencentMapActivity;
 import com.aibfive.sample.util.DataCreator;
 
-public class MainActivity extends AppCompatActivity implements OnItemClickLisenter {
+public class MainActivity extends BaseActivity implements OnItemClickLisenter {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         initView();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     private void initView(){
@@ -24,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickLisent
         MainItemAdapter adapter = new MainItemAdapter(this, DataCreator.buildMainItemData(this));
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickLisenter(this);
+        KeyboardUtil.INSTANCE.disableShowKeyboard(recyclerView);
     }
 
     @Override

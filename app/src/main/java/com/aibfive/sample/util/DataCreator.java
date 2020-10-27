@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.aibfive.sample.bean.MainItemBean;
 import com.aibfive.sample.R;
+import com.aibfive.sample.bean.base.CommonBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,15 @@ public class DataCreator {
         List<MainItemBean> data = new ArrayList<>();
         data.add(new MainItemBean(DATA_TYPE_TENCENT_MAP, context.getString(R.string.tencent_map)));
         data.add(new MainItemBean(DATA_TYPE_ADAPTER, context.getString(R.string.adapter)));
+        return data;
+    }
+
+    public static List<CommonBean> buildCommonData(Context context){
+        List<CommonBean> data = new ArrayList<>();
+        int size = 20;
+        for(int i = 1; i < size; i++){
+            data.add(new CommonBean(context.getString(R.string.format_data, i), i));
+        }
         return data;
     }
 

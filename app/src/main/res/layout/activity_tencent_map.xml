@@ -9,6 +9,7 @@
     tools:context=".ui.tencentmap.TencentMapActivity">
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_send_location"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="@string/send_location"
@@ -16,10 +17,10 @@
         android:textSize="14sp"
         android:gravity="center_vertical"
         android:paddingHorizontal="13dp"
-        android:background="@color/colorFFFFFF"
-        android:onClick="onSendLocationClick"/>
+        android:background="@color/colorFFFFFF"/>
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_search_address"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="@string/search_address"
@@ -27,8 +28,7 @@
         android:textSize="14sp"
         android:gravity="center_vertical"
         android:paddingHorizontal="13dp"
-        android:background="@color/colorFFFFFF"
-        android:onClick="onSearchAddressClick"/>
+        android:background="@color/colorFFFFFF"/>
 
 
 </LinearLayout>

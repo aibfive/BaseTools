@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
+import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.L
 import com.aibfive.sample.R
 import com.aibfive.sample.adapter.SearchAddressAdapter
@@ -28,7 +29,7 @@ import com.tencent.tencentmap.mapsdk.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_search_address.*
 
 //https://lbs.qq.com/geosdk/doc/com/tencent/map/geolocation/package-summary.html
-class SearchAddressActivity : AppCompatActivity(), TencentLocationListener, BaseQuickAdapter.OnItemClickListener {
+class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuickAdapter.OnItemClickListener {
 
     lateinit var addressAdapter: SearchAddressAdapter
     lateinit var tencentSearch : TencentSearch
@@ -49,13 +50,16 @@ class SearchAddressActivity : AppCompatActivity(), TencentLocationListener, Base
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_address)
         initLocation()
         tencentSearch = TencentSearch(this)
         addressAdapter = SearchAddressAdapter()
         recyclerView.adapter = addressAdapter
         addressAdapter.setOnItemClickListener(this)
         startLocation()
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_search_address
     }
 
     /**
@@ -113,10 +117,11 @@ class SearchAddressActivity : AppCompatActivity(), TencentLocationListener, Base
     override fun onLocationChanged(tencentLocation: TencentLocation?, i: Int, s: String?) {
         L.i(TAG, "位置变化回调经纬度：" + i + "," + tencentLocation!!.latitude + "," + tencentLocation!!.longitude + "," + tencentLocation!!.city)
         if(i == TencentLocation.ERROR_OK){
-            city = tencentLocation!!.city
-            stopLocation()//停止定位
-            geo2address(tencentLocation.latitude, tencentLocation.longitude)//搜索当前定位周围的地址列表
-
+            if(tencentLocation != null) {
+                city = tencentLocation!!.city
+                stopLocation()//停止定位
+                geo2address(tencentLocation.latitude, tencentLocation.longitude)//搜索当前定位周围的地址列表
+            }
         }
     }
 

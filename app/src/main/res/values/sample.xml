@@ -10,4 +10,8 @@
 
     <!--适配器-->
     <string name="adapter">适配器</string>
+    <string name="single_multiple_select">单多选</string>
+
+    <!--公共-->
+    <string name="format_data">数据%d</string>
 </resources>
