@@ -6,13 +6,14 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
+import kotlin.properties.Delegates
 
 /**
  * Date : 2020/10/28/028
  * Time : 11:02
  * author : Li
  */
-class GridItemDecoration : RecyclerView.ItemDecoration() {
+class GridItemDecoration : RecyclerView.ItemDecoration {
 
     companion object {
         const val ORIENTATION_VERTICAL = 1
@@ -20,8 +21,12 @@ class GridItemDecoration : RecyclerView.ItemDecoration() {
     }
 
     var orientation : Int = ORIENTATION_VERTICAL
+    var dividerSize : Int = 1
 
-
+    constructor(orientation : Int, dividerSize : Int){
+        this.orientation = orientation
+        this.dividerSize = dividerSize
+    }
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
