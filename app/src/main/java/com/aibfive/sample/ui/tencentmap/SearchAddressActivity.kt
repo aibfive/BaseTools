@@ -4,12 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
-import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.aibfive.basetools.ui.BaseActivity
-import com.aibfive.basetools.util.L
+import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 import com.aibfive.sample.adapter.SearchAddressAdapter
 import com.aibfive.sample.bean.tencentmap.AddressBean
@@ -115,7 +113,7 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
      * 腾讯定位SDK位置变化回调
      */
     override fun onLocationChanged(tencentLocation: TencentLocation?, i: Int, s: String?) {
-        L.i(TAG, "位置变化回调经纬度：" + i + "," + tencentLocation!!.latitude + "," + tencentLocation!!.longitude + "," + tencentLocation!!.city)
+        LogUtil.v(TAG, "位置变化回调经纬度：" + i + "," + tencentLocation!!.latitude + "," + tencentLocation!!.longitude + "," + tencentLocation!!.city)
         if(i == TencentLocation.ERROR_OK){
             if(tencentLocation != null) {
                 city = tencentLocation!!.city
@@ -133,7 +131,7 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
      * @param s1
      */
     override fun onStatusUpdate(s: String?, p1: Int, s1: String?) {
-        L.i(TAG, s + "：s----s1：" + s1)
+        LogUtil.v(TAG, s + "：s----s1：" + s1)
     }
 
     /**
@@ -163,7 +161,7 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
                 }
                 val list = ArrayList<AddressBean>()
                 for(item in obj.data){
-                    L.i(TAG, "poi检索成功：title:" + item.title + ";" + item.address)
+                    LogUtil.v(TAG, "poi检索成功：title:" + item.title + ";" + item.address)
                     list.add(AddressBean(item.title, item.address, item.latLng.latitude, item.latLng.longitude))
                 }
                 addressAdapter.setNewData(list)
@@ -177,7 +175,7 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
              * @param throwable
              */
             override fun onFailure(i: Int, s: String?, throwable: Throwable?) {
-                L.i(TAG, "poi检索失败："+s)
+                LogUtil.v(TAG, "poi检索失败："+s)
             }
         })
     }
@@ -216,7 +214,7 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
                 }
                 val list = ArrayList<AddressBean>()
                 for(poi in obj.result.pois){
-                    L.i(TAG, "poi检索成功：title:" + poi.title + ";" + poi.address)
+                    LogUtil.v(TAG, "poi检索成功：title:" + poi.title + ";" + poi.address)
                     list.add(AddressBean(poi.title, poi.address, poi.latLng.latitude, poi.latLng.longitude))
                 }
                 addressAdapter.setNewData(list)
@@ -230,7 +228,7 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
              * @param throwable
              */
             override fun onFailure(i: Int, s: String?, throwable: Throwable?) {
-                L.i(TAG, "poi检索失败："+s)
+                LogUtil.v(TAG, "poi检索失败："+s)
             }
         })
     }
@@ -260,10 +258,10 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
     fun onDetermineClick(view : View?){
         val bean = addressAdapter.selectedItem
         if(bean == null){
-            L.i(TAG,"请选择地址")
+            LogUtil.v(TAG,"请选择地址")
             return
         }
-        L.i(TAG,"选择地址：title:" + bean.title + ";" + bean.address)
+        LogUtil.v(TAG,"选择地址：title:" + bean.title + ";" + bean.address)
         Toast.makeText(this, "选择地址：title:" + bean.title + ";" + bean.address, Toast.LENGTH_LONG).show()
     }
 }

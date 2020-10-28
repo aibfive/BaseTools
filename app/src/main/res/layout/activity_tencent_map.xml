@@ -5,30 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorF5F5F5"
+    android:showDividers="middle"
+    android:divider="@drawable/divider_middle_0_5dp"
+    android:background="@color/color333333"
     tools:context=".ui.tencentmap.TencentMapActivity">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_send_location"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:text="@string/send_location"
-        android:textColor="@color/color333333"
+        android:textColor="@color/colorFFFFFF"
         android:textSize="14sp"
         android:gravity="center_vertical"
         android:paddingHorizontal="13dp"
-        android:background="@color/colorFFFFFF"/>
+        android:background="@color/color484848"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_search_address"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:text="@string/search_address"
-        android:textColor="@color/color333333"
+        android:textColor="@color/colorFFFFFF"
         android:textSize="14sp"
         android:gravity="center_vertical"
         android:paddingHorizontal="13dp"
-        android:background="@color/colorFFFFFF"/>
+        android:background="@color/color484848"/>
 
 
 </LinearLayout>

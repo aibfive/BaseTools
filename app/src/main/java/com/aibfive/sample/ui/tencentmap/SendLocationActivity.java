@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.aibfive.basetools.adapter.itemdecoration.LinearItemDecoration;
 import com.aibfive.basetools.util.DisplayUtil;
-import com.aibfive.basetools.util.L;
+import com.aibfive.basetools.util.LogUtil;
 import com.aibfive.sample.R;
 import com.aibfive.sample.adapter.SearchAddressAdapter;
 import com.aibfive.sample.bean.tencentmap.AddressBean;
@@ -156,7 +156,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         }
         List<AddressBean> list = new ArrayList<>();
         for (Poi poi : obj.result.pois) {
-            L.i(TAG,"poi检索成功：title:" + poi.title + ";" + poi.address);
+            LogUtil.v(TAG,"poi检索成功：title:" + poi.title + ";" + poi.address);
             list.add(new AddressBean(poi.title, poi.address, poi.latLng.latitude, poi.latLng.longitude));
         }
         addressAdapter.setNewData(list);
@@ -171,7 +171,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
      */
     @Override
     public void onFailure(int i, String s, Throwable throwable) {
-        L.i(TAG, "poi检索失败："+s);
+        LogUtil.v(TAG, "poi检索失败："+s);
     }
 
     /**
@@ -181,7 +181,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
      */
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
-        L.i(TAG, "视图改变回调经纬度："+cameraPosition.target.latitude+","+cameraPosition.target.longitude+";zoom："+cameraPosition.zoom);
+        LogUtil.v(TAG, "视图改变回调经纬度："+cameraPosition.target.latitude+","+cameraPosition.target.longitude+";zoom："+cameraPosition.zoom);
     }
 
     /**
@@ -196,7 +196,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
         }
         //设置当前缩放等级
         zoomLevel = cameraPosition.zoom;
-        L.i(TAG, "视图改变结束回调经纬度："+cameraPosition.target.latitude+","+cameraPosition.target.longitude+";zoom："+cameraPosition.zoom);
+        LogUtil.v(TAG, "视图改变结束回调经纬度："+cameraPosition.target.latitude+","+cameraPosition.target.longitude+";zoom："+cameraPosition.zoom);
         if(poiSearchEnabled) {
             searchPoi(cameraPosition.target.latitude, cameraPosition.target.longitude);
         }else{
@@ -221,7 +221,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
      */
     @Override
     public void onLocationChanged(TencentLocation tencentLocation, int i, String s) {
-        L.i(TAG, "位置变化回调经纬度："+i+","+tencentLocation.getLatitude()+","+tencentLocation.getLongitude());
+        LogUtil.v(TAG, "位置变化回调经纬度："+i+","+tencentLocation.getLatitude()+","+tencentLocation.getLongitude());
         //其中 locationChangeListener 为 LocationSource.active 返回给用户的位置监听器
         //用户通过这个监听器就可以设置地图的定位点位置
         if(i == TencentLocation.ERROR_OK && locationChangedListener != null){
@@ -254,16 +254,16 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
                 locationRequest, this, Looper.myLooper());
         switch (err) {
             case 1:
-                L.i(TAG, "设备缺少使用腾讯定位服务需要的基本条件");
+                LogUtil.v(TAG, "设备缺少使用腾讯定位服务需要的基本条件");
                 break;
             case 2:
-                L.i(TAG, "manifest 中配置的 key 不正确");
+                LogUtil.v(TAG, "manifest 中配置的 key 不正确");
                 break;
             case 3:
-                L.i(TAG, "自动加载libtencentloc.so失败");
+                LogUtil.v(TAG, "自动加载libtencentloc.so失败");
                 break;
             default:
-                L.i(TAG, "err："+err);
+                LogUtil.v(TAG, "err："+err);
                 break;
         }
     }
@@ -277,7 +277,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
      */
     @Override
     public void onStatusUpdate(String s, int i, String s1) {
-        L.i(TAG, s + "：s----s1：" + s1);
+        LogUtil.v(TAG, s + "：s----s1：" + s1);
     }
 
     /**
@@ -326,10 +326,10 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     public void onDetermineClick(View view){
         AddressBean bean = addressAdapter.getSelectedItem();
         if(bean == null){
-            L.i(TAG,"请选择发送位置");
+            LogUtil.v(TAG,"请选择发送位置");
             return;
         }
-        L.i(TAG,"发送位置：title:" + bean.getTitle() + ";" + bean.getAddress());
+        LogUtil.v(TAG,"发送位置：title:" + bean.getTitle() + ";" + bean.getAddress());
         Toast.makeText(this, "发送位置：title:" + bean.getTitle() + ";" + bean.getAddress(), Toast.LENGTH_LONG).show();
     }
 

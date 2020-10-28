@@ -1,10 +1,7 @@
 package com.aibfive.basetools.util
 
-import android.util.Log
 import android.view.View
 import android.widget.EditText
-import java.lang.reflect.Method
-import kotlin.reflect.KClass
 
 /**
  * 软键盘工具
@@ -27,8 +24,12 @@ object KeyboardUtil {
             return
         }
         val cls : Class<EditText> = EditText::class.java
-        val method = cls.getMethod("setShowSoftInputOnFocus", Boolean.javaClass)
-        method.isAccessible = true
-        method.invoke(editText, false)
+        try {
+            val method = cls.getMethod("setShowSoftInputOnFocus", Boolean::class.java)
+            method.isAccessible = true
+            method.invoke(editText, false)
+        } catch (e: Exception) {
+            LogUtil.v(KeyboardUtil::class.simpleName, "disableShowKeyboard().Exception-->" + e.toString())
+        }
     }
 }
