@@ -1,4 +1,4 @@
-package com.aibfive.sample.ui.adapter
+package com.aibfive.sample.ui.adapter.singlemultipleselect
 
 import com.aibfive.basetools.adapter.BaseRVHolder
 import com.aibfive.basetools.adapter.select.SelectedAdapter

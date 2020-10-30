@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    android:divider="@drawable/divider_middle_0_5dp"
+    android:background="@color/color333333"
+    tools:context=".ui.adapter.AdapterActivity">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/gridItemDecorationTv"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/grid_item_decoration"
+        android:textColor="@color/colorFFFFFF"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="13dp"
+        android:background="@color/color484848"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/singleMultipleSelectTv"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/single_multiple_select"
+        android:textColor="@color/colorFFFFFF"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="13dp"
+        android:background="@color/color484848"/>
+
+
+</LinearLayout>

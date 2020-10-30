@@ -75,7 +75,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
     }
 
     private void initView(){
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new LinearItemDecoration(
                 DisplayUtil.dip2px(this, 1f), ContextCompat.getColor(this, R.color.colorF5F5F5),
                 LinearItemDecoration.VERTICAL, LinearItemDecoration.VERTICAL_INCLUDE_BOTTOM));

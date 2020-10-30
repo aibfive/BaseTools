@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import com.aibfive.basetools.ui.BaseActivity;
 import com.aibfive.sample.adapter.MainItemAdapter;
 import com.aibfive.sample.listener.OnItemClickLisenter;
+import com.aibfive.sample.ui.adapter.AdapterActivity;
 import com.aibfive.sample.ui.tencentmap.TencentMapActivity;
 import com.aibfive.sample.util.DataCreator;
 
@@ -17,7 +18,7 @@ public class MainActivity extends BaseActivity implements OnItemClickLisenter {
 
     @Override
     public void initView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         MainItemAdapter adapter = new MainItemAdapter(this, DataCreator.buildMainItemData(this));
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickLisenter(this);
@@ -30,7 +31,7 @@ public class MainActivity extends BaseActivity implements OnItemClickLisenter {
                 TencentMapActivity.start(this);
                 break;
             case DataCreator.DATA_TYPE_ADAPTER://适配器
-                TencentMapActivity.start(this);
+                AdapterActivity.start(this);
                 break;
         }
     }
