@@ -35,12 +35,12 @@ class GridItemDecorationActivity : BaseActivity() {
         super.initView()
         val adapter = GridItemDecorationAdapter()
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(GridItemDecoration(
+        /*recyclerView.addItemDecoration(GridItemDecoration(
                 GridItemDecoration.ORIENTATION_VERTICAL, resources.getDimensionPixelSize(R.dimen.dp_40),
-                Color.BLACK, false))
-        /*recyclerView.addItemDecoration(GridSpacingItemDecoration(
+                Color.BLACK, false))*/
+        recyclerView.addItemDecoration(GridSpacingItemDecoration(
                 4, resources.getDimensionPixelSize(R.dimen.dp_40),
-                false))*/
+                false))
         adapter.setNewData(DataCreator.buildCommonData(this))
     }
 }
