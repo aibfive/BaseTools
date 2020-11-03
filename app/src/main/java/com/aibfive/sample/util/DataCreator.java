@@ -2,8 +2,8 @@ package com.aibfive.sample.util;
 
 import android.content.Context;
 
-import com.aibfive.sample.bean.MainItemBean;
 import com.aibfive.sample.R;
+import com.aibfive.sample.bean.MainItemBean;
 import com.aibfive.sample.bean.base.CommonBean;
 
 import java.util.ArrayList;
@@ -29,10 +29,27 @@ public class DataCreator {
 
     public static List<CommonBean> buildCommonData(Context context){
         List<CommonBean> data = new ArrayList<>();
+        data.add(new CommonBean("数据0",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据数据1",1));
+        data.add(new CommonBean("数据2",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据3",1));
+        data.add(new CommonBean("数据4",1));
+        data.add(new CommonBean("数据数据数据数据数据5",1));
+        data.add(new CommonBean("数据6",1));
+        data.add(new CommonBean("数据7",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据数据数据8",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据9",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数据数数据数据数据10",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据数据数据11",1));
+        data.add(new CommonBean("数据数据数据数据数据数据12",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据数据数据13",1));
+        data.add(new CommonBean("数据数据数据数据14",1));
+        data.add(new CommonBean("数据数据数据数据数据数据数据数据数据15",1));
+        data.add(new CommonBean("数据据数据数数据数据据数据数数据数据据数据数数据数据据数据数数据16",1));
         int size = 20;
-        for(int i = 0; i < size; i++){
+        /*for(int i = 0; i < size; i++){
             data.add(new CommonBean(context.getString(R.string.format_data, i), i));
-        }
+        }*/
         return data;
     }
 

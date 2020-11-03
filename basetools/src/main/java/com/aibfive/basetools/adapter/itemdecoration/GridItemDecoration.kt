@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import com.aibfive.basetools.util.LogUtil
-import kotlin.properties.Delegates
 
 /**
  * Date : 2020/10/28/028
@@ -59,26 +58,33 @@ class GridItemDecoration : RecyclerView.ItemDecoration {
         super.onDraw(c, parent, state)
         val count = parent.childCount
         val spanCount = getSpanCount(parent)
-        for(position in 0 until count){
-            val view = parent.getChildAt(position)
-            if(includeEdge) {//包含边缘
-                c.drawRect(Rect(view.left - dividerWidth, view.top - dividerHeight, view.left, view.bottom + dividerHeight), colorPaint)//左部
-                c.drawRect(Rect(view.left - dividerWidth, view.top - dividerHeight, view.right + dividerWidth, view.top), colorPaint)//顶部
-                c.drawRect(Rect(view.right, view.top - dividerHeight, view.right + dividerWidth, view.bottom + dividerHeight), colorPaint)//右部
-                c.drawRect(Rect(view.left - dividerWidth, view.bottom, view.right + dividerWidth, view.bottom + dividerHeight), colorPaint)//底部
-            }else{//不包含边缘
-                if(!isFristLeft(position, spanCount)) {//若视图位置不在最左边
+        if(parent.layoutManager is GridLayoutManager) {
+            for (position in 0 until count) {
+                val view = parent.getChildAt(position)
+                if (includeEdge) {//包含边缘
                     c.drawRect(Rect(view.left - dividerWidth, view.top - dividerHeight, view.left, view.bottom + dividerHeight), colorPaint)//左部
-                }
-                if(!isFristTop(position, spanCount)){//若视图位置不在最顶部
                     c.drawRect(Rect(view.left - dividerWidth, view.top - dividerHeight, view.right + dividerWidth, view.top), colorPaint)//顶部
-                }
-                if(!isLastRight(position, count, spanCount)) {//若视图位置不在最右边
                     c.drawRect(Rect(view.right, view.top - dividerHeight, view.right + dividerWidth, view.bottom + dividerHeight), colorPaint)//右部
-                }
-                if(!isLastBottom(position, count, spanCount)) {//若视图位置不在最底部
                     c.drawRect(Rect(view.left - dividerWidth, view.bottom, view.right + dividerWidth, view.bottom + dividerHeight), colorPaint)//底部
+                } else {//不包含边缘
+                    if (!isFristLeft(position, spanCount)) {//若视图位置不在最左边
+                        c.drawRect(Rect(view.left - dividerWidth, view.top - dividerHeight, view.left, view.bottom + dividerHeight), colorPaint)//左部
+                    }
+                    if (!isFristTop(position, spanCount)) {//若视图位置不在最顶部
+                        c.drawRect(Rect(view.left - dividerWidth, view.top - dividerHeight, view.right + dividerWidth, view.top), colorPaint)//顶部
+                    }
+                    if (!isLastRight(position, count, spanCount)) {//若视图位置不在最右边
+                        c.drawRect(Rect(view.right, view.top - dividerHeight, view.right + dividerWidth, view.bottom + dividerHeight), colorPaint)//右部
+                    }
+                    if (!isLastBottom(position, count, spanCount)) {//若视图位置不在最底部
+                        c.drawRect(Rect(view.left - dividerWidth, view.bottom, view.right + dividerWidth, view.bottom + dividerHeight), colorPaint)//底部
+                    }
                 }
+            }
+        }else if(parent.layoutManager is StaggeredGridLayoutManager){
+            for (position in 0 until count) {
+                val view = parent.getChildAt(position)
+                c.drawRect(Rect(view.left, view.bottom, view.right, view.bottom + dividerHeight), colorPaint)//底部
             }
         }
 
@@ -89,101 +95,115 @@ class GridItemDecoration : RecyclerView.ItemDecoration {
         if(parent.adapter == null){
             return
         }
-        val count = parent.adapter!!.itemCount
-        val spanCount = getSpanCount(parent)
-        val position = parent.getChildAdapterPosition(view)
+        if(parent.layoutManager is GridLayoutManager) {
+            val count = parent.adapter!!.itemCount
+            val spanCount = getSpanCount(parent)
+            val position = parent.getChildAdapterPosition(view)
 
-        when(orientation){
-            ORIENTATION_VERTICAL->{//垂直方向
-                val column = calColumn(position, spanCount)
-                if(includeEdge){//包含边缘
-                    /**
-                     * 当视图只有两列时，分割线共有三条，位于两侧和它们两中间，位置分别取它们的左右两侧，
-                     * 其中第一个视图的左侧是需要腾出分割线大小位置，右侧需要腾出分割线大小一半的位置，
-                     * 第二个视图的右侧是需要腾出分割线大小位置，左侧需要腾出分割线大小一半的位置，
-                     * 这样两个视图的宽度才会一样，根据不包含边缘的(n-1)/n算法，可以推算出包含边缘计算每个视图需要分出多少位置的算法为(n+1)/n。（n--表示列总数）
-                     * 通过上述，我们可以举一个例子：
-                     *         1             2            3             4
-                     *    左      右    左     右    左      右    左       右
-                     *    4/4     1/4   3/4    2/4   2/4     3/4   1/4     4/4
-                     * 该例子里共四列，通过(n+1)/n可以计算出每个视图需要分出多少的位置，即5/4分割线大小的位置。
-                     * 那么每个视图的左右位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
-                     * 左边计算方式：(spanCount - n + 1)/spanCount（n--列数，spanCount--列总数）
-                     * 右边计算方式：n/spanCount（n--列数，spanCount--列总数）
-                     */
-                    outRect.left = (spanCount - column + 1) * dividerWidth / spanCount
-                    outRect.right = column * dividerWidth / spanCount
-                    if(isFristTop(position, spanCount)){//若视图位置在最顶部
-                        outRect.top = dividerHeight
-                    }
-                    outRect.bottom = dividerHeight
-                }else{//不包含边缘
-                    /**
-                     * https://blog.csdn.net/qq_27192795/article/details/80563487
-                     * 当视图有两列时，分割线只有一条，位于它们两中间，位置分别取它们的右（第一列）左（第二列），
-                     * 大小为该分割线的一半，即每个视图需要分出1/2*分割线大小的位置充当分割线，这样两个视图的宽度才会一样。
-                     * 这是只有两列的情况，若是有多列呢？通过上述的1/2，我们可以推断出两种计算方式，1/n、(n-1)/n。（n--表示列总数）
-                     * 分别对这两种进行验证，可以得出(n-1)/n才是正确的。通过(n-1)/n可以算出多列的情况下，每个视图需要分出多少的位置。
-                     * 通过上述，我们可以举一个例子：
-                     *        1             2            3             4
-                     *    左      右    左     右    左      右    左       右
-                     *   0/4     3/4   1/4    2/4   2/4     1/4   3/4     0/4
-                     * 该例子里共四列，通过(n-1)/n可以计算出每个视图需要分出多少的位置，即3/4分割线大小的位置。
-                     * 那么每个视图的左右位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
-                     * 左边计算方式：(n - 1)/spanCount（n--列数，spanCount--列总数）
-                     * 右边计算方式：(spanCount - n)/spanCount（n--列数，spanCount--列总数）
-                     */
-                    outRect.left = (column - 1) * dividerWidth / spanCount
-                    outRect.right = (spanCount - column) * dividerWidth / spanCount
-                    if(!isLastBottom(position, count, spanCount)){//若视图位置不在最底部
+            when (orientation) {
+                ORIENTATION_VERTICAL -> {//垂直方向
+                    val column = calColumn(position, spanCount)
+                    if (includeEdge) {//包含边缘
+                        /**
+                         * 当视图只有两列时，分割线共有三条，位于两侧和它们两中间，位置分别取它们的左右两侧，
+                         * 其中第一个视图的左侧是需要腾出分割线大小位置，右侧需要腾出分割线大小一半的位置，
+                         * 第二个视图的右侧是需要腾出分割线大小位置，左侧需要腾出分割线大小一半的位置，
+                         * 这样两个视图的宽度才会一样，根据不包含边缘的(n-1)/n算法，可以推算出包含边缘计算每个视图需要分出多少位置的算法为(n+1)/n。（n--表示列总数）
+                         * 通过上述，我们可以举一个例子：
+                         *         1             2            3             4
+                         *    左      右    左     右    左      右    左       右
+                         *    4/4     1/4   3/4    2/4   2/4     3/4   1/4     4/4
+                         * 该例子里共四列，通过(n+1)/n可以计算出每个视图需要分出多少的位置，即5/4分割线大小的位置。
+                         * 那么每个视图的左右位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
+                         * 左边计算方式：(spanCount - n + 1)/spanCount（n--列数，spanCount--列总数）
+                         * 右边计算方式：n/spanCount（n--列数，spanCount--列总数）
+                         */
+                        outRect.left = (spanCount - column + 1) * dividerWidth / spanCount
+                        outRect.right = column * dividerWidth / spanCount
+                        if (isFristTop(position, spanCount)) {//若视图位置在最顶部
+                            outRect.top = dividerHeight
+                        }
                         outRect.bottom = dividerHeight
+                    } else {//不包含边缘
+                        /**
+                         * https://blog.csdn.net/qq_27192795/article/details/80563487
+                         * 当视图有两列时，分割线只有一条，位于它们两中间，位置分别取它们的右（第一列）左（第二列），
+                         * 大小为该分割线的一半，即每个视图需要分出1/2*分割线大小的位置充当分割线，这样两个视图的宽度才会一样。
+                         * 这是只有两列的情况，若是有多列呢？通过上述的1/2，我们可以推断出两种计算方式，1/n、(n-1)/n。（n--表示列总数）
+                         * 分别对这两种进行验证，可以得出(n-1)/n才是正确的。通过(n-1)/n可以算出多列的情况下，每个视图需要分出多少的位置。
+                         * 通过上述，我们可以举一个例子：
+                         *        1             2            3             4
+                         *    左      右    左     右    左      右    左       右
+                         *   0/4     3/4   1/4    2/4   2/4     1/4   3/4     0/4
+                         * 该例子里共四列，通过(n-1)/n可以计算出每个视图需要分出多少的位置，即3/4分割线大小的位置。
+                         * 那么每个视图的左右位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
+                         * 左边计算方式：(n - 1)/spanCount（n--列数，spanCount--列总数）
+                         * 右边计算方式：(spanCount - n)/spanCount（n--列数，spanCount--列总数）
+                         */
+                        outRect.left = (column - 1) * dividerWidth / spanCount
+                        outRect.right = (spanCount - column) * dividerWidth / spanCount
+                        if (!isLastBottom(position, count, spanCount)) {//若视图位置不在最底部
+                            outRect.bottom = dividerHeight
+                        }
+                    }
+                }
+                ORIENTATION_HORIZONTAL -> {//水平方向
+                    val row = calRow(position, spanCount)//行数
+                    if (includeEdge) {//包含边缘
+                        /**
+                         * 当视图只有两行时，分割线共有三条，位于两侧和它们两中间，位置分别取它们的顶底两侧，
+                         * 其中第一个视图的顶部是需要腾出分割线大小位置，底部需要腾出分割线大小一半的位置，
+                         * 第二个视图的底部是需要腾出分割线大小位置，顶部需要腾出分割线大小一半的位置，
+                         * 这样两个视图的高度才会一样，根据不包含边缘的(n-1)/n算法，可以推算出包含边缘计算每个视图需要分出多少位置的算法为(n+1)/n。（n--表示行总数）
+                         * 通过上述，我们可以举一个例子：
+                         *         1             2            3             4
+                         *    顶      底    顶     底    顶      底    顶       底
+                         *    4/4     1/4   3/4    2/4   2/4     3/4   1/4     4/4
+                         * 该例子里共四行，通过(n+1)/n可以计算出每个视图需要分出多少的位置，即5/4分割线大小的位置。
+                         * 那么每个视图的顶底位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
+                         * 顶部计算方式：(spanCount - n + 1)/spanCount（n--行数，spanCount--行总数）
+                         * 底部计算方式：n/spanCount（n--行数，spanCount--行总数）
+                         */
+                        outRect.top = (spanCount - row + 1) * dividerHeight / spanCount
+                        outRect.bottom = row * dividerHeight / spanCount
+                        if (isFristLeft(position, spanCount)) {//若视图位置在最左边
+                            outRect.left = dividerWidth
+                        }
+                        outRect.right = dividerWidth
+                    } else {//不包含边缘
+                        /**
+                         * https://blog.csdn.net/qq_27192795/article/details/80563487
+                         * 当视图有两行时，分割线只有一条，位于它们两中间，位置分别取它们的顶（第一行）底（第二行），
+                         * 大小为该分割线的一半，即每个视图需要分出1/2*分割线大小的位置充当分割线，这样两个视图的高度才会一样。
+                         * 这是只有两行的情况，若是有多行呢？通过上述的1/2，我们可以推断出两种计算方式，1/n、(n-1)/n。（n--表示行总数）
+                         * 分别对这两种进行验证，可以得出(n-1)/n才是正确的。通过(n-1)/n可以算出多行的情况下，每个视图需要分出多少的位置。
+                         * 通过上述，我们可以举一个例子：
+                         *        1             2            3             4
+                         *    顶      底    顶     底    顶      底    顶       底
+                         *   0/4     3/4   1/4    2/4   2/4     1/4   3/4     0/4
+                         * 该例子里共四行，通过(n-1)/n可以计算出每个视图需要分出多少的位置，即3/4分割线大小的位置。
+                         * 那么每个视图的顶底位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
+                         * 顶部计算方式：(n - 1)/spanCount（n--行数，spanCount--行总数）
+                         * 底部计算方式：(spanCount - n)/spanCount（n--行数，spanCount--行总数）
+                         */
+                        outRect.top = (row - 1) * dividerHeight / spanCount
+                        outRect.bottom = (spanCount - row) * dividerHeight / spanCount
+                        if (!isLastRight(position, count, spanCount)) {//若视图位置不在最右边
+                            outRect.right = dividerWidth
+                        }
                     }
                 }
             }
-            ORIENTATION_HORIZONTAL->{//水平方向
-                val row = calRow(position, spanCount)//行数
-                if(includeEdge){//包含边缘
-                    /**
-                     * 当视图只有两行时，分割线共有三条，位于两侧和它们两中间，位置分别取它们的顶底两侧，
-                     * 其中第一个视图的顶部是需要腾出分割线大小位置，底部需要腾出分割线大小一半的位置，
-                     * 第二个视图的底部是需要腾出分割线大小位置，顶部需要腾出分割线大小一半的位置，
-                     * 这样两个视图的高度才会一样，根据不包含边缘的(n-1)/n算法，可以推算出包含边缘计算每个视图需要分出多少位置的算法为(n+1)/n。（n--表示行总数）
-                     * 通过上述，我们可以举一个例子：
-                     *         1             2            3             4
-                     *    顶      底    顶     底    顶      底    顶       底
-                     *    4/4     1/4   3/4    2/4   2/4     3/4   1/4     4/4
-                     * 该例子里共四行，通过(n+1)/n可以计算出每个视图需要分出多少的位置，即5/4分割线大小的位置。
-                     * 那么每个视图的顶底位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
-                     * 顶部计算方式：(spanCount - n + 1)/spanCount（n--行数，spanCount--行总数）
-                     * 底部计算方式：n/spanCount（n--行数，spanCount--行总数）
-                     */
-                    outRect.top = (spanCount - row + 1) * dividerHeight / spanCount
-                    outRect.bottom = row * dividerHeight / spanCount
-                    if(isFristLeft(position, spanCount)){//若视图位置在最左边
-                        outRect.left = dividerWidth
-                    }
+        }else if(parent.layoutManager is StaggeredGridLayoutManager){
+            when(orientation){
+                ORIENTATION_VERTICAL->{//垂直方向
                     outRect.right = dividerWidth
-                }else{//不包含边缘
-                    /**
-                     * https://blog.csdn.net/qq_27192795/article/details/80563487
-                     * 当视图有两行时，分割线只有一条，位于它们两中间，位置分别取它们的顶（第一行）底（第二行），
-                     * 大小为该分割线的一半，即每个视图需要分出1/2*分割线大小的位置充当分割线，这样两个视图的高度才会一样。
-                     * 这是只有两行的情况，若是有多行呢？通过上述的1/2，我们可以推断出两种计算方式，1/n、(n-1)/n。（n--表示行总数）
-                     * 分别对这两种进行验证，可以得出(n-1)/n才是正确的。通过(n-1)/n可以算出多行的情况下，每个视图需要分出多少的位置。
-                     * 通过上述，我们可以举一个例子：
-                     *        1             2            3             4
-                     *    顶      底    顶     底    顶      底    顶       底
-                     *   0/4     3/4   1/4    2/4   2/4     1/4   3/4     0/4
-                     * 该例子里共四行，通过(n-1)/n可以计算出每个视图需要分出多少的位置，即3/4分割线大小的位置。
-                     * 那么每个视图的顶底位置大小又该怎么计算呢？通过上述例子可以看出他的规律性，
-                     * 顶部计算方式：(n - 1)/spanCount（n--行数，spanCount--行总数）
-                     * 底部计算方式：(spanCount - n)/spanCount（n--行数，spanCount--行总数）
-                     */
-                    outRect.top = (row - 1) * dividerHeight / spanCount
-                    outRect.bottom = (spanCount - row) * dividerHeight / spanCount
-                    if(!isLastRight(position, count, spanCount)){//若视图位置不在最右边
-                        outRect.right = dividerWidth
-                    }
+                    outRect.bottom = dividerHeight
+
+                    LogUtil.v(GridItemDecoration::class.simpleName, "right-->"+view.right+"position-->"+parent.getChildAdapterPosition(view))
+                }
+                ORIENTATION_HORIZONTAL->{//水平方向
+
                 }
             }
         }

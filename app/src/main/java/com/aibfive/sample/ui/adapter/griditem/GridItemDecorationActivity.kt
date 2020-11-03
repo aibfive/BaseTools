@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import com.aibfive.basetools.adapter.itemdecoration.GridItemDecoration
-import com.aibfive.basetools.adapter.itemdecoration.GridSpacingItemDecoration
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
 import com.aibfive.sample.util.DataCreator
@@ -36,11 +35,8 @@ class GridItemDecorationActivity : BaseActivity() {
         val adapter = GridItemDecorationAdapter()
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(GridItemDecoration(
-                GridItemDecoration.ORIENTATION_HORIZONTAL, resources.getDimensionPixelSize(R.dimen.dp_80), resources.getDimensionPixelSize(R.dimen.dp_40),
+                GridItemDecoration.ORIENTATION_VERTICAL, resources.getDimensionPixelSize(R.dimen.dp_40), resources.getDimensionPixelSize(R.dimen.dp_40),
                 Color.WHITE, false))
-        /*recyclerView.addItemDecoration(GridSpacingItemDecoration(
-                4, resources.getDimensionPixelSize(R.dimen.dp_40),
-                false))*/
         adapter.setNewData(DataCreator.buildCommonData(this))
     }
 }
