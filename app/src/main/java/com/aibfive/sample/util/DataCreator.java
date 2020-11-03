@@ -30,7 +30,7 @@ public class DataCreator {
     public static List<CommonBean> buildCommonData(Context context){
         List<CommonBean> data = new ArrayList<>();
         int size = 20;
-        for(int i = 1; i < size; i++){
+        for(int i = 0; i < size; i++){
             data.add(new CommonBean(context.getString(R.string.format_data, i), i));
         }
         return data;
