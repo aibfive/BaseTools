@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import com.aibfive.basetools.adapter.itemdecoration.GridItemDecoration
+import com.aibfive.basetools.adapter.itemdecoration.StaggeredGridItemDecoration
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
 import com.aibfive.sample.util.DataCreator
@@ -34,9 +35,8 @@ class GridItemDecorationActivity : BaseActivity() {
         super.initView()
         val adapter = GridItemDecorationAdapter()
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(GridItemDecoration(
-                GridItemDecoration.ORIENTATION_VERTICAL, resources.getDimensionPixelSize(R.dimen.dp_40), resources.getDimensionPixelSize(R.dimen.dp_40),
-                Color.WHITE, false))
+        recyclerView.addItemDecoration(StaggeredGridItemDecoration(resources.getDimensionPixelSize(R.dimen.dp_10), resources.getDimensionPixelSize(R.dimen.dp_10),
+                Color.WHITE))
         adapter.setNewData(DataCreator.buildCommonData(this))
     }
 }
