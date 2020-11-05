@@ -13,6 +13,9 @@
     <string name="single_multiple_select">单多选</string>
     <string name="grid_item_decoration">网格分割线</string>
 
+    <!--Kotlin-->
+    <string name="kotlin">kotlin</string>
+
     <!--公共-->
     <string name="format_data">数据\n数据\n数据\n数据\n数据\n数据\n数据\n%d</string>
 </resources>

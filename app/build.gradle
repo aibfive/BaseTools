@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 def ver = rootProject.ext.ver
 def library = rootProject.ext.library
 def tencent = rootProject.ext.tencent
+def kotlin = rootProject.ext.kotlin
+def retrofit = rootProject.ext.retrofit
 
 android {
     compileSdkVersion ver.compileSdkVersion
@@ -24,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -37,6 +40,11 @@ dependencies {
     implementation library.recyclerview
     implementation library.constraint
     implementation library.baseRecyclerViewAdapterHelper
+    implementation retrofit.retrofit
+    implementation retrofit.retrofit_gson
+    implementation retrofit.okhttp_log_interceptor
     implementation tencent.tencentMap
     implementation tencent.tencentLocation
+    implementation kotlin.coroutinesCore
+
 }
