@@ -1,13 +1,11 @@
 package com.aibfive.basetools.http
 
 import com.aibfive.basetools.util.LogUtil
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.reflect.KClass
+import java.util.concurrent.TimeUnit
 
 /**
  * Date : 2020/11/5/005
@@ -50,10 +48,21 @@ object RetrofitClient {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val okHttpClient = OkHttpClient.Builder()
+                //添加日志拦截
                 .addInterceptor(httpLoggingInterceptor)
+                //连接超时时间
+                .connectTimeout(15, TimeUnit.SECONDS)
+                //阅读超时时间
+                .readTimeout(20, TimeUnit.SECONDS)
+                //写入超时时间
+                .writeTimeout(20, TimeUnit.SECONDS)
                 .build()
         return okHttpClient
 
+    }
+
+    fun <T> getAPIService(service: Class<T>?): T {
+        return getInstance()!!.create(service)
     }
 
     /*fun getApiService(cls : Class){
