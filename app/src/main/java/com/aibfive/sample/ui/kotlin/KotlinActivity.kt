@@ -2,13 +2,10 @@ package com.aibfive.sample.ui.kotlin
 
 import android.content.Context
 import android.content.Intent
-import com.aibfive.basetools.http.Demo
-import com.aibfive.basetools.http.RetrofitClient
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 import kotlinx.coroutines.*
-import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.concurrent.thread
 import kotlin.coroutines.CoroutineContext
 
@@ -48,7 +45,6 @@ class KotlinActivity : BaseActivity(), CoroutineScope {
         GlobalScope.async(Dispatchers.IO){
 
         }
-        Demo.demo()
     }
 
     override fun initView() {

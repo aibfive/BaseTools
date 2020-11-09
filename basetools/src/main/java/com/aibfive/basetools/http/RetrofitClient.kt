@@ -14,13 +14,16 @@ import java.util.concurrent.TimeUnit
  */
 object RetrofitClient {
 
-    var client : Retrofit? = null
+    const val TAG = "RetrofitClient"
 
-    fun getInstance() : Retrofit? {
+    var client : Retrofit? = null
+    var baseUrl : String? = null
+
+    private fun getInstance() : Retrofit? {
         if(client == null){
             synchronized(RetrofitClient::class.java){
                 if(client == null){
-                    client = getRetrofit("")
+                    client = getRetrofit(baseUrl!!)
                 }
             }
         }
@@ -28,10 +31,17 @@ object RetrofitClient {
     }
 
     /**
+     * 初始化
+     */
+    fun init(baseUrl: String){
+        this.baseUrl = baseUrl
+    }
+
+    /**
      * 获取Retrofit实例
      *
      */
-    private fun getRetrofit(baseUrl : String) : Retrofit{
+    private fun getRetrofit(baseUrl : String) : Retrofit {
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -39,16 +49,18 @@ object RetrofitClient {
                 .build()
     }
 
-    private fun getOkHttpClient() : OkHttpClient{
+    private fun getOkHttpClient() : OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
             override fun log(message: String) {
-                LogUtil.v(RetrofitClient::class.simpleName, message)
+                LogUtil.json(TAG, message)
             }
         })
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
-        val okHttpClient = OkHttpClient.Builder()
-                //添加日志拦截
+        return OkHttpClient.Builder()
+                //添加头文件的数据字段拦截器
+                .addInterceptor(RequestParameterInterceptor())
+                //添加日志拦截器
                 .addInterceptor(httpLoggingInterceptor)
                 //连接超时时间
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -57,17 +69,14 @@ object RetrofitClient {
                 //写入超时时间
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .build()
-        return okHttpClient
-
     }
 
-    fun <T> getAPIService(service: Class<T>?): T {
+    /**
+     * 获取接口类
+     */
+    fun <T> getAPIService(service : Class<T>) : T {
         return getInstance()!!.create(service)
     }
-
-    /*fun getApiService(cls : Class){
-        getInstance()?.create(DemoService::class.java)
-    }*/
 
 
 }

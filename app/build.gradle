@@ -27,6 +27,13 @@ android {
         }
     }
 
+    android {
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+    }
+
 }
 
 dependencies {
@@ -40,11 +47,11 @@ dependencies {
     implementation library.recyclerview
     implementation library.constraint
     implementation library.baseRecyclerViewAdapterHelper
+    implementation library.logger
     implementation retrofit.retrofit
     implementation retrofit.retrofit_gson
     implementation retrofit.okhttp_log_interceptor
     implementation tencent.tencentMap
     implementation tencent.tencentLocation
     implementation kotlin.coroutinesCore
-
 }

@@ -16,13 +16,16 @@ ext {
 
             baseRecyclerViewAdapterHelper     : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50',
             logger                            : 'com.orhanobut:logger:2.2.0',
-
     ]
 
     retrofit = [
-            retrofit                          : 'com.squareup.retrofit2:retrofit:2.9.0',
-            retrofit_gson                     : 'com.squareup.retrofit2:converter-gson:2.9.0',
-            okhttp_log_interceptor            : 'com.squareup.okhttp3:logging-interceptor:4.9.0',
+            //retrofit                        : 'com.squareup.retrofit2:retrofit:2.9.0',最低minSdkVersion--21
+            //retrofit_gson                   : 'com.squareup.retrofit2:converter-gson:2.9.0',最低minSdkVersion--21
+            retrofit                          : 'com.squareup.retrofit2:retrofit:2.6.4',//minSdkVersion<21若要使用，将版本降至2.6.4，低版本兼容2.6.4为最新，不过最好是使用2.9.0这种最新。
+            retrofit_gson                     : 'com.squareup.retrofit2:converter-gson:2.6.4',//minSdkVersion<21若要使用，将版本降至2.6.4，低版本兼容2.6.4为最新，不过最好是使用2.9.0这种最新。
+
+            //okhttp_log_interceptor          : 'com.squareup.okhttp3:logging-interceptor:4.9.0',最低minSdkVersion--21
+            okhttp_log_interceptor            : 'com.squareup.okhttp3:logging-interceptor:3.12.12',//minSdkVersion<21若要使用，将版本降至3.12.12，低版本兼容3.12.12为最新，不过最好是使用4.9.0这种最新。
     ]
 
     tencent = [

@@ -33,6 +33,7 @@ dependencies {
     implementation library.supportV7
     implementation library.recyclerview
     implementation library.baseRecyclerViewAdapterHelper
+    implementation library.logger
     implementation retrofit.retrofit
     implementation retrofit.retrofit_gson
     implementation retrofit.okhttp_log_interceptor
