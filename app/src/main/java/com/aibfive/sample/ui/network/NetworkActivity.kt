@@ -60,8 +60,8 @@ class NetworkActivity : BaseActivity() {
         })*/
         GlobalScope.launch {
             LogUtil.v(NetworkActivity::class.simpleName, "Thread.Name1-->"+Thread.currentThread().name)
-            RetrofitClient.getAPIService(ApiService::class.java).getBarIndexDeferred(1).await()
-            LogUtil.v(NetworkActivity::class.simpleName, "data-->")
+            val data : BaseBean<BarInfoBean> = RetrofitClient.getAPIService(ApiService::class.java).getBarIndexDeferred(1).await()
+            LogUtil.v(NetworkActivity::class.simpleName, "data-->" + data.data.bar_head)
             LogUtil.v(NetworkActivity::class.simpleName, "Thread.Name2-->"+Thread.currentThread().name)
         }
     }
