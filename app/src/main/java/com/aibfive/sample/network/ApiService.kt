@@ -3,6 +3,7 @@ package com.aibfive.sample.network
 import com.aibfive.sample.bean.network.BannerBean
 import com.aibfive.sample.bean.network.BarInfoBean
 import com.aibfive.basetools.http.BaseBean
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -24,5 +25,13 @@ interface ApiService {
     fun getBarIndex(
             @Field("bar_id") bar_id : Int
     ) : Call<BaseBean<BarInfoBean>>
+
+    @POST(HostUrl.GET_BAR_INFO)
+    @FormUrlEncoded
+    fun getBarIndexDeferred(
+            @Field("bar_id") bar_id : Int
+    ) : Deferred<BaseBean<BarInfoBean>>
+
+
 
 }

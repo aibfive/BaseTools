@@ -8,7 +8,10 @@ import com.aibfive.sample.R
 import com.aibfive.sample.bean.network.BarInfoBean
 import com.aibfive.basetools.http.BaseBean
 import com.aibfive.basetools.http.DefaultCallback
+import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.network.ApiService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,14 +50,20 @@ class NetworkActivity : BaseActivity() {
                 }
             }
         })*/
-        RetrofitClient.getAPIService(ApiService::class.java).getBarIndex(1).enqueue(object : DefaultCallback<BarInfoBean>() {
+        /*RetrofitClient.getAPIService(ApiService::class.java).getBarIndex(1).enqueue(object : DefaultCallback<BarInfoBean>() {
 
             override fun onFail(code: Int, error: String) {
             }
 
             override fun onSuccess(data: BarInfoBean) {
             }
-        })
+        })*/
+        GlobalScope.launch {
+            LogUtil.v(NetworkActivity::class.simpleName, "Thread.Name1-->"+Thread.currentThread().name)
+            RetrofitClient.getAPIService(ApiService::class.java).getBarIndexDeferred(1).await()
+            LogUtil.v(NetworkActivity::class.simpleName, "data-->")
+            LogUtil.v(NetworkActivity::class.simpleName, "Thread.Name2-->"+Thread.currentThread().name)
+        }
     }
 
 }

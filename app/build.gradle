@@ -53,5 +53,5 @@ dependencies {
     implementation retrofit.okhttp_log_interceptor
     implementation tencent.tencentMap
     implementation tencent.tencentLocation
-    implementation kotlin.coroutinesCore
+    implementation kotlin.coroutinesAndroid
 }

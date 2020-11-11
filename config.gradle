@@ -26,6 +26,9 @@ ext {
 
             //okhttp_log_interceptor          : 'com.squareup.okhttp3:logging-interceptor:4.9.0',最低minSdkVersion--21
             okhttp_log_interceptor            : 'com.squareup.okhttp3:logging-interceptor:3.12.12',//minSdkVersion<21若要使用，将版本降至3.12.12，低版本兼容3.12.12为最新，不过最好是使用4.9.0这种最新。
+
+            retrofit_coroutines_adapter       : 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2',
+
     ]
 
     tencent = [
@@ -34,7 +37,7 @@ ext {
     ]
 
     kotlin = [
-            coroutinesCore                    : 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1',
+            coroutinesAndroid                    : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1',
     ]
 
 }

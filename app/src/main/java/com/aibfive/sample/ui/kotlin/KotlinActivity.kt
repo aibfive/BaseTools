@@ -6,13 +6,14 @@ import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 import kotlinx.coroutines.*
-import kotlin.concurrent.thread
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext.plus
 
 /**
  * Kotlin Demo
  */
-class KotlinActivity : BaseActivity(), CoroutineScope {
+class KotlinActivity : BaseActivity() {
 
     companion object{
         @JvmStatic
@@ -28,29 +29,29 @@ class KotlinActivity : BaseActivity(), CoroutineScope {
 
     override fun initData() {
         super.initData()
-        GlobalScope.launch {
-            delay(1000L)
-            LogUtil.v(KotlinActivity::class.simpleName, "World!")
-        }
-        LogUtil.v(KotlinActivity::class.simpleName, "Hello，")
-        thread {
-            Thread.sleep(1000L)
-        }
-        repeat(1000){
-
-        }
-        val join = GlobalScope.launch {
-
-        }
-        GlobalScope.async(Dispatchers.IO){
-
+        GlobalScope.launch(Dispatchers.Main) {
+            async { suspendFun1() }
+            async { suspendFun3() }
+            async { suspendFun2() }
         }
     }
+
+    suspend fun suspendFun1(){
+        delay(2000L)
+        LogUtil.v(KotlinActivity::class.simpleName, "suspendFun1")
+    }
+
+    suspend fun suspendFun2(){
+        LogUtil.v(KotlinActivity::class.simpleName, "suspendFun2")
+    }
+
+    suspend fun suspendFun3(){
+        delay(1000L)
+        LogUtil.v(KotlinActivity::class.simpleName, "suspendFun3")
+    }
+
 
     override fun initView() {
         super.initView()
     }
-    private lateinit var job: Job
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
 }

@@ -1,6 +1,7 @@
 package com.aibfive.basetools.http
 
 import com.aibfive.basetools.util.LogUtil
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -45,6 +46,7 @@ object RetrofitClient {
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .client(getOkHttpClient())
                 .build()
     }
