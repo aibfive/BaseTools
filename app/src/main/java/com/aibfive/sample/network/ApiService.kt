@@ -32,6 +32,12 @@ interface ApiService {
             @Field("bar_id") bar_id : Int
     ) : Deferred<BaseBean<BarInfoBean>>
 
+    @POST(HostUrl.GET_BAR_INFO)
+    @FormUrlEncoded
+    suspend fun getBarIndexSuspend(
+            @Field("bar_id") bar_id : Int
+    ) : BaseBean<BarInfoBean>
+
 
 
 }
