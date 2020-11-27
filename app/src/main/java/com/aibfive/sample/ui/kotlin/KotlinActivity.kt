@@ -2,8 +2,13 @@ package com.aibfive.sample.ui.kotlin
 
 import android.content.Context
 import android.content.Intent
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import com.aibfive.basetools.ui.BaseActivity
+import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
+import kotlinx.android.synthetic.main.activity_kotlin.*
 
 /**
  * Kotlin Demo
@@ -28,6 +33,15 @@ class KotlinActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
+        searchView.setOnEditorActionListener(
+                {
+                    v: TextView?, actionId: Int, event: KeyEvent? -> Boolean
+                    if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                        LogUtil.v(KotlinActivity::class.simpleName, "search-->"+v?.text)
+                    }
+                    false
+                }
+        )
     }
 
 }

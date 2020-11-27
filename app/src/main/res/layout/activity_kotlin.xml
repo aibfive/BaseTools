@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color3493FF"
     tools:context=".ui.kotlin.KotlinActivity">
 
     <android.support.v7.widget.AppCompatTextView
@@ -14,5 +15,23 @@
         android:textColor="@color/color484848"
         android:textSize="18sp"
         android:gravity="center"/>
+
+    <com.aibfive.basetools.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:hint="@string/search_hint"
+        android:textSize="@dimen/sp_14"
+        android:textColorHint="@color/color999999"
+        android:textColor="@color/color333333"
+        android:drawableLeft="@drawable/icon_search1"
+        android:drawableRight="@drawable/icon_close"
+        android:background="@drawable/bg_search_view"
+        android:layout_marginTop="@dimen/dp_20"
+        android:paddingHorizontal="@dimen/dp_20"
+        android:drawablePadding="@dimen/dp_10"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

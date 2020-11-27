@@ -15,6 +15,7 @@
 
     <!--Kotlin-->
     <string name="kotlin">kotlin</string>
+    <string name="search_hint">请输入搜索关键字</string>
 
     <!--Network-->
     <string name="network">network</string>
