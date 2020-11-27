@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="StyleCenterDialogAnim" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_center_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_dialog_center_out</item>
+    </style>
+
+    <style name="StyleBottomDialogAnim" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_dialog_bottom_out</item>
+    </style>
+
+</resources>
