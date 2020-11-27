@@ -1,6 +1,7 @@
 package com.aibfive.basetools.widget
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.AppCompatEditText
 import android.text.Editable
 import android.text.InputType
@@ -18,6 +19,8 @@ import com.aibfive.basetools.util.LogUtil
  */
 class SearchView : AppCompatEditText {
 
+    var clearIcon : Drawable? = null
+
     constructor(context: Context?) : super(context){
         initView()
     }
@@ -31,8 +34,9 @@ class SearchView : AppCompatEditText {
     }
 
     fun initView(){
+        clearIcon = compoundDrawables[2]
         inputType = InputType.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_VARIATION_NORMAL
-        imeOptions = EditorInfo.IME_MASK_ACTION or EditorInfo.IME_ACTION_SEARCH
+        imeOptions = EditorInfo.IME_ACTION_SEARCH
         addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 if(TextUtils.isEmpty(s)){
@@ -58,7 +62,7 @@ class SearchView : AppCompatEditText {
      */
     fun showClearIcon(){
         LogUtil.v(SearchView::class.simpleName, "showClearIcon")
-        setCompoundDrawablesWithIntrinsicBounds(compoundDrawables[0], null, compoundDrawables[2], null)
+        setCompoundDrawablesWithIntrinsicBounds(compoundDrawables[0], null, clearIcon, null)
     }
 
     /**
