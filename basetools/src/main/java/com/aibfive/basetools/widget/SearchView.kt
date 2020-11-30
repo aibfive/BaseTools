@@ -61,7 +61,6 @@ class SearchView : AppCompatEditText {
      * 显示清除按钮
      */
     fun showClearIcon(){
-        LogUtil.v(SearchView::class.simpleName, "showClearIcon")
         setCompoundDrawablesWithIntrinsicBounds(compoundDrawables[0], null, clearIcon, null)
     }
 
@@ -69,7 +68,6 @@ class SearchView : AppCompatEditText {
      * 隐藏清除按钮
      */
     fun hideClearIcon(){
-        LogUtil.v(SearchView::class.simpleName, "hideClearIcon")
         setCompoundDrawablesWithIntrinsicBounds(compoundDrawables[0], null, null, null)
     }
 
