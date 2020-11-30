@@ -48,6 +48,8 @@ dependencies {
     implementation library.constraint
     implementation library.baseRecyclerViewAdapterHelper
     implementation library.logger
+    implementation library.glide
+    implementation library.glideCompiler
     implementation retrofit.retrofit
     implementation retrofit.retrofit_gson
     implementation retrofit.okhttp_log_interceptor

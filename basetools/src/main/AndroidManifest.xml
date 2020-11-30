@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aibfive.basetools">
 
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 检查网络可用性 -->
+
     <application>
         <activity android:name=".ui.BaseActivity"></activity>
     </application>

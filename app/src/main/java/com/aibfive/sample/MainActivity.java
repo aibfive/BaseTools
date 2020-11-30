@@ -11,6 +11,7 @@ import com.aibfive.sample.ui.adapter.AdapterActivity;
 import com.aibfive.sample.ui.kotlin.KotlinActivity;
 import com.aibfive.sample.ui.network.NetworkActivity;
 import com.aibfive.sample.ui.tencentmap.TencentMapActivity;
+import com.aibfive.sample.ui.webview.WebViewActivity;
 import com.aibfive.sample.util.DataCreator;
 
 public class MainActivity extends BaseActivity implements OnItemClickLisenter {
@@ -46,6 +47,9 @@ public class MainActivity extends BaseActivity implements OnItemClickLisenter {
                 break;
             case DataCreator.DATA_TYPE_NETWORK://network
                 NetworkActivity.start(this);
+                break;
+            case DataCreator.DATA_TYPE_WEBVIEW://webview
+                WebViewActivity.start(this, "https://www.baidu.com");
                 break;
         }
     }

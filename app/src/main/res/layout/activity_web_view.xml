@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color3493FF"
-    tools:context=".ui.kotlin.KotlinActivity">
+    tools:context=".ui.webview.WebViewActivity">
 
-    <com.aibfive.basetools.widget.MyWebView
+    <com.aibfive.basetools.widget.CustomWebView
         android:id="@+id/customWebView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color333333"/>
-
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>

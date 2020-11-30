@@ -16,6 +16,11 @@ ext {
 
             baseRecyclerViewAdapterHelper     : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50',
             logger                            : 'com.orhanobut:logger:2.2.0',
+
+            glide                             : 'com.github.bumptech.glide:glide:4.9.0',
+            glideCompiler                     : 'com.github.bumptech.glide:compiler:4.9.0',
+
+
     ]
 
     retrofit = [

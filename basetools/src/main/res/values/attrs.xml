@@ -70,6 +70,9 @@
     <attr name="inputable" format="boolean"/>
     <attr name="is_auto_fill" format="boolean"/>
   </declare-styleable>
-  <attr name="indexBarTextSize" format="dimension" />
+
+  <declare-styleable name="CustomWebView">
+    <attr name="progressBarHeight" format="dimension"/>
+  </declare-styleable>
 
 </resources>

@@ -16,6 +16,7 @@ public class DataCreator {
     public static final int DATA_TYPE_ADAPTER = 1;//适配器
     public static final int DATA_TYPE_KOTLIN = 2;//kotlin
     public static final int DATA_TYPE_NETWORK = 3;//network
+    public static final int DATA_TYPE_WEBVIEW = 4;//webview
 
     /**
      * 创建主页数据
@@ -28,6 +29,7 @@ public class DataCreator {
         data.add(new MainItemBean(DATA_TYPE_ADAPTER, context.getString(R.string.adapter)));
         data.add(new MainItemBean(DATA_TYPE_KOTLIN, context.getString(R.string.kotlin)));
         data.add(new MainItemBean(DATA_TYPE_NETWORK, context.getString(R.string.network)));
+        data.add(new MainItemBean(DATA_TYPE_WEBVIEW, context.getString(R.string.webview)));
         return data;
     }
 

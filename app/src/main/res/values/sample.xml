@@ -14,11 +14,14 @@
     <string name="grid_item_decoration">网格分割线</string>
 
     <!--Kotlin-->
-    <string name="kotlin">kotlin</string>
+    <string name="kotlin">Kotlin</string>
     <string name="search_hint">请输入搜索关键字</string>
 
     <!--Network-->
-    <string name="network">network</string>
+    <string name="network">Network</string>
+
+    <!--WebView-->
+    <string name="webview">WebView</string>
 
     <!--公共-->
     <string name="format_data">数据\n数据\n数据\n数据\n数据\n数据\n数据\n%d</string>
