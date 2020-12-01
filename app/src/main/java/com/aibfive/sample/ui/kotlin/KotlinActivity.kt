@@ -2,15 +2,11 @@ package com.aibfive.sample.ui.kotlin
 
 import android.content.Context
 import android.content.Intent
-import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.LogUtil
+import com.aibfive.basetools.util.sharedpreferences.SharedPreferencesUtils
 import com.aibfive.sample.R
 import kotlinx.android.synthetic.main.activity_kotlin.*
-import kotlinx.android.synthetic.main.activity_kotlin.customWebView
-import kotlinx.android.synthetic.main.activity_web_view.*
 
 /**
  * Kotlin Demo
@@ -24,13 +20,18 @@ class KotlinActivity : BaseActivity() {
             context.startActivity(starter)
         }
     }
-    
+
     override fun getLayoutId(): Int {
         return R.layout.activity_kotlin
     }
 
     override fun initData() {
         super.initData()
+        SharedPreferencesUtils.INT = 111
+        SharedPreferencesUtils.STRING = "STR"
+        LogUtil.v(KotlinActivity::class.simpleName, "INT：${SharedPreferencesUtils.INT}")
+        LogUtil.v(KotlinActivity::class.simpleName, "STRING：${SharedPreferencesUtils.STRING}")
+
     }
 
     override fun initView() {
