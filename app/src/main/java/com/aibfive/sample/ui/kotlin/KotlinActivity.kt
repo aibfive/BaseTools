@@ -27,11 +27,7 @@ class KotlinActivity : BaseActivity() {
 
     override fun initData() {
         super.initData()
-        SharedPreferencesUtils.INT = 111
-        SharedPreferencesUtils.STRING = "STR"
-        LogUtil.v(KotlinActivity::class.simpleName, "INT：${SharedPreferencesUtils.INT}")
-        LogUtil.v(KotlinActivity::class.simpleName, "STRING：${SharedPreferencesUtils.STRING}")
-
+        Box<Int>(2).show()
     }
 
     override fun initView() {
@@ -52,6 +48,20 @@ class KotlinActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         customWebView.onDestroy()
+    }
+
+    class Box<T>(value : T){
+
+        public constructor(value2 : T, value3 : String) : this(value2){
+
+        }
+
+        var value1 : T? = null
+
+        fun show() : T?{
+            val valu : T? = value1
+            return valu
+        }
     }
 
 }

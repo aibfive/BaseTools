@@ -5,7 +5,12 @@ import android.support.v7.widget.RecyclerView;
 
 import com.aibfive.basetools.adapter.itemdecoration.GridItemDecoration;
 import com.aibfive.basetools.ui.BaseActivity;
+import com.aibfive.basetools.ui.DemoActivity;
+import com.aibfive.basetools.util.LogUtil;
 import com.aibfive.sample.adapter.MainItemAdapter;
+import com.aibfive.sample.app.App;
+import com.aibfive.sample.demo.ChildBean;
+import com.aibfive.sample.demo.SuperBean;
 import com.aibfive.sample.listener.OnItemClickLisenter;
 import com.aibfive.sample.ui.adapter.AdapterActivity;
 import com.aibfive.sample.ui.kotlin.KotlinActivity;
@@ -13,6 +18,9 @@ import com.aibfive.sample.ui.network.NetworkActivity;
 import com.aibfive.sample.ui.tencentmap.TencentMapActivity;
 import com.aibfive.sample.ui.webview.WebViewActivity;
 import com.aibfive.sample.util.DataCreator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements OnItemClickLisenter {
 
@@ -43,7 +51,7 @@ public class MainActivity extends BaseActivity implements OnItemClickLisenter {
                 AdapterActivity.start(this);
                 break;
             case DataCreator.DATA_TYPE_KOTLIN://kotlin
-                KotlinActivity.start(this);
+                DemoActivity.start(this);
                 break;
             case DataCreator.DATA_TYPE_NETWORK://network
                 NetworkActivity.start(this);
