@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorFFFFFF">
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvHint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvHint"/>
 
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvOperate"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
@@ -40,4 +40,4 @@
         app:layout_constraintTop_toBottomOf="@id/view1"/>
 
 
-</android.support.constraint.ConstraintLayout >
+</androidx.constraintlayout.widget.ConstraintLayout >

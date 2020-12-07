@@ -2,9 +2,9 @@ package com.aibfive.sample.ui.tencentmap
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.aibfive.sample.R
 import kotlinx.android.synthetic.main.activity_tencent_map.*
 

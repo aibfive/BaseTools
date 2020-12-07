@@ -3,9 +3,9 @@ package com.aibfive.basetools.dialog
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
 import android.view.*
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.aibfive.basetools.R
 
 /**
@@ -51,7 +51,7 @@ open abstract class BaseDialogFragment : DialogFragment(){
     }
 
     fun initDialog(){
-        val window = dialog.window
+        val window = dialog?.window
         val lp = window?.attributes
         lp?.width = getDialogWidth()
         lp?.height = getDialogHeight()
@@ -60,7 +60,7 @@ open abstract class BaseDialogFragment : DialogFragment(){
         window?.setBackgroundDrawable(getDialogBackgroundDrawable())
     }
 
-    fun show(manager: FragmentManager?) {
+    fun show(manager: FragmentManager) {
         super.show(manager, null)
     }
 

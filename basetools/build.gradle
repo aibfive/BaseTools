@@ -30,7 +30,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible
-    implementation library.supportV7
+    implementation library.appcompat
     implementation library.recyclerview
     implementation library.baseRecyclerViewAdapterHelper
     implementation library.logger
@@ -38,7 +38,7 @@ dependencies {
     implementation retrofit.retrofit_gson
     implementation retrofit.okhttp_log_interceptor
     implementation retrofit.retrofit_coroutines_adapter
-    implementation library.constraint
+    implementation library.constraintlayout
     implementation library.glide
     implementation library.glideCompiler
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

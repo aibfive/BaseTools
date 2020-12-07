@@ -3,10 +3,12 @@ package com.aibfive.basetools.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 /**
  * 正方体文本视图
  */
-public class SquareTextView extends android.support.v7.widget.AppCompatTextView {
+public class SquareTextView extends AppCompatTextView {
 
     public SquareTextView(Context context) {
         this(context, null);

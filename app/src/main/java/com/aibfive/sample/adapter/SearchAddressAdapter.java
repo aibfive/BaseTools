@@ -1,12 +1,11 @@
 package com.aibfive.sample.adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.aibfive.basetools.adapter.SelectedAdapter;
 import com.aibfive.sample.R;
 import com.aibfive.sample.bean.tencentmap.AddressBean;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.tencent.lbssearch.httpresponse.Poi;
 
 /**
  * Date : 2020/9/17/017

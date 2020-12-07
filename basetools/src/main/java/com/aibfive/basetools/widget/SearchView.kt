@@ -2,7 +2,6 @@ package com.aibfive.basetools.widget
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.v7.widget.AppCompatEditText
 import android.text.Editable
 import android.text.InputType
 import android.text.TextUtils
@@ -10,7 +9,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo
-import com.aibfive.basetools.util.LogUtil
+import androidx.appcompat.widget.AppCompatEditText
 
 /**
  * Date : 2020/11/27/027
@@ -21,15 +20,15 @@ class SearchView : AppCompatEditText {
 
     var clearIcon : Drawable? = null
 
-    constructor(context: Context?) : super(context){
+    constructor(context: Context) : super(context){
         initView()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs){
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs){
         initView()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr){
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr){
         initView()
     }
 

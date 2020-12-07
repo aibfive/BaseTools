@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
     android:background="@color/color333333"
     tools:context=".ui.adapter.griditem.GridItemDecorationActivity">
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center"
@@ -16,7 +16,7 @@
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -25,15 +25,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:spanCount="6"
-        app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         android:overScrollMode="never"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/ivBack"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

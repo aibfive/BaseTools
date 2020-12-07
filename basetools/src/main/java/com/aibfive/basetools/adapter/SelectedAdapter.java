@@ -1,9 +1,9 @@
 package com.aibfive.basetools.adapter;
 
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 import com.aibfive.basetools.util.EmptyUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;

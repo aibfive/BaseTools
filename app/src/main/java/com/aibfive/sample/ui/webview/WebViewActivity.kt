@@ -2,8 +2,6 @@ package com.aibfive.sample.ui.webview
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
 import kotlinx.android.synthetic.main.activity_web_view.*

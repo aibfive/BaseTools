@@ -3,11 +3,12 @@ package com.aibfive.basetools.adapter;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IdRes;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+
+import androidx.annotation.IdRes;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

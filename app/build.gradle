@@ -43,9 +43,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation library.supportV7
+    implementation library.appcompat
     implementation library.recyclerview
-    implementation library.constraint
+    implementation library.constraintlayout
     implementation library.baseRecyclerViewAdapterHelper
     implementation library.logger
     implementation library.glide

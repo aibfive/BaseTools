@@ -1,10 +1,7 @@
 package com.aibfive.basetools.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,6 +13,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.aibfive.basetools.R;
 import com.bumptech.glide.Glide;

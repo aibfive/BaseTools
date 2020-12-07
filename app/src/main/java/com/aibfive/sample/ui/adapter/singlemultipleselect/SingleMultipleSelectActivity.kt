@@ -2,12 +2,9 @@ package com.aibfive.sample.ui.adapter.singlemultipleselect
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
-import com.aibfive.sample.ui.adapter.griditem.GridItemDecorationActivity
 
 /**
  * 单多选适配器

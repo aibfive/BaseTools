@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
 import android.view.View
 import android.webkit.WebChromeClient
@@ -12,6 +11,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import androidx.annotation.RequiresApi
 import com.aibfive.basetools.R
 import com.aibfive.basetools.util.LogUtil
 

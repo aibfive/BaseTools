@@ -3,8 +3,9 @@ package com.aibfive.basetools.adapter.itemdecoration;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 /**
@@ -217,7 +218,7 @@ public class LinearItemDecoration extends RecyclerView.ItemDecoration {
      */
     private int getOrientation(RecyclerView parent){
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        if(layoutManager instanceof  LinearLayoutManager){
+        if(layoutManager instanceof LinearLayoutManager){
             return ((LinearLayoutManager)layoutManager).getOrientation();
         }else{
             return RecyclerView.VERTICAL;
