@@ -6,6 +6,7 @@ def library = rootProject.ext.library
 def tencent = rootProject.ext.tencent
 def kotlin = rootProject.ext.kotlin
 def retrofit = rootProject.ext.retrofit
+def refresh = rootProject.ext.refresh
 
 android {
     compileSdkVersion ver.compileSdkVersion
@@ -56,4 +57,7 @@ dependencies {
     implementation tencent.tencentMap
     implementation tencent.tencentLocation
     implementation kotlin.coroutinesAndroid
+    implementation refresh.smartRefresh
+    implementation refresh.smartRefreshHeader
+    implementation refresh.smartRefreshFooter
 }

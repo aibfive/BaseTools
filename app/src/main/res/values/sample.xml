@@ -23,6 +23,12 @@
     <!--WebView-->
     <string name="webview">WebView</string>
 
+    <!--Refresh-->
+    <string name="refresh">Refresh</string>
+
+    <!--Coroutine-->
+    <string name="coroutine">Coroutine</string>
+
     <!--公共-->
     <string name="format_data">数据\n数据\n数据\n数据\n数据\n数据\n数据\n%d</string>
 </resources>

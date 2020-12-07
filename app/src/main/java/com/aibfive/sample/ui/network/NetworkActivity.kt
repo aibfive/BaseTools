@@ -36,34 +36,6 @@ class NetworkActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        /*RetrofitClient.getAPIService(ApiService::class.java).getBanner().enqueue(object : Callback<BaseBean<BannerBean>>{
-            override fun onFailure(call: Call<BaseBean<BannerBean>>, t: Throwable) {
-                LogUtil.v(NetworkActivity::class.simpleName, "onFailure" + t.toString())
-            }
-
-            override fun onResponse(call: Call<BaseBean<BannerBean>>, response: Response<BaseBean<BannerBean>>) {
-                if(response != null) {
-                    val data: BaseBean<BannerBean>? = response.body()
-                    if(data != null) {
-                        LogUtil.v(NetworkActivity::class.simpleName, "onResponse" + data.toString())
-                    }
-                }
-            }
-        })*/
-        /*RetrofitClient.getAPIService(ApiService::class.java).getBarIndex(1).enqueue(object : DefaultCallback<BarInfoBean>() {
-
-            override fun onFail(code: Int, error: String) {
-            }
-
-            override fun onSuccess(data: BarInfoBean) {
-            }
-        })*/
-        GlobalScope.launch {
-            LogUtil.v(NetworkActivity::class.simpleName, "Thread.Name1-->"+Thread.currentThread().name)
-            val data : BaseBean<BarInfoBean> = RetrofitClient.getAPIService(ApiService::class.java).getBarIndexDeferred(1).await()
-            LogUtil.v(NetworkActivity::class.simpleName, "data-->" + data.data.bar_head)
-            LogUtil.v(NetworkActivity::class.simpleName, "Thread.Name2-->"+Thread.currentThread().name)
-        }
     }
 
 }

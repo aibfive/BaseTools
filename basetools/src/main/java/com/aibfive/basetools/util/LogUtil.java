@@ -45,7 +45,7 @@ public class LogUtil {
 
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
-    public static void printLine(String tag, boolean isTop) {
+    private static void printLine(String tag, boolean isTop) {
         if (isTop) {
             Log.v(tag, "╔═══════════════════════════════════════════════════════════════════════════════════════");
         } else {
@@ -53,7 +53,7 @@ public class LogUtil {
         }
     }
 
-    public static void printJson(String tag, String msg) {
+    private static void printJson(String tag, String msg) {
         try {
 
             String message;

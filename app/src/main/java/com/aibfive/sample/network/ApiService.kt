@@ -1,10 +1,7 @@
 package com.aibfive.sample.network
 
-import com.aibfive.sample.bean.network.BannerBean
-import com.aibfive.sample.bean.network.BarInfoBean
-import com.aibfive.basetools.http.BaseBean
+import com.aibfive.sample.bean.ArticleBean
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.http.*
 
 /**
@@ -14,30 +11,13 @@ import retrofit2.http.*
  */
 interface ApiService {
 
-    @GET(HostUrl.GET_BANNER)
-    fun getBanner() : Call<BaseBean<BannerBean>>
+    // 文章列表
+    @GET("article/list/{page}/json1")
+    suspend fun getArticlesSuspend(@Path("page") page: Int): BaseBean<ArticleBean>
 
-    @GET(HostUrl.GET_COLLECT_LIST)
-    fun getCollectList() : Call<BaseBean<Any>>
-
-    @POST(HostUrl.GET_BAR_INFO)
-    @FormUrlEncoded
-    fun getBarIndex(
-            @Field("bar_id") bar_id : Int
-    ) : Call<BaseBean<BarInfoBean>>
-
-    @POST(HostUrl.GET_BAR_INFO)
-    @FormUrlEncoded
-    fun getBarIndexDeferred(
-            @Field("bar_id") bar_id : Int
-    ) : Deferred<BaseBean<BarInfoBean>>
-
-    @POST(HostUrl.GET_BAR_INFO)
-    @FormUrlEncoded
-    suspend fun getBarIndexSuspend(
-            @Field("bar_id") bar_id : Int
-    ) : BaseBean<BarInfoBean>
-
+    // 文章列表
+    @GET("article/list/{page}/json")
+    suspend fun getArticlesSuspend1(@Path("page") page: Int): BaseBean<String>
 
 
 }
