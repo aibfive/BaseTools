@@ -4,6 +4,7 @@ import com.aibfive.basetools.mvp.MvpModel
 import com.aibfive.basetools.mvp.MvpPresenter
 import com.aibfive.basetools.mvp.MvpView
 import com.aibfive.basetools.mvp.ResponseCallback
+import com.aibfive.sample.bean.ArticleBean
 
 /**
  * Date : 2020/12/8/008
@@ -13,11 +14,11 @@ import com.aibfive.basetools.mvp.ResponseCallback
 interface DemoContract {
 
     interface View : MvpView {
-        fun getDemoSuccess()
+        fun getDemoSuccess(data : ArticleBean?)
     }
 
     interface Model : MvpModel {
-        fun getDemo(callback: ResponseCallback<DemoBean>)
+        fun getDemo(callback: ResponseCallback<ArticleBean>)
     }
 
     abstract class Presenter : MvpPresenter<View, Model>(){

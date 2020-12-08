@@ -1,5 +1,6 @@
 package com.aibfive.basetools.http
 
+import com.aibfive.basetools.mvp.ResponseCallback
 import com.aibfive.basetools.util.LogUtil
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -80,5 +81,8 @@ object RetrofitClient {
         return getInstance()!!.create(service)
     }
 
+    fun <T> launchUI(callback: ResponseCallback<T>){
+
+    }
 
 }

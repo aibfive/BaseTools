@@ -5,6 +5,7 @@ import android.content.Intent
 import com.aibfive.basetools.mvp.MvpActivity
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
+import com.aibfive.sample.bean.ArticleBean
 
 class DemoActivity : MvpActivity<DemoPresenter, DemoModel>(), DemoContract.View {
 
@@ -29,8 +30,8 @@ class DemoActivity : MvpActivity<DemoPresenter, DemoModel>(), DemoContract.View 
         presenter?.getDemo()
     }
 
-    override fun getDemoSuccess() {
-        LogUtil.v(DemoActivity::class.simpleName, "获取数据成功")
+    override fun getDemoSuccess(data : ArticleBean?) {
+        LogUtil.v(DemoActivity::class.simpleName, "获取数据成功：${data!!.datas[0]!!.desc}")
     }
 
     override fun showLoading() {

@@ -1,6 +1,7 @@
 package com.aibfive.sample.ui.mvp
 
 import com.aibfive.basetools.mvp.ResponseCallback
+import com.aibfive.sample.bean.ArticleBean
 
 /**
  * Date : 2020/12/8/008
@@ -11,9 +12,9 @@ class DemoPresenter : DemoContract.Presenter() {
 
     override fun getDemo() {
         view?.showLoading()
-        model?.getDemo(object : ResponseCallback<DemoBean>{
-            override fun onSuccess(data: DemoBean?) {
-                view?.getDemoSuccess()
+        model?.getDemo(object : ResponseCallback<ArticleBean>{
+            override fun onSuccess(data: ArticleBean?) {
+                view?.getDemoSuccess(data)
                 view?.hideLoading()
             }
 
@@ -22,4 +23,5 @@ class DemoPresenter : DemoContract.Presenter() {
             }
         })
     }
+
 }
