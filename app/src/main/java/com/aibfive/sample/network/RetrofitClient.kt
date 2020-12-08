@@ -45,17 +45,4 @@ object RetrofitClient {
         return retrofit.create(ApiService::class.java)
     }
 
-    fun launchUI(
-            block: suspend () -> Unit,
-            error: suspend (e: Exception) -> Unit
-    ){
-        GlobalScope.launch(Dispatchers.Main) {
-            try {
-                block.invoke()
-            } catch (e: Exception) {
-                error.invoke(e)
-            }
-        }
-    }
-
 }
