@@ -37,6 +37,6 @@ class GridItemDecorationActivity : BaseActivity() {
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(StaggeredGridItemDecoration(resources.getDimensionPixelSize(R.dimen.dp_10), resources.getDimensionPixelSize(R.dimen.dp_10),
                 Color.WHITE))
-        adapter.setNewData(DataCreator.buildCommonData(this))
+        adapter.setList(DataCreator.buildCommonData(this))
     }
 }

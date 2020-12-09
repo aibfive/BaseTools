@@ -1,3 +1,4 @@
+/*
 package com.aibfive.basetools.adapter.expandable;
 
 
@@ -32,12 +33,14 @@ public class EditExpandableQuickAdapter<T extends MultiItemEntity, K extends Bas
         reigsterGroupItemClickListener(holder.itemView, holder, group, groupPosition);
     }
 
-    /**
+    */
+/**
      * 用于为child项的View设置与group项同样的操作，除了折叠、展开操作
      * @param itemView
      * @param holder
      * @param group
-     */
+     *//*
+
     public void reigsterGroupItemInChildGrandsonClickListener(View itemView, final K holder, final T group){
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,10 +60,12 @@ public class EditExpandableQuickAdapter<T extends MultiItemEntity, K extends Bas
                 if(isEditMode() && !isEditStatus()){
                     //长按的是group的时候，childPosition = -1
                     if (isGroupSelectMode()) {
-                        /**
+                        */
+/**
                          * 若长按组项并且组项选择模式开启
                          * 开启编辑模式
-                         */
+                         *//*
+
                         setEditStatus(true);
                     }
                 }
@@ -103,10 +108,12 @@ public class EditExpandableQuickAdapter<T extends MultiItemEntity, K extends Bas
                 if(isEditMode() && !isEditStatus()){
                     //长按的是group的时候，childPosition = -1
                     if (isGroupSelectMode()) {
-                        /**
+                        */
+/**
                          * 若长按组项并且组项选择模式开启
                          * 开启编辑模式
-                         */
+                         *//*
+
                         setEditStatus(true);
                     }
                 }
@@ -153,10 +160,12 @@ public class EditExpandableQuickAdapter<T extends MultiItemEntity, K extends Bas
             public boolean onLongClick(View v) {
                 if(isEditMode() && !isEditStatus()){
                     if (isChildSelectMode()) {
-                        /*
+                        */
+/*
                          * 或长按子项并且子项选择模式开启
                          * 开启编辑模式
-                         */
+                         *//*
+
                         setEditStatus(true);
                     }
                 }
@@ -188,10 +197,12 @@ public class EditExpandableQuickAdapter<T extends MultiItemEntity, K extends Bas
             public boolean onLongClick(View v) {
                 if(isEditMode() && !isEditStatus()){
                     if (isChildSelectMode()) {
-                        /*
+                        */
+/*
                          * 或长按子项并且子项选择模式开启
                          * 开启编辑模式
-                         */
+                         *//*
+
                         setEditStatus(true);
                     }
                 }
@@ -200,35 +211,43 @@ public class EditExpandableQuickAdapter<T extends MultiItemEntity, K extends Bas
         });
     }
 
-    /**
+    */
+/**
      * 是否可编辑
      * @return
-     */
+     *//*
+
     public boolean isEditMode() {
         return mEditMode;
     }
 
-    /**
+    */
+/**
      * 设置编辑模式
      * @param editMode
-     */
+     *//*
+
     public void setEditMode(boolean editMode) {
         this.mEditMode = editMode;
 
     }
 
-    /**
+    */
+/**
      * 是否编辑状态
      * @return
-     */
+     *//*
+
     public boolean isEditStatus() {
         return mEditStatus;
     }
 
-    /**
+    */
+/**
      * 设置编辑状态
      * @param editStatus
-     */
+     *//*
+
     public void setEditStatus(boolean editStatus) {
         this.mEditStatus = editStatus;
         if(mListener != null){
@@ -261,3 +280,4 @@ public class EditExpandableQuickAdapter<T extends MultiItemEntity, K extends Bas
     }
 
 }
+*/

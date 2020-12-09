@@ -1,3 +1,4 @@
+/*
 package com.aibfive.basetools.adapter.expandable;
 
 import android.view.View;
@@ -160,9 +161,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 设置列表之前关闭或者展开的状态
-     */
+     *//*
+
     public void setOldSelectStatus(Collection<? extends T> data){
         if(data == null || selectHashMap.isEmpty()){
             return;
@@ -209,9 +212,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         refreshOnSelectListener();
     }
 
-    /**
+    */
+/**
      * 重置
-     */
+     *//*
+
     public void resetOnSelectListener(){
         if(mSelectListener != null){
             mSelectListener.onSelect(0, false);
@@ -225,11 +230,13 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 组内子内所有孙项是否全选
      * @param child
      * @return
-     */
+     *//*
+
     public boolean isGroupChildGrandsonAllSelected(MultiItemEntity child){
         if(child != null && isGrandsonSelectMode()) {
             List<MultiItemEntity> grandsonList = ((IExpandable)child).getSubItems();
@@ -255,11 +262,13 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 组内所有子项是否全选
      * @param group
      * @return
-     */
+     *//*
+
     public boolean isGroupChildAllSelected(MultiItemEntity group){
         if(group != null && isChildSelectMode()) {
             List<MultiItemEntity> childList = ((IExpandable)group).getSubItems();
@@ -285,10 +294,12 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 获取选中数量
      * @return
-     */
+     *//*
+
     public int getSelectedCount(){
         int count = 0;
         if(isGrandsonSelectMode()){
@@ -341,10 +352,12 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         return count;
     }
 
-    /**
+    */
+/**
      * 获取可选择数量
      * @return
-     */
+     *//*
+
     public int getSelectableCount(){
         if(isGrandsonSelectMode()){
             int count = 0;
@@ -418,9 +431,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         return selectedCount == selectableCount;
     }
 
-    /**
+    */
+/**
      * 设置所有选择状态
-     */
+     *//*
+
     public void setAllSelectStatus(){
         boolean isSelectedAll = isSelectedAll();
         if(isGroupSelectMode() && !isChildSelectMode() && !isGrandsonSelectMode()){  //仅开启组选
@@ -444,9 +459,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         //notifyDataSetChanged();
     }
 
-    /**
+    */
+/**
      * 选择全部子项
-     */
+     *//*
+
     private void setAllChildStatus(boolean select){
         for(T group : mGroupList){
             if(group != null) {
@@ -467,9 +484,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 选择全部孙项
-     */
+     *//*
+
     private void setAllGrandsonStatus(boolean select){
         for(T group : mGroupList){
             if(group != null) {
@@ -497,9 +516,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 选择全部组项
-     */
+     *//*
+
     private void setAllGroupStatus(boolean select){
         for(T group : mGroupList){
             if(group != null && group instanceof SelectMultiItemEntity){
@@ -513,10 +534,12 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 设置组选择状态
      * @param groupEntity
-     */
+     *//*
+
     public void setGroupSelectStatus(MultiItemEntity groupEntity){
         if(isGroupSelectMode()) {
             if (groupEntity != null && groupEntity instanceof SelectMultiItemEntity) {
@@ -586,9 +609,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
                 }
             }
 
-            /**
+            */
+/**
              * 若开启了孙项模式，
-             */
+             *//*
+
             if(isGrandsonSelectMode()){
                 if(child != null && child instanceof IExpandable){
                     List<MultiItemEntity> grandsonList = ((IExpandable)child).getSubItems();
@@ -604,9 +629,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
                 }
             }
 
-            /**
+            */
+/**
              * 若开启了组项模式，根据该组子项是否全选，设置该组是否选中
-             */
+             *//*
+
             if (isGroupSelectMode()) {
                 if (group != null && group instanceof SelectMultiItemEntity) {
                     SelectMultiItemEntity selectEntity = (SelectMultiItemEntity) group;
@@ -637,9 +664,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
                 }
             }
 
-            /**
+            */
+/**
              * 若开启了子项模式，根据该组孙项是否全选，设置该子组是否选中
-             */
+             *//*
+
             if(isChildSelectMode()){
                 if (child != null && child instanceof SelectMultiItemEntity) {
                     SelectMultiItemEntity selectEntity = (SelectMultiItemEntity) child;
@@ -653,9 +682,11 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
             }
 
 
-            /**
+            */
+/**
              * 若开启了组项模式，根据该组子项是否全选，设置该组是否选中
-             */
+             *//*
+
             if (isGroupSelectMode()) {
                 if (groud != null && groud instanceof SelectMultiItemEntity) {
                     SelectMultiItemEntity selectEntity = (SelectMultiItemEntity) groud;
@@ -674,50 +705,62 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 
-    /**
+    */
+/**
      * 是否组选择
      * @return
-     */
+     *//*
+
     public boolean isGroupSelectMode() {
         return mGroupSelectMode;
     }
 
-    /**
+    */
+/**
      * 设置组选择
      * @param groupSelectMode
-     */
+     *//*
+
     public void setGroupSelectMode(boolean groupSelectMode) {
         this.mGroupSelectMode = groupSelectMode;
     }
 
-    /**
+    */
+/**
      * 是否子选择
      * @return
-     */
+     *//*
+
     public boolean isChildSelectMode() {
         return mChildSelectMode;
     }
 
-    /**
+    */
+/**
      * 设置子选择模式
      * @param childSelectMode
-     */
+     *//*
+
     public void setChildSelectMode(boolean childSelectMode) {
         this.mChildSelectMode = childSelectMode;
     }
 
-    /**
+    */
+/**
      * 是否孙选择
      * @return
-     */
+     *//*
+
     public boolean isGrandsonSelectMode() {
         return mGrandsonSelectMode;
     }
 
-    /**
+    */
+/**
      * 是否孙选择
      * @param mGrandsonSelectMode
-     */
+     *//*
+
     public void setGrandsonSelectMode(boolean mGrandsonSelectMode) {
         this.mGrandsonSelectMode = mGrandsonSelectMode;
     }
@@ -751,3 +794,4 @@ public class SelectExpandableQuickAdapter<T extends MultiItemEntity, K extends B
         }
     }
 }
+*/

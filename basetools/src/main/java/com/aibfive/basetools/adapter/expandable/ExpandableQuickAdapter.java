@@ -1,3 +1,4 @@
+/*
 package com.aibfive.basetools.adapter.expandable;
 
 import android.view.View;
@@ -54,11 +55,13 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         remove(entity, true);
     }
 
-    /**
+    */
+/**
      * 移除group child grandson
      * @param entity
      * @param nullRemoveParent
-     */
+     *//*
+
     public void remove(MultiItemEntity entity, boolean nullRemoveParent) {
         switch (entity.getItemType()){
             case TYPE_GROUP:
@@ -169,11 +172,13 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         }
     }
 
-    /**
+    */
+/**
      * 移除groud
      * @param groupIterator
      * @param group
-     */
+     *//*
+
     public void remove(Iterator groupIterator, T group) {
         groupIterator.remove();
         if(getData().contains(group)) {
@@ -183,26 +188,30 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         }
     }
 
-    /**
+    */
+/**
      * 移除child
      * @param groupIterator
      * @param childIterator
      * @param group
      * @param child
-     */
+     *//*
+
     public void remove(Iterator groupIterator, Iterator childIterator, T group, MultiItemEntity child) {
         remove(groupIterator, childIterator, group, child, true);
     }
 
 
-    /**
+    */
+/**
      * 移除child
      * @param groupIterator
      * @param childIterator
      * @param group
      * @param child
      * @param nullRemoveParent
-     */
+     *//*
+
     public void remove(Iterator groupIterator, Iterator childIterator, T group, MultiItemEntity child, boolean nullRemoveParent) {
         childIterator.remove();
         if(nullRemoveParent && ((IExpandable)group).getSubItems().size() == 0){
@@ -232,7 +241,8 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         }
     }
 
-    /**
+    */
+/**
      * 移除grandson
      * @param groupIterator
      * @param childIterator
@@ -240,12 +250,14 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
      * @param group
      * @param child
      * @param grandson
-     */
+     *//*
+
     public void remove(Iterator groupIterator, Iterator childIterator, Iterator grandsonIterator, T group, MultiItemEntity child, MultiItemEntity grandson) {
         remove(groupIterator, childIterator, grandsonIterator, group, child, grandson, true);
     }
 
-    /**
+    */
+/**
      * 移除grandson
      * @param groupIterator
      * @param childIterator
@@ -254,7 +266,8 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
      * @param child
      * @param grandson
      * @param nullRemoveParent
-     */
+     *//*
+
     public void remove(Iterator groupIterator, Iterator childIterator, Iterator grandsonIterator, T group, MultiItemEntity child, MultiItemEntity grandson, boolean nullRemoveParent) {
         grandsonIterator.remove();
         if(nullRemoveParent && ((IExpandable)group).getSubItems().size() == 0){
@@ -304,14 +317,16 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         }
     }
 
-    /**
+    */
+/**
      * 移除group child grandson  --  移除有问题，会抛出java.util.ConcurrentModificationException
      * @param groupIterator
      * @param childIterator
      * @param grandsonIterator
      * @param entity
      * @param nullRemoveParent
-     */
+     *//*
+
     public void remove(Iterator groupIterator, Iterator childIterator, Iterator grandsonIterator, MultiItemEntity entity, boolean nullRemoveParent) {
         switch (entity.getItemType()){
             case TYPE_GROUP:
@@ -595,12 +610,14 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         }
     }
 
-    /**
+    */
+/**
      * 获取子项中最后一个孙项的索引
      * 失败返回0
      * @param child
      * @return
-     */
+     *//*
+
     public int getLastGrandsonPositionInChild(MultiItemEntity child){
         if(child != null && child instanceof IExpandable){
             List<T> data = getData();
@@ -658,9 +675,11 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         setOldExpandCollapseStatus();
     }
 
-    /**
+    */
+/**
      * 设置列表之前关闭或者展开的状态
-     */
+     *//*
+
     private void setOldExpandCollapseStatus(){
         if(!expandCollapseHashMap.isEmpty()) {
             Set<Object> set = expandCollapseHashMap.keySet();
@@ -691,34 +710,42 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         return mGroupList;
     }
 
-    /**
+    */
+/**
      * 组项是否可以展开关闭
      * @return
-     */
+     *//*
+
     public boolean isGroupExpandable() {
         return groupExpandable;
     }
 
-    /**
+    */
+/**
      * 设置组项展开关闭可用性
      * @param groupExpandable
-     */
+     *//*
+
     public void setGroupExpandable(boolean groupExpandable) {
         this.groupExpandable = groupExpandable;
     }
 
-    /**
+    */
+/**
      * 子项是否可以展开关闭
      * @return
-     */
+     *//*
+
     public boolean isChildExpandable() {
         return childExpandable;
     }
 
-    /**
+    */
+/**
      * 设置子项展开关闭可用性
      * @param childExpandable
-     */
+     *//*
+
     public void setChildExpandable(boolean childExpandable) {
         this.childExpandable = childExpandable;
     }
@@ -778,3 +805,4 @@ public class ExpandableQuickAdapter<T extends MultiItemEntity, K extends BaseVie
         }
     }
 }
+*/

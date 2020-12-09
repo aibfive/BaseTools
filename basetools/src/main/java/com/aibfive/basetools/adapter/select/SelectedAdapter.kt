@@ -1,15 +1,16 @@
 package com.aibfive.basetools.adapter.select
 
 import android.view.View
-import com.aibfive.basetools.adapter.BaseRVAdapter
-import com.aibfive.basetools.adapter.BaseRVHolder
+import androidx.recyclerview.widget.DiffUtil
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * Date : 2020/10/27/027
  * Time : 14:24
  * author : Li
  */
-open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
+open class SelectedAdapter<T : SelectItemEntity> : BaseQuickAdapter<T, BaseViewHolder> {
 
     companion object {
         const val MODE_SINGLE = 1;//单选模式
@@ -25,12 +26,13 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
 
     constructor(layoutResId : Int) : super(layoutResId)
 
-    override fun convertPayloads(helper: BaseRVHolder, item: T, payloads: MutableList<Any>) {
-        super.convertPayloads(helper, item, payloads)
+    override fun convert(holder: BaseViewHolder, item: T, payloads: List<Any>) {
+        super.convert(holder, item, payloads)
+        registerSelectOperateView(holder.itemView, item, getItemPosition(item))
     }
 
-    override fun onBindVH(holder: BaseRVHolder, item: T, position: Int) {
-        registerSelectOperateView(holder.itemView, item, position)
+    override fun convert(holder: BaseViewHolder, item: T) {
+        registerSelectOperateView(holder.itemView, item, getItemPosition(item))
     }
 
     /**
@@ -56,11 +58,33 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
                 if(listener != null){
                     listener.onSelected(isSelectedAll(), getSelectedCount())
                 }
-                if(onItemClickListener != null){
-                    setOnItemClick(v, position)
+                if(getOnItemClickListener() != null){
+                    if (v != null) {
+                        setOnItemClick(v, position)
+                    }
                 }
             }
         })
+    }
+
+    override fun setDiffNewData(list: MutableList<T>?, commitCallback: Runnable?) {
+        if(showCacheStatus) {
+            showCacheSelectStatus(list)
+        }
+        super.setDiffNewData(list, commitCallback)
+        if (showCacheStatus && listener != null) {
+            listener.onSelected(isSelectedAll(), getSelectedCount())
+        }
+    }
+
+    override fun setDiffNewData(diffResult: DiffUtil.DiffResult, list: MutableList<T>) {
+        if(showCacheStatus) {
+            showCacheSelectStatus(list)
+        }
+        super.setDiffNewData(diffResult, list)
+        if (showCacheStatus && listener != null) {
+            listener.onSelected(isSelectedAll(), getSelectedCount())
+        }
     }
 
     override fun setData(index: Int, data: T) {
@@ -73,9 +97,19 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
         }
     }
 
-    override fun replaceData(data: MutableCollection<out T>) {
-        if(showCacheStatus && data != null){
-            showCacheSelectStatus(data.toList())
+    override fun setList(list: Collection<T>?) {
+        if(showCacheStatus){
+            showCacheSelectStatus(list?.toList())
+        }
+        super.setList(list)
+        if (showCacheStatus && listener != null) {
+            listener.onSelected(isSelectedAll(), getSelectedCount())
+        }
+    }
+
+    override fun replaceData(newData: Collection<T>) {
+        if(showCacheStatus){
+            showCacheSelectStatus(newData.toList())
         }
         super.replaceData(data)
         if (showCacheStatus && listener != null) {
@@ -83,7 +117,7 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
         }
     }
 
-    override fun setNewData(data: List<T>?) {
+    override fun setNewData(data: MutableList<T>?) {
         if(showCacheStatus){
             showCacheSelectStatus(data)
         }
@@ -132,7 +166,7 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
     }
 
     /**
-     * 清楚缓存
+     * 清除缓存
      */
     fun clearCache(){
         if(!selectHashMap.isEmpty()){
@@ -204,6 +238,20 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
         }
     }
 
+    fun isSelected(item : T?) : Boolean? {
+        if(selectHashMap.size == 0 || item?.tag == null){
+            return false
+        }
+        return selectHashMap.get(item?.tag)
+    }
+
+    fun isSelected(position: Int) : Boolean? {
+        if(selectHashMap.size == 0 || getItem(position) == null){
+            return false
+        }
+        return selectHashMap.get(getItem(position)?.tag)
+    }
+
     /**
      * 获取选中的数量
      */
@@ -215,7 +263,7 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
      * 获取选中项--用于单选模式
      */
     fun getSingleSelectedData() : T? {
-        for(item in mData){
+        for(item in data){
             if(item.select){
                 return item
             }
@@ -228,7 +276,7 @@ open class SelectedAdapter<T : SelectItemEntity> : BaseRVAdapter<T> {
      */
     fun getMultiSelectedData() : List<T> {
         val list = ArrayList<T>()
-        for(item in mData){
+        for(item in data){
             if(item.select){
                 list.add(item)
             }

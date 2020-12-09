@@ -1,6 +1,8 @@
 package com.aibfive.sample.bean.tencentmap
 
-class AddressBean() {
+import com.aibfive.basetools.adapter.select.SelectItemEntity
+
+class AddressBean() : SelectItemEntity {
 
     var title : String = ""
     var address : String = ""
@@ -13,4 +15,12 @@ class AddressBean() {
         this.latitude = latitude
         this.longitude = longitude
     }
+
+    override var select: Boolean
+        get() = false
+        set(value) {}
+
+    override var tag: Any?
+        get() = title
+        set(value) {}
 }

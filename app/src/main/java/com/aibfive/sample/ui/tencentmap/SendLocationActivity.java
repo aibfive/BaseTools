@@ -19,6 +19,7 @@ import com.aibfive.sample.R;
 import com.aibfive.sample.adapter.SearchAddressAdapter;
 import com.aibfive.sample.bean.tencentmap.AddressBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.tencent.lbssearch.TencentSearch;
 import com.tencent.lbssearch.httpresponse.BaseObject;
 import com.tencent.lbssearch.httpresponse.HttpResponseListener;
@@ -42,7 +43,7 @@ import java.util.List;
 /**
  * 发送定位
  */
-public class SendLocationActivity extends AppCompatActivity implements LocationSource, TencentLocationListener, TencentMap.OnMyLocationClickListener, TencentMap.OnCameraChangeListener, HttpResponseListener<BaseObject>, BaseQuickAdapter.OnItemClickListener {
+public class SendLocationActivity extends AppCompatActivity implements LocationSource, TencentLocationListener, TencentMap.OnMyLocationClickListener, TencentMap.OnCameraChangeListener, HttpResponseListener<BaseObject>, OnItemClickListener {
 
     private final String TAG = "SendLocationActivity";
 
@@ -324,7 +325,7 @@ public class SendLocationActivity extends AppCompatActivity implements LocationS
      * @param view
      */
     public void onDetermineClick(View view){
-        AddressBean bean = addressAdapter.getSelectedItem();
+        AddressBean bean = addressAdapter.getSingleSelectedData();
         if(bean == null){
             LogUtil.v(TAG,"请选择发送位置");
             return;

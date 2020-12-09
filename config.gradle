@@ -14,7 +14,7 @@ ext {
             recyclerview                      : 'androidx.recyclerview:recyclerview:1.2.0-alpha05',
             constraintlayout                  : 'androidx.constraintlayout:constraintlayout:2.0.4',
 
-            baseRecyclerViewAdapterHelper     : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50',
+            baseRecyclerViewAdapterHelper     : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6',
             logger                            : 'com.orhanobut:logger:2.2.0',
 
             glide                             : 'com.github.bumptech.glide:glide:4.11.0',

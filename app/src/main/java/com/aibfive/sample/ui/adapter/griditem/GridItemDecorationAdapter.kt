@@ -1,21 +1,22 @@
 package com.aibfive.sample.ui.adapter.griditem
 
 import android.graphics.Color
-import com.aibfive.basetools.adapter.BaseRVAdapter
-import com.aibfive.basetools.adapter.BaseRVHolder
 import com.aibfive.sample.R
 import com.aibfive.sample.bean.base.CommonBean
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * Date : 2020/10/30/030
  * Time : 16:37
  * author : Li
  */
-class GridItemDecorationAdapter : BaseRVAdapter<CommonBean>(R.layout.item_grid) {
+class GridItemDecorationAdapter : BaseQuickAdapter<CommonBean, BaseViewHolder>(R.layout.item_grid) {
 
-    override fun onBindVH(holder: BaseRVHolder?, data: CommonBean?, position: Int) {
-        holder?.setText(R.id.tv_name, data?.name)
-        when(position){
+
+    override fun convert(holder: BaseViewHolder, item: CommonBean) {
+        holder?.setText(R.id.tv_name, item?.name)
+        when(getItemPosition(item)){
             0-> if (holder != null) {
                 holder.itemView.setBackgroundColor(Color.RED)
             }
@@ -72,4 +73,5 @@ class GridItemDecorationAdapter : BaseRVAdapter<CommonBean>(R.layout.item_grid) 
             }
         }
     }
+
 }

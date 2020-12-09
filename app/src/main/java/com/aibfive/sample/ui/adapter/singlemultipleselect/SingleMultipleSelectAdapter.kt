@@ -1,9 +1,9 @@
 package com.aibfive.sample.ui.adapter.singlemultipleselect
 
-import com.aibfive.basetools.adapter.BaseRVHolder
 import com.aibfive.basetools.adapter.select.SelectedAdapter
 import com.aibfive.sample.R
 import com.aibfive.sample.bean.base.CommonBean
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * Date : 2020/10/27/027
@@ -12,8 +12,9 @@ import com.aibfive.sample.bean.base.CommonBean
  */
 class SingleMultipleSelectAdapter : SelectedAdapter<CommonBean>(R.layout.item_select) {
 
-    override fun onBindVH(holder: BaseRVHolder, item: CommonBean, position: Int) {
-        super.onBindVH(holder, item, position)
+    override fun convert(holder: BaseViewHolder, item: CommonBean) {
+        super.convert(holder, item)
     }
+
 
 }

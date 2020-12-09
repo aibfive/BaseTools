@@ -12,6 +12,7 @@ import com.aibfive.sample.R
 import com.aibfive.sample.adapter.SearchAddressAdapter
 import com.aibfive.sample.bean.tencentmap.AddressBean
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.tencent.lbssearch.TencentSearch
 import com.tencent.lbssearch.`object`.param.Geo2AddressParam
 import com.tencent.lbssearch.`object`.param.SuggestionParam
@@ -27,7 +28,7 @@ import com.tencent.tencentmap.mapsdk.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_search_address.*
 
 //https://lbs.qq.com/geosdk/doc/com/tencent/map/geolocation/package-summary.html
-class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuickAdapter.OnItemClickListener {
+class SearchAddressActivity : BaseActivity(), TencentLocationListener, OnItemClickListener {
 
     lateinit var addressAdapter: SearchAddressAdapter
     lateinit var tencentSearch : TencentSearch
@@ -103,10 +104,9 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
         stopLocation()
     }
 
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
+    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
 
     }
-
 
     /**
      * TencentLocationListener
@@ -256,7 +256,7 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, BaseQuick
      * 选择并确定位置
      */
     fun onDetermineClick(view : View?){
-        val bean = addressAdapter.selectedItem
+        val bean = addressAdapter.getSingleSelectedData()
         if(bean == null){
             LogUtil.v(TAG,"请选择地址")
             return

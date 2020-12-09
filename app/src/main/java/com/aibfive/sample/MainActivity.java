@@ -9,6 +9,7 @@ import com.aibfive.basetools.ui.BaseActivity;
 import com.aibfive.sample.adapter.MainItemAdapter;
 import com.aibfive.sample.listener.OnItemClickLisenter;
 import com.aibfive.sample.ui.adapter.AdapterActivity;
+import com.aibfive.sample.ui.adapter.expandable.ExpandableActivity;
 import com.aibfive.sample.ui.coroutine.CoroutineActivity;
 import com.aibfive.sample.ui.kotlin.KotlinActivity;
 import com.aibfive.sample.ui.mvp.DemoActivity;
@@ -59,8 +60,9 @@ public class MainActivity extends BaseActivity implements OnItemClickLisenter {
                 RefreshActivity.start(this);
                 break;
             case DataCreator.DATA_TYPE_COROUTINE://coroutine
-                DemoActivity.start(this);
+                ExpandableActivity.start(this);
                 break;
         }
     }
+
 }
