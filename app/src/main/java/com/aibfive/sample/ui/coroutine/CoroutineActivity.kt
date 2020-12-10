@@ -3,16 +3,7 @@ package com.aibfive.sample.ui.coroutine
 import android.content.Context
 import android.content.Intent
 import com.aibfive.basetools.ui.BaseActivity
-import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
-import com.aibfive.sample.bean.Data
-import com.aibfive.sample.network.ApiService
-import com.aibfive.sample.network.RetrofitClient
-import com.aibfive.sample.ui.refresh.RefreshActivity
-import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.http.Tag
-import kotlin.concurrent.thread
 
 class CoroutineActivity : BaseActivity() {
 

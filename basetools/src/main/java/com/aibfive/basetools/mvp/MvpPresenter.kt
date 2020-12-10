@@ -7,17 +7,17 @@ package com.aibfive.basetools.mvp
  */
 abstract class MvpPresenter<V : MvpView, M : MvpModel> {
 
-    var view : V? = null
-    var model : M? = null
+    var mView : V? = null
+    var mModel : M? = null
 
     fun attachView(view : MvpView?, model: MvpModel?){
-        this.view = view as V
-        this.model = model as M
+        this.mView = view as V
+        this.mModel = model as M
     }
 
     fun detachView(){
-        this.view = null
-        this.model = null
+        this.mView = null
+        this.mModel = null
     }
 
 }

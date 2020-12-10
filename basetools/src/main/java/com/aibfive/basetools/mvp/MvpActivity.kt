@@ -11,19 +11,19 @@ import com.aibfive.basetools.util.CreateUtil
  */
 abstract class MvpActivity<P : MvpPresenter<*, *>, M : MvpModel> : BaseActivity(), MvpView{
 
-    var presenter : P? = null
-    var model : M? = null
+    var mPresenter : P? = null
+    var mModel : M? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        presenter = CreateUtil.getT(this, 0)
-        model = CreateUtil.getT(this, 1)
-        presenter?.attachView(this, model)
+        mPresenter = CreateUtil.getT(this, 0)
+        mModel = CreateUtil.getT(this, 1)
+        mPresenter?.attachView(this, mModel)
         super.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter?.detachView()
+        mPresenter?.detachView()
     }
 
     override fun showLoading() {
@@ -33,5 +33,7 @@ abstract class MvpActivity<P : MvpPresenter<*, *>, M : MvpModel> : BaseActivity(
     override fun hideLoading() {
 
     }
+
+
 
 }

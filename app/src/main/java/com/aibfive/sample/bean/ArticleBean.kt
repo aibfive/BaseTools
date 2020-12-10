@@ -1,8 +1,8 @@
 package com.aibfive.sample.bean
 
 /**
- * Date : 2020/12/7/007
- * Time : 16:01
+ * Date : 2020/12/10/010
+ * Time : 11:30
  * author : Li
  */
 data class ArticleBean(
@@ -38,7 +38,7 @@ data class Data(
     val publishTime: Long,
     val realSuperChapterId: Int,
     val selfVisible: Int,
-    val shareDate: Long,
+    val shareDate: Any,
     val shareUser: String,
     val superChapterId: Int,
     val superChapterName: String,

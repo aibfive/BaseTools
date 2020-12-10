@@ -27,7 +27,7 @@ class DemoActivity : MvpActivity<DemoPresenter, DemoModel>(), DemoContract.View 
 
     override fun initView() {
         super.initView()
-        presenter?.getDemo()
+        mPresenter?.getDemo()
     }
 
     override fun getDemoSuccess(data : ArticleBean?) {

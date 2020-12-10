@@ -15,7 +15,5 @@ class CacheExpandableNodeAdapter<T : MultiItemEntity> : ExpandableNodeAdapter<T>
 
     constructor(firstLayoutId: Int?, secondLayoutId: Int?, thirdLayoutId: Int?) : super(firstLayoutId, secondLayoutId, thirdLayoutId)
 
-    fun getData(){
 
-    }
 }

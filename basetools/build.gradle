@@ -41,6 +41,10 @@ dependencies {
     implementation library.constraintlayout
     implementation library.glide
     implementation library.glideCompiler
+    implementation refresh.smartRefresh
+    implementation refresh.smartRefreshHeader
+    implementation refresh.smartRefreshFooter
+    debugImplementation library.leakcanary
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

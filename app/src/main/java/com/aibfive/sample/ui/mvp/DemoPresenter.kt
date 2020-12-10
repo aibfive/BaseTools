@@ -11,15 +11,15 @@ import com.aibfive.sample.bean.ArticleBean
 class DemoPresenter : DemoContract.Presenter() {
 
     override fun getDemo() {
-        view?.showLoading()
-        model?.getDemo(object : ResponseCallback<ArticleBean>{
+        mView?.showLoading()
+        mModel?.getDemo(object : ResponseCallback<ArticleBean>{
             override fun onSuccess(data: ArticleBean?) {
-                view?.getDemoSuccess(data)
-                view?.hideLoading()
+                mView?.getDemoSuccess(data)
+                mView?.hideLoading()
             }
 
             override fun onFail(code: String, msg: String) {
-                view?.hideLoading()
+                mView?.hideLoading()
             }
         })
     }

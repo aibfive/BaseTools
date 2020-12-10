@@ -12,7 +12,7 @@ import retrofit2.http.*
 interface ApiService {
 
     // 文章列表
-    @GET("article/list/{page}/json")
+    @GET(HostUrl.GET_DATA)
     suspend fun getArticlesSuspend(@Path("page") page: Int): BaseBean<ArticleBean>
 
 }
