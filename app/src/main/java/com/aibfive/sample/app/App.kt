@@ -1,11 +1,9 @@
 package com.aibfive.sample.app
 
-import android.app.Application
 import android.content.Context
 import android.graphics.Color
+import com.aibfive.basetools.BaseApplication
 import com.aibfive.sample.R
-import com.orhanobut.logger.AndroidLogAdapter
-import com.orhanobut.logger.Logger
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -20,11 +18,10 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
  * Time : 11:17
  * author : Li
  */
-class App : Application() {
+class App : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        Logger.addLogAdapter(AndroidLogAdapter())
     }
 
     init {

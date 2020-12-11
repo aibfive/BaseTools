@@ -27,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.adapter.expandable.ExpandableActivity"></activity>
+        <activity android:name=".ui.fragment.FragmentActivity"></activity>
+        <activity android:name=".ui.adapter.expandable.ExpandableActivity" />
         <activity android:name=".ui.mvp.DemoActivity" />
         <activity android:name=".ui.coroutine.CoroutineActivity" />
         <activity android:name=".ui.refresh.RefreshDemoActivity" />

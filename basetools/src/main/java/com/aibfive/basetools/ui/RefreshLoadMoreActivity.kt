@@ -19,6 +19,20 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 abstract class RefreshLoadMoreActivity<P : MvpPresenter<*, *>, M : MvpModel> : MvpActivity<P, M>() {
 
     var mCurrentPage : Int = START_PAGE
+    /**
+     * 实现该mRefreshLayout，有两种方式，
+     * 1、继承SmartRefreshLayout所用的属性变量名与mRefreshLayout不同，如：
+     *  override val mRefreshLayout: SmartRefreshLayout
+     *      get() = refreshLayout
+     * 2、使用findViewById获取属性值，这样属性变量名一致也可以。
+     *  override val mRefreshLayout: SmartRefreshLayout
+     *      get() = this.findViewById(R.id.mRefreshLayout)
+     *
+     *  不然如果实现时属性变量名一致，如：
+     *  override val mRefreshLayout: SmartRefreshLayout
+     *      get() = mRefreshLayout
+     *  会抛出异常java.lang.StackOverflowError: stack size 8192KB
+     */
     abstract val mRefreshLayout : SmartRefreshLayout
 
     companion object {

@@ -3,10 +3,8 @@ package com.aibfive.basetools.util;
 import android.util.Log;
 
 import com.aibfive.basetools.BuildConfig;
-import com.orhanobut.logger.Logger;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**

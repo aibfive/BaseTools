@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.FragmentActivity">
+
+    <FrameLayout
+        android:id="@+id/mFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvFragment1"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_50"
+        android:text="Fragment1"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/colorFFFFFF"
+        android:gravity="center"
+        android:background="@color/color3493FF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tvFragment2"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvFragment2"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_50"
+        android:text="Fragment2"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/colorFFFFFF"
+        android:gravity="center"
+        android:background="@color/color3493FF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tvFragment1"
+        app:layout_constraintRight_toLeftOf="@id/tvFragment3"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvFragment3"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_50"
+        android:text="Fragment3"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/colorFFFFFF"
+        android:gravity="center"
+        android:background="@color/color3493FF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tvFragment2"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
