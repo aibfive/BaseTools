@@ -5,16 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.aibfive.basetools.ui.BaseFragment
+import com.aibfive.basetools.ui.BaseLazyFragment
+import com.aibfive.basetools.ui.RefreshFragment
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
+import com.aibfive.sample.bean.ArticleBean
+import com.aibfive.sample.ui.refresh.RefreshContract
+import com.aibfive.sample.ui.refresh.RefreshModel
+import com.aibfive.sample.ui.refresh.RefreshPresenter
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 /**
  * Date : 2020/12/11/011
  * Time : 15:24
  * author : Li
  */
-class Fragment2 : BaseFragment() {
+class Fragment2 : RefreshFragment<RefreshPresenter, RefreshModel>(), RefreshContract.View {
 
     companion object {
         fun newInstance(): Fragment2 {
@@ -24,7 +30,7 @@ class Fragment2 : BaseFragment() {
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_2
+        return R.layout.activity_refresh
     }
 
     override fun onAttach(context: Context) {
@@ -87,4 +93,22 @@ class Fragment2 : BaseFragment() {
         LogUtil.v("Fragment", "Fragment2-->onDetach")
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        LogUtil.v("Fragment", "Fragment2-->setUserVisibleHint = $isVisibleToUser")
+    }
+
+    override fun lazyLoad() {
+        LogUtil.v("Fragment", "Fragment2-->lazyLoad")
+        mPresenter?.getData(1)
+    }
+
+    override val mRefreshLayout: SmartRefreshLayout
+        get() = this.requireView().findViewById(R.id.mRefreshLayout)
+
+    override fun getDataSuccess(data: ArticleBean?) {
+    }
+
+    override fun getDataFail(code: String, msg: String) {
+    }
 }

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.aibfive.basetools.ui.BaseFragment
+import com.aibfive.basetools.ui.BaseLazyFragment
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 
@@ -14,7 +14,7 @@ import com.aibfive.sample.R
  * Time : 15:24
  * author : Li
  */
-class Fragment3 : BaseFragment() {
+class Fragment3 : BaseLazyFragment() {
 
     companion object {
         fun newInstance(): Fragment3 {
@@ -85,6 +85,15 @@ class Fragment3 : BaseFragment() {
     override fun onDetach() {
         super.onDetach()
         LogUtil.v("Fragment", "Fragment3-->onDetach")
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        LogUtil.v("Fragment", "Fragment3-->setUserVisibleHint = $isVisibleToUser")
+    }
+
+    override fun lazyLoad() {
+        LogUtil.v("Fragment", "Fragment3-->lazyLoad")
     }
 
 }
