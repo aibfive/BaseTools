@@ -14,6 +14,7 @@ import com.aibfive.sample.ui.fragment.FragmentActivity;
 import com.aibfive.sample.ui.kotlin.KotlinActivity;
 import com.aibfive.sample.ui.network.NetworkActivity;
 import com.aibfive.sample.ui.refresh.RefreshDemoActivity;
+import com.aibfive.sample.ui.temporary.TemporaryActivity;
 import com.aibfive.sample.ui.tencentmap.TencentMapActivity;
 import com.aibfive.sample.ui.webview.WebViewActivity;
 import com.aibfive.sample.util.DataCreator;
@@ -60,6 +61,9 @@ public class MainActivity extends BaseActivity implements OnItemClickLisenter {
                 break;
             case DataCreator.DATA_TYPE_COROUTINE://coroutine
                 FragmentActivity.start(this);
+                break;
+            case DataCreator.DATA_TYPE_TEMPORARY://temporary
+                TemporaryActivity.start(this);
                 break;
         }
     }

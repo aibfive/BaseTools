@@ -19,6 +19,7 @@ public class DataCreator {
     public static final int DATA_TYPE_WEBVIEW = 4;//webview
     public static final int DATA_TYPE_REFRESH = 5;//refresh
     public static final int DATA_TYPE_COROUTINE = 6;//coroutine
+    public static final int DATA_TYPE_TEMPORARY = 7;//temporary
 
     /**
      * 创建主页数据
@@ -34,6 +35,7 @@ public class DataCreator {
         data.add(new MainItemBean(DATA_TYPE_WEBVIEW, context.getString(R.string.webview)));
         data.add(new MainItemBean(DATA_TYPE_REFRESH, context.getString(R.string.refresh)));
         data.add(new MainItemBean(DATA_TYPE_COROUTINE, context.getString(R.string.coroutine)));
+        data.add(new MainItemBean(DATA_TYPE_TEMPORARY, context.getString(R.string.temporary)));
         return data;
     }
 

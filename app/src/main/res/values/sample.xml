@@ -29,6 +29,9 @@
     <!--Coroutine-->
     <string name="coroutine">Coroutine</string>
 
+    <!--Temporary-->
+    <string name="temporary">Temporary</string>
+
     <!--公共-->
     <string name="format_data">数据\n数据\n数据\n数据\n数据\n数据\n数据\n%d</string>
 </resources>

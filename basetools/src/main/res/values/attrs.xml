@@ -74,5 +74,11 @@
   <declare-styleable name="CustomWebView">
     <attr name="progressBarHeight" format="dimension"/>
   </declare-styleable>
+  
+  <declare-styleable name="GetCodeView">
+    <attr name="init_desc" format="string"/>
+    <attr name="countdown_desc" format="string"/>
+    <attr name="millis_in_future" format="integer"/>
+  </declare-styleable>
 
 </resources>
