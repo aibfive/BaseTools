@@ -1,9 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 def ver = rootProject.ext.ver
 def library = rootProject.ext.library
 def retrofit = rootProject.ext.retrofit
+def refresh = rootProject.ext.refresh
+def lifecycle = rootProject.ext.lifecycle
 
 android {
     compileSdkVersion ver.compileSdkVersion
@@ -24,6 +27,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -31,6 +38,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     //noinspection GradleCompatible
     implementation library.appcompat
+    implementation library.coordinatorlayout
     implementation library.recyclerview
     implementation library.baseRecyclerViewAdapterHelper
     implementation library.logger
@@ -45,6 +53,9 @@ dependencies {
     implementation refresh.smartRefreshHeader
     implementation refresh.smartRefreshFooter
     debugImplementation library.leakcanary
+    implementation lifecycle.lifecycle_viewmodel
+    implementation lifecycle.lifecycle_livedata
+    implementation lifecycle.lifecycle_process
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

@@ -11,4 +11,9 @@
         <item name="android:windowExitAnimation">@anim/anim_dialog_bottom_out</item>
     </style>
 
+    <style name="StyleDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
 </resources>

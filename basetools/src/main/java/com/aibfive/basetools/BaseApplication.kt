@@ -13,11 +13,12 @@ import com.aibfive.basetools.util.ActivityManager
 open class BaseApplication : Application() {
 
     companion object{
-        val instance by lazy { BaseApplication() }
+        lateinit var instance : BaseApplication
     }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         registerActivityLifecycle()
     }
 

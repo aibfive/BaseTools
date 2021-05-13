@@ -20,6 +20,8 @@ public class DataCreator {
     public static final int DATA_TYPE_REFRESH = 5;//refresh
     public static final int DATA_TYPE_COROUTINE = 6;//coroutine
     public static final int DATA_TYPE_TEMPORARY = 7;//temporary
+    public static final int DATA_TYPE_MVVM = 8;//mvvm
+    public static final int DATA_TYPE_LIFECYCLE = 9;//lifecycle
 
     /**
      * 创建主页数据
@@ -36,6 +38,8 @@ public class DataCreator {
         data.add(new MainItemBean(DATA_TYPE_REFRESH, context.getString(R.string.refresh)));
         data.add(new MainItemBean(DATA_TYPE_COROUTINE, context.getString(R.string.coroutine)));
         data.add(new MainItemBean(DATA_TYPE_TEMPORARY, context.getString(R.string.temporary)));
+        data.add(new MainItemBean(DATA_TYPE_MVVM, context.getString(R.string.mvvm)));
+        data.add(new MainItemBean(DATA_TYPE_LIFECYCLE, context.getString(R.string.lifecycle)));
         return data;
     }
 

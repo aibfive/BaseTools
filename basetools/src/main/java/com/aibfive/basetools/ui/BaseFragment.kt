@@ -22,16 +22,34 @@ abstract class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initData()
         initView()
+        initStatusBar()
     }
 
+    /**
+     * 获取布局id
+     */
     abstract fun getLayoutId() : Int
 
+    /**
+     * 初始化数据
+     */
     open fun initData(){
 
     }
 
+    /**
+     * 初始化视图
+     */
     open fun initView(){
 
     }
+
+    /**
+     * 初始化状态栏
+     */
+    open fun initStatusBar(){
+
+    }
+
 
 }

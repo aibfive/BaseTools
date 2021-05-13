@@ -2,13 +2,12 @@ package com.aibfive.sample.ui.temporary
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
 import com.aibfive.basetools.ui.BaseActivity
+import com.aibfive.basetools.util.LogUtil
+import com.aibfive.basetools.widget.ClickRecyclerView
 import com.aibfive.sample.R
 import kotlinx.android.synthetic.main.activity_temporary.*
-import java.util.*
 
 class TemporaryActivity : BaseActivity() {
 
@@ -26,12 +25,11 @@ class TemporaryActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        tvStart.setOnClickListener {
-            getCodeView.start()
-        }
-        tvCancel.setOnClickListener {
-            getCodeView.cancel()
-        }
+        clickRecyclerView.setOnSingleClickListener(object : ClickRecyclerView.OnSingleClickListener{
+            override fun onSingleClick(v: View?) {
+                LogUtil.v(TemporaryActivity::class.simpleName, "点击了")
+            }
+        })
     }
 
 }

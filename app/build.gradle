@@ -1,12 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 def ver = rootProject.ext.ver
 def library = rootProject.ext.library
 def tencent = rootProject.ext.tencent
 def kotlin = rootProject.ext.kotlin
 def retrofit = rootProject.ext.retrofit
 def refresh = rootProject.ext.refresh
+def lifecycle = rootProject.ext.lifecycle
 
 android {
     compileSdkVersion ver.compileSdkVersion
@@ -35,21 +38,26 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':basetools')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation library.appcompat
+    implementation library.material
     implementation library.recyclerview
     implementation library.constraintlayout
     implementation library.baseRecyclerViewAdapterHelper
     implementation library.logger
+    implementation library.banner
     implementation library.glide
     implementation library.glideCompiler
     implementation retrofit.retrofit
@@ -61,4 +69,7 @@ dependencies {
     implementation refresh.smartRefresh
     implementation refresh.smartRefreshHeader
     implementation refresh.smartRefreshFooter
+    implementation lifecycle.lifecycle_viewmodel
+    implementation lifecycle.lifecycle_livedata
+    implementation lifecycle.lifecycle_process
 }

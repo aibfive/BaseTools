@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def ver = rootProject.ext.ver
+def library = rootProject.ext.library
+def tencent = rootProject.ext.tencent
+def kotlin = rootProject.ext.kotlin
+def retrofit = rootProject.ext.retrofit
+def refresh = rootProject.ext.refresh
+def lifecycle = rootProject.ext.lifecycle
+def room = rootProject.ext.room
+
+android {
+    compileSdkVersion ver.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.aibfive.sample"
+        minSdkVersion ver.minSdkVersion
+        targetSdkVersion ver.targetSdkVersion
+        versionCode ver.versionCode
+        versionName ver.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android {
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':basetools')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation library.appcompat
+    implementation library.material
+    implementation library.recyclerview
+    implementation library.constraintlayout
+    implementation library.baseRecyclerViewAdapterHelper
+    implementation library.logger
+    implementation library.banner
+    implementation library.glide
+    implementation library.glideCompiler
+    implementation retrofit.retrofit
+    implementation retrofit.retrofit_gson
+    implementation retrofit.okhttp_log_interceptor
+    implementation tencent.tencentMap
+    implementation tencent.tencentLocation
+    implementation kotlin.coroutinesAndroid
+    implementation refresh.smartRefresh
+    implementation refresh.smartRefreshHeader
+    implementation refresh.smartRefreshFooter
+    implementation lifecycle.lifecycle_viewmodel
+    implementation lifecycle.lifecycle_livedata
+    implementation lifecycle.lifecycle_process
+    implementation room.room_runtime
+    kapt room.room_compiler
+}

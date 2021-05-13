@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color333333"
-    tools:context="com.aibfive.sample.MainActivity">
+    tools:context="com.aibfive.sample.ui.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

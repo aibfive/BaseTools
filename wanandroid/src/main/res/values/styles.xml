@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color333333</item>
+        <item name="colorPrimaryDark">@color/color333333</item>
+        <item name="colorAccent">@color/color333333</item>
+    </style>
+
+    <style name="TabTextAppearance">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+</resources>

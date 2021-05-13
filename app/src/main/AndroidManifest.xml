@@ -26,8 +26,13 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:resizeableActivity="true"
+        android:maxAspectRatio="2.4"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.temporary.TemporaryActivity"></activity>
+        <activity android:name=".ui.lifecycle.LifecycleActivity" />
+        <activity android:name=".ui.mvvm.MVVMActivity" />
+        <activity android:name=".ui.socket.SocketActivity" />
+        <activity android:name=".ui.temporary.TemporaryActivity" />
         <activity android:name=".ui.fragment.FragmentActivity" />
         <activity android:name=".ui.adapter.expandable.ExpandableActivity" />
         <activity android:name=".ui.mvp.DemoActivity" />
@@ -40,7 +45,7 @@
         <activity android:name=".ui.adapter.griditem.GridItemDecorationActivity" />
         <activity android:name=".ui.tencentmap.TencentMapActivity" />
         <activity android:name=".ui.adapter.singlemultipleselect.SingleMultipleSelectActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,6 +58,22 @@
         <meta-data
             android:name="TencentMapSDK"
             android:value="TRNBZ-GSTC3-3Z43E-3QNUD-ORA63-BPBJF" />
+
+        <service android:name=".ui.socket.SocketService" />
+
+        <!--ImmersionBar(开始)-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true"/>
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+        <!--ImmersionBar(结束)-->
     </application>
 
 </manifest>

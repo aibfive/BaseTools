@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="view_model"
+            type="com.aibfive.wanandroid.ui.auth.register.RegisterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.auth.register.RegisterActivity">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:gravity="center"
+            android:text="@string/register"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/color333333"
+            android:background="@drawable/divider_0_6dp_ebebebcolor_bottom"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_48"
+            android:paddingHorizontal="@dimen/dp_15"
+            android:src="@drawable/icon_back"
+            android:scaleType="centerInside"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:background="@drawable/divider_0_6dp_ebebebcolor_bottom"
+            android:text="@={view_model.usernameLiveData}"
+            android:textColor="@color/color333333"
+            android:textSize="@dimen/sp_14"
+            android:hint="@string/hint_input_nickname"
+            android:textColorHint="@color/color999999"
+            android:inputType="text"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/ivBack"
+            app:layout_constraintBottom_toTopOf="@id/etPassword"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:background="@drawable/divider_0_6dp_ebebebcolor_bottom"
+            android:text="@={view_model.passwordLiveData}"
+            android:textColor="@color/color333333"
+            android:textSize="@dimen/sp_14"
+            android:hint="@string/hint_input_password"
+            android:textColorHint="@color/color999999"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            app:layout_constraintTop_toBottomOf="@id/etName"
+            app:layout_constraintBottom_toTopOf="@id/etRePassword"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etRePassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:background="@drawable/divider_0_6dp_ebebebcolor_bottom"
+            android:text="@={view_model.repasswordLiveData}"
+            android:textColor="@color/color333333"
+            android:textSize="@dimen/sp_14"
+            android:hint="@string/hint_input_repassword"
+            android:textColorHint="@color/color999999"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            app:layout_constraintTop_toBottomOf="@id/etPassword"
+            app:layout_constraintBottom_toTopOf="@id/tvRegister"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRegister"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:onClick="@{view_model::register}"
+            android:text="@string/register_account"
+            android:textColor="@color/colorFFFFFF"
+            android:textSize="@dimen/sp_16"
+            android:gravity="center"
+            android:background="@color/color3489FF"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginHorizontal="@dimen/dp_40"
+            app:layout_constraintTop_toBottomOf="@id/etRePassword"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</layout>

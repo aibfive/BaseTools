@@ -32,6 +32,15 @@
     <!--Temporary-->
     <string name="temporary">Temporary</string>
 
+    <!--MVVM-->
+    <string name="mvvm">MVVM</string>
+
+    <!--Lifecycle-->
+    <string name="lifecycle">Lifecycle</string>
+
     <!--公共-->
     <string name="format_data">数据\n数据\n数据\n数据\n数据\n数据\n数据\n%d</string>
+    <string name="format_mvvm_data">用户信息：%s--%d</string>
+
+
 </resources>

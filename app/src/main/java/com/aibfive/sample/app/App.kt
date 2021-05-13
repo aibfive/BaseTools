@@ -1,9 +1,14 @@
 package com.aibfive.sample.app
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.os.Bundle
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.aibfive.basetools.BaseApplication
+import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
+import com.aibfive.sample.ui.lifecycle.ApplicationLifycycleObserver
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -22,6 +27,36 @@ class App : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        //监听app处于前后台状态--方式一
+        ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationLifycycleObserver())
+        /*//监听app处于前后台状态--方式二
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks{
+            var number = 0
+            override fun onActivityPaused(activity: Activity) {
+            }
+
+            override fun onActivityStarted(activity: Activity) {
+                number++
+                LogUtil.v("Lifecycle", "App-onActivityStarted:$number")
+            }
+
+            override fun onActivityDestroyed(activity: Activity) {
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+            }
+
+            override fun onActivityStopped(activity: Activity) {
+                number--
+                LogUtil.v("Lifecycle", "App-onActivityStopped:$number")
+            }
+
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            }
+
+            override fun onActivityResumed(activity: Activity) {
+            }
+        })*/
     }
 
     init {

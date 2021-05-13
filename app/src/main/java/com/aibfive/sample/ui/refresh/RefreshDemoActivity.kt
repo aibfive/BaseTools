@@ -4,14 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.aibfive.basetools.BaseApplication
 import com.aibfive.basetools.adapter.itemdecoration.LinearItemDecoration
-import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.ui.RefreshLoadMoreActivity
 import com.aibfive.basetools.util.ActivityManager
 import com.aibfive.basetools.util.DisplayUtil
 import com.aibfive.basetools.util.LogUtil
-import com.aibfive.sample.MainActivity
+import com.aibfive.sample.ui.MainActivity
 import com.aibfive.sample.R
 import com.aibfive.sample.bean.ArticleBean
 import com.chad.library.adapter.base.BaseQuickAdapter
