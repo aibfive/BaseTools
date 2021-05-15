@@ -34,7 +34,7 @@
     <string name="format_ranking">排名：%s</string>
     <string name="default_ranking">排名：--</string>
     <string name="my_integral">我的积分</string>
-    <string name="format_integral">当前积分：%d</string>
+    <string name="format_integral">当前积分：%s</string>
     <string name="collect_articles">收藏文章</string>
     <string name="collect_website">收藏网站</string>
     <string name="share_articles">分享文章</string>

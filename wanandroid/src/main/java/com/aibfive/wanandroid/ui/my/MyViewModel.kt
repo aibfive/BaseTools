@@ -32,7 +32,10 @@ class MyViewModel : BaseViewModel {
                     RetrofitClient.getService<MyService>().getUserInfo()
                 }, object : Callback<UserInfoModel>{
                     override fun onSuccess(data: UserInfoModel) {
-                        userInfoLiveData.value = data
+                        userInfoLiveData.value = UserInfoModel(
+                                StringUtil.getString(R.string.format_integral, data.coinCount),
+                                StringUtil.getString(R.string.format_ranking, data.rank),
+                                data.userId, data.username)
                         AppDataBase.db.userInfoDao().insertUserInfoModel(data)
                     }
 

@@ -8,4 +8,8 @@ object StringUtil {
         return BaseApplication.instance.getString(resId)
     }
 
+    fun getString(resId : Int, value : String) : String{
+        return BaseApplication.instance.getString(resId, value)
+    }
+
 }
