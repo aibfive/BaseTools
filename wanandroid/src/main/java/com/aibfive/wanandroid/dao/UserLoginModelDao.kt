@@ -14,7 +14,7 @@ interface UserLoginModelDao {
      * 获取登录成功时用户数据
      * @return UserLoginModel
      */
-    @Query("select * from user_login")
+    @Query("SELECT * FROM user_login")
     fun getUserLoginModel() : UserLoginModel
 
     /**
@@ -28,7 +28,7 @@ interface UserLoginModelDao {
      * 删除登录成功时用户数据
      * @param model UserLoginModel
      */
-    @Query("delete from user_login")
+    @Query("DELETE FROM user_login")
     fun deleteUserLoginModel()
 
 }

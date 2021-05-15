@@ -1,5 +1,6 @@
 package com.aibfive.wanandroid.network
 
+import com.aibfive.basetools.util.LogUtil
 import com.aibfive.basetools.util.StringUtil
 import com.aibfive.basetools.util.ToastUtil
 import com.aibfive.basetools.util.loading.LoadingUtil
@@ -21,6 +22,7 @@ object DefaultRepository {
             }
             GlobalScope.launch(Dispatchers.Main) {
                 val data = block.invoke()
+                LogUtil.v("GG", "DefaultRepository")
                 if (data == null) {
                     callback.onFailed(ERROR_CODE_SERVER, StringUtil.getString(R.string.error_code_server))
                     ToastUtil.show(StringUtil.getString(R.string.error_code_server))

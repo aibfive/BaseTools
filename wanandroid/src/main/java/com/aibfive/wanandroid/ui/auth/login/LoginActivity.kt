@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : StatusBarMvvmActivity<ActivityLoginBinding, LoginViewModel>() {
 
+
     override fun getLayoutId(): Int {
         return R.layout.activity_login
     }

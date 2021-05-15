@@ -5,6 +5,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aibfive.basetools.BaseApplication
 import com.aibfive.wanandroid.app.App
+import com.aibfive.wanandroid.app.Constants
+import com.aibfive.wanandroid.base.CookieModel
 import com.aibfive.wanandroid.base.UserLoginModel
 import com.aibfive.wanandroid.ui.my.UserInfoModel
 
@@ -14,15 +16,18 @@ import com.aibfive.wanandroid.ui.my.UserInfoModel
  */
 @Database(entities = [
     UserLoginModel::class,
-    UserInfoModel::class
-], version = 1)
+    UserInfoModel::class,
+    CookieModel::class
+], version = Constants.DB_VERSION)
 abstract class AppDataBase : RoomDatabase(){
 
     abstract fun userLoginDao() : UserLoginModelDao
+    abstract fun userInfoDao() : UserInfoModelDao
+    abstract fun cookieDao() : CookieModelDao
 
     companion object{
         val db : AppDataBase by lazy {
-            Room.databaseBuilder(BaseApplication.instance, AppDataBase::class.java, "wanandroid.db").allowMainThreadQueries().build()
+            Room.databaseBuilder(BaseApplication.instance, AppDataBase::class.java, Constants.DB_NAME).allowMainThreadQueries().fallbackToDestructiveMigration().build()
         }
     }
 

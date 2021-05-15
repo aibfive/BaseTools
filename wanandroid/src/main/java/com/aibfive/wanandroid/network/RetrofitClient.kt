@@ -1,13 +1,10 @@
 package com.aibfive.wanandroid.network
 
 import com.aibfive.basetools.util.LogUtil
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
@@ -21,6 +18,7 @@ object RetrofitClient {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)//添加日志拦截器
+                .addInterceptor(CookieInterceptor())//头部拦截器
                 .callTimeout(30, TimeUnit.SECONDS)//设置调用超时时间为30秒
                 .connectTimeout(30, TimeUnit.SECONDS)//设置连接超时时间为30秒
                 .readTimeout(60, TimeUnit.SECONDS)//阅读超时时间

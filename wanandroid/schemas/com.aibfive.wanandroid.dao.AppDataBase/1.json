@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "21677b983206965e5e1cdd4df9aa643d",
+    "identityHash": "e72fa257160f99333f8fb058188188f5",
     "entities": [
       {
         "tableName": "user_login",
@@ -44,18 +44,18 @@
       },
       {
         "tableName": "user_info",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`coinCount` INTEGER NOT NULL, `rank` INTEGER NOT NULL, `userId` INTEGER NOT NULL, `username` TEXT NOT NULL, PRIMARY KEY(`userId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`coinCount` TEXT NOT NULL, `rank` TEXT NOT NULL, `userId` INTEGER NOT NULL, `username` TEXT NOT NULL, PRIMARY KEY(`userId`))",
         "fields": [
           {
             "fieldPath": "coinCount",
             "columnName": "coinCount",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "rank",
             "columnName": "rank",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -84,7 +84,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '21677b983206965e5e1cdd4df9aa643d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e72fa257160f99333f8fb058188188f5')"
     ]
   }
 }

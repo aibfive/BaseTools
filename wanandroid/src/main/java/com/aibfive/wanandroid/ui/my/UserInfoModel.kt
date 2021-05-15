@@ -10,8 +10,10 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "user_info")
 data class UserInfoModel(
-        @ColumnInfo val coinCount: Int,
-        @ColumnInfo val rank: Int,
-        @PrimaryKey val userId: Int,
-        @ColumnInfo val username: String
-)
+        @ColumnInfo var coinCount: String,
+        @ColumnInfo var rank: String,
+        @PrimaryKey var userId: Int,
+        @ColumnInfo var username: String
+){
+    constructor() : this("", "", 0, "")
+}
