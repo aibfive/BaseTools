@@ -19,17 +19,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.aibfive.wanandroid.ui.auth.register.RegisterActivity"/>
-        <activity android:name="com.aibfive.wanandroid.ui.auth.login.LoginActivity" />
         <activity
-            android:name=".ui.WanAndroidActivity"
+            android:name=".ui.SplashActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- ImmersionBar(开始) -->
+        </activity>
+        <activity android:name=".ui.auth.register.RegisterActivity" />
+        <activity android:name=".ui.auth.login.LoginActivity" />
+        <activity
+            android:name=".ui.WanAndroidActivity"
+            android:launchMode="singleTask"/>
+        <!-- ImmersionBar(开始) -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->

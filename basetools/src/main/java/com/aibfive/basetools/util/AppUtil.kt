@@ -1,5 +1,6 @@
 package com.aibfive.basetools.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
@@ -31,6 +32,34 @@ object AppUtil {
             }
         }
         context.startActivity(intent)
+    }
+
+    fun startActivity(activity: Activity, cls : Class<*>, finish : Boolean, vararg data : Pair<String, Any>){
+        val intent = Intent()
+        intent.setClass(activity, cls)
+        data.forEach {
+            when(it.second){
+                is String -> intent.putExtra(it.first, it.second as String)
+                is Int -> intent.putExtra(it.first, it.second as Int)
+                is Float -> intent.putExtra(it.first, it.second as Float)
+                is Double -> intent.putExtra(it.first, it.second as Double)
+                is Char -> intent.putExtra(it.first, it.second as Char)
+                is Byte -> intent.putExtra(it.first, it.second as Byte)
+                is Boolean -> intent.putExtra(it.first, it.second as Boolean)
+                is Short -> intent.putExtra(it.first, it.second as Short)
+                is Long -> intent.putExtra(it.first, it.second as Long)
+                is Parcelable -> intent.putExtra(it.first, it.second as Parcelable)
+                is Serializable -> intent.putExtra(it.first, it.second as Serializable)
+            }
+        }
+        activity.startActivity(intent)
+        if(finish){
+            activity.finish()
+        }
+    }
+
+    fun startActivity(activity: Activity, cls : Class<*>, vararg data : Pair<String, Any>){
+        startActivity(activity, cls, true, *data)
     }
 
 }

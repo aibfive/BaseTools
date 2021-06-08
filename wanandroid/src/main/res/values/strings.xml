@@ -2,7 +2,7 @@
 <resources>
 
     <string name="error_code_server">服务器执行错误</string>
-    
+
     <string name="app_name">WanAndroid</string>
 
     <string-array name="main_tab_texts">

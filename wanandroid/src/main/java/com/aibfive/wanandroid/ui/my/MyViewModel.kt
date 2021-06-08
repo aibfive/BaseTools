@@ -27,6 +27,8 @@ class MyViewModel : BaseViewModel {
 
     fun getUserInfo(){
         if(UserUtil.isLogin()){//用户已登录
+            //在网络访问获取到数据前，先使用缓存的数据显示。
+            userInfoLiveData.value = AppDataBase.db.userInfoDao().getUserInfoModel()
             if(NetworkUtil.isNetworkConnect(BaseApplication.instance)){//已连接网络
                 DefaultRepository.getData(false, {
                     RetrofitClient.getService<MyService>().getUserInfo()
@@ -36,7 +38,7 @@ class MyViewModel : BaseViewModel {
                                 StringUtil.getString(R.string.format_integral, data.coinCount),
                                 StringUtil.getString(R.string.format_ranking, data.rank),
                                 data.userId, data.username)
-                        AppDataBase.db.userInfoDao().insertUserInfoModel(data)
+                        AppDataBase.db.userInfoDao().insertUserInfoModel(userInfoLiveData.value!!)
                     }
 
                     override fun onFailed(errorCode: String, errorMsg: String) {

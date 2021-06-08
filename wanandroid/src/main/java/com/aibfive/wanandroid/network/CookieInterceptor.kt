@@ -1,5 +1,6 @@
 package com.aibfive.wanandroid.network
 
+import com.aibfive.basetools.util.LogUtil
 import com.aibfive.wanandroid.app.Constants
 import com.aibfive.wanandroid.base.CookieModel
 import com.aibfive.wanandroid.dao.AppDataBase
@@ -23,6 +24,7 @@ class CookieInterceptor : Interceptor {
             val headers = AppDataBase.db.cookieDao().getCookie().headers
             headers.forEach {
                 builder.addHeader(Constants.HEADER_COOKIE, it)
+                LogUtil.v(CookieInterceptor::class.simpleName, it)
             }
             response = chain.proceed(builder.build())
         }else{//用户未登录

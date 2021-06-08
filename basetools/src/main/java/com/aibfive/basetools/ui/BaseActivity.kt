@@ -1,5 +1,6 @@
 package com.aibfive.basetools.ui
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ abstract class BaseActivity : AppCompatActivity() {
         initData()
         initView()
         initStatusBar()
+
     }
 
     /**
@@ -42,6 +44,10 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     open fun initStatusBar(){
 
+    }
+
+    fun getActivity() : Activity {
+        return this
     }
 
 }
