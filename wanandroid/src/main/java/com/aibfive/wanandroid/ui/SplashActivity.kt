@@ -1,14 +1,19 @@
 package com.aibfive.wanandroid.ui
 
 import android.app.Activity
+import android.graphics.Color
+import android.view.LayoutInflater
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.AppUtil
 import com.aibfive.basetools.util.LogUtil
+import com.aibfive.basetools.util.StatusBarUtil
 import com.aibfive.wanandroid.R
+import com.aibfive.wanandroid.ui.base.StatusBarActivity
 import kotlinx.android.synthetic.main.activity_splash.*
+import java.util.logging.Handler
 
 /**
  * @author: 小李
@@ -30,7 +35,8 @@ class SplashActivity : BaseActivity() {
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                AppUtil.startActivity(getActivity(), WanAndroidActivity::class.java, true)
+
+                AppUtil.startActivity(getActivity(), WanAndroidActivity::class.java)
             }
 
             override fun onAnimationStart(animation: Animation?) {
@@ -38,5 +44,7 @@ class SplashActivity : BaseActivity() {
             }
         })
         tvLogo.startAnimation(anim)
+        
     }
+
 }

@@ -52,8 +52,7 @@ ext {
     ]
 
     kotlin = [
-            coroutinesAndroid                 : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0',
-            reflect                           : 'org.jetbrains.kotlin:kotlin-reflect:1.5.10',  //反射
+            coroutinesAndroid                 : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_version",
     ]
 
     lifecycle = [
