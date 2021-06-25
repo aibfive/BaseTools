@@ -2,17 +2,20 @@ package com.aibfive.basetools.dialog
 
 import android.annotation.SuppressLint
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.aibfive.basetools.R
-import kotlinx.android.synthetic.main.dialog_single_operate_hint.*
+import com.aibfive.basetools.databinding.DialogSingleOperateHintBinding
 
 /**
  * Date : 2020/11/27/027
  * Time : 16:53
  * author : Li
  */
+
 class SingleOperateHintDialog @SuppressLint("ValidFragment")
-private constructor () : BaseDialogFragment(), View.OnClickListener {
+private constructor () : BaseDialogFragment<DialogSingleOperateHintBinding>(), View.OnClickListener {
 
     companion object {
 
@@ -25,18 +28,24 @@ private constructor () : BaseDialogFragment(), View.OnClickListener {
 
     }
 
-    override fun getLayoutId(): Int {
-        return builder.layoutId
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): DialogSingleOperateHintBinding {
+        return DialogSingleOperateHintBinding.inflate(inflater, container, false)
     }
 
     override fun init() {
+        if(builder.background != -1) {
+            binding.clContainer.setBackgroundResource(builder.background)
+        }
         if(!TextUtils.isEmpty(builder.hint)) {
-            tvHint?.text = builder.hint
+            binding.tvHint.text = builder.hint
         }
         if(!TextUtils.isEmpty(builder.operateText)) {
-            tvOperate?.text = builder.operateText
+            binding.tvOperate.text = builder.operateText
         }
-        tvOperate?.setOnClickListener(this)
+        binding.tvOperate.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -47,13 +56,13 @@ private constructor () : BaseDialogFragment(), View.OnClickListener {
 
     class Builder {
 
-        var layoutId : Int = R.layout.dialog_single_operate_hint
+        var background : Int = -1
         var hint : String? = null
         var operateText : String? = null
         var operate : ((dialog : SingleOperateHintDialog) -> Unit)? = null
 
-        fun setLayoutId(layoutId : Int) : Builder {
-            this.layoutId = layoutId
+        fun setBackground(background : Int) : Builder {
+            this.background = background
             return this
         }
 

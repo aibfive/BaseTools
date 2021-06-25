@@ -1,5 +1,6 @@
 package com.aibfive.basetools.ui
 
+import androidx.viewbinding.ViewBinding
 import com.aibfive.basetools.mvp.MvpActivity
 import com.aibfive.basetools.mvp.MvpModel
 import com.aibfive.basetools.mvp.MvpPresenter
@@ -12,7 +13,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * Time : 16:32
  * author : Li
  */
-abstract class RefreshActivity<P : MvpPresenter<*, *>, M : MvpModel> : MvpActivity<P, M>() {
+abstract class RefreshActivity<VB : ViewBinding, P : MvpPresenter<*, *>, M : MvpModel> : MvpActivity<VB, P, M>() {
 
     /**
      * 实现该mRefreshLayout，有两种方式，

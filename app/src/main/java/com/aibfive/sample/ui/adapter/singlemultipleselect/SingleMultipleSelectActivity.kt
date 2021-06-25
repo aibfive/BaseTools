@@ -5,11 +5,12 @@ import android.content.Intent
 import android.view.View
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
+import com.aibfive.sample.databinding.ActivitySingleMultipleSelectBinding
 
 /**
  * 单多选适配器
  */
-class SingleMultipleSelectActivity : BaseActivity(), View.OnClickListener {
+class SingleMultipleSelectActivity : BaseActivity<ActivitySingleMultipleSelectBinding>(), View.OnClickListener {
 
     companion object{
         @JvmStatic
@@ -17,10 +18,6 @@ class SingleMultipleSelectActivity : BaseActivity(), View.OnClickListener {
             val starter = Intent(context, SingleMultipleSelectActivity::class.java)
             context.startActivity(starter)
         }
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_single_multiple_select
     }
 
     override fun initData() {

@@ -2,18 +2,17 @@ package com.aibfive.sample.ui.socket
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.text.TextUtils
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.LogUtil
-import com.aibfive.sample.R
-import com.aibfive.sample.ui.temporary.TemporaryActivity
-import kotlinx.android.synthetic.main.activity_socket.*
-import java.io.*
+import com.aibfive.sample.databinding.ActivitySocketBinding
+import java.io.BufferedReader
+import java.io.BufferedWriter
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
 import java.net.Socket
 
-class SocketActivity : BaseActivity() {
+class SocketActivity : BaseActivity<ActivitySocketBinding>() {
 
     var socket : Socket? = null
 
@@ -25,20 +24,16 @@ class SocketActivity : BaseActivity() {
         }
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_socket
-    }
-
     override fun initView() {
         super.initView()
-        btnOpen.setOnClickListener {
+        binding.btnOpen.setOnClickListener {
             val intent = Intent(this, SocketService::class.java)
             startService(intent)
         }
-        btnConnect.setOnClickListener {
+        binding.btnConnect.setOnClickListener {
             connect()
         }
-        btnSend.setOnClickListener {
+        binding.btnSend.setOnClickListener {
             send()
         }
 

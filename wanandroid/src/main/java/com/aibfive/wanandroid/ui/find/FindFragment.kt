@@ -1,18 +1,14 @@
 package com.aibfive.wanandroid.ui.find
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.aibfive.basetools.ui.BaseFragment
-import com.aibfive.wanandroid.R
-import kotlinx.android.synthetic.main.fragment_problem.*
+import com.aibfive.wanandroid.databinding.FragmentFindBinding
 
-class FindFragment : BaseFragment() {
-
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_find
-    }
+class FindFragment : BaseFragment<FragmentFindBinding>() {
 
     override fun initView() {
         super.initView()
     }
-
 
 }

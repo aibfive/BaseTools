@@ -6,11 +6,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
-import kotlinx.android.synthetic.main.activity_mvvm.*
+import com.aibfive.sample.databinding.ActivityMvvmBinding
 
-class MVVMActivity : AppCompatActivity() {
+class MVVMActivity : BaseActivity<ActivityMvvmBinding>() {
 
     companion object{
         @JvmStatic
@@ -22,27 +23,21 @@ class MVVMActivity : AppCompatActivity() {
 
     //lateinit var binding : ActivityMvvmBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mvvm)
-      
+    override fun initView() {
+        super.initView()
         //binding = DataBindingUtil.setContentView(this, R.layout.activity_mvvm)
         var viewModel :BannerViewModel = ViewModelProvider(this).get(BannerViewModel::class.java)
         viewModel.data.observe(this, object  : Observer<BannerBean>{
             override fun onChanged(t: BannerBean?) {
                 LogUtil.v(MVVMActivity::class.simpleName, "收到了")
                 if (t != null) {
-                    (recyclerView.adapter as BannerAdapter).addData(t)
+                    (binding.recyclerView.adapter as BannerAdapter).addData(t)
                 }
             }
         })
-        recyclerView.adapter = BannerAdapter()
+        binding.recyclerView.adapter = BannerAdapter()
         BannerRepository(viewModel).getBannerData()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //binding.unbind()
-    }
 
 }

@@ -10,6 +10,7 @@ import com.aibfive.basetools.ui.RefreshFragment
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 import com.aibfive.sample.bean.ArticleBean
+import com.aibfive.sample.databinding.ActivityRefreshBinding
 import com.aibfive.sample.ui.refresh.RefreshContract
 import com.aibfive.sample.ui.refresh.RefreshModel
 import com.aibfive.sample.ui.refresh.RefreshPresenter
@@ -20,17 +21,13 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * Time : 15:24
  * author : Li
  */
-class Fragment2 : RefreshFragment<RefreshPresenter, RefreshModel>(), RefreshContract.View {
+class Fragment2 : RefreshFragment<ActivityRefreshBinding, RefreshPresenter, RefreshModel>(), RefreshContract.View {
 
     companion object {
         fun newInstance(): Fragment2 {
             val fragment = Fragment2()
             return fragment
         }
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_refresh
     }
 
     override fun onAttach(context: Context) {

@@ -1,17 +1,12 @@
 package com.aibfive.wanandroid.ui.problem
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.aibfive.basetools.ui.BaseFragment
-import com.aibfive.wanandroid.R
 import com.aibfive.basetools.util.StatusBarUtil
-import kotlinx.android.synthetic.main.fragment_problem.*
+import com.aibfive.wanandroid.databinding.FragmentProblemBinding
 
-class ProblemFragment : BaseFragment() {
-
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_problem
-    }
+class ProblemFragment : BaseFragment<FragmentProblemBinding>() {
 
     override fun initView() {
         super.initView()
@@ -19,7 +14,7 @@ class ProblemFragment : BaseFragment() {
 
     override fun initStatusBar() {
        // tvTitle.setOnClickListener {
-            StatusBarUtil.setParentStatusBarPadding(context, tvTitle)
+            StatusBarUtil.setParentStatusBarPadding(context, binding.tvTitle)
        // }
 
     }

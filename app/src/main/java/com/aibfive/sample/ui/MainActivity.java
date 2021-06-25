@@ -8,6 +8,7 @@ import com.aibfive.basetools.adapter.itemdecoration.GridItemDecoration;
 import com.aibfive.basetools.ui.BaseActivity;
 import com.aibfive.sample.R;
 import com.aibfive.sample.adapter.MainItemAdapter;
+import com.aibfive.sample.databinding.ActivityMainBinding;
 import com.aibfive.sample.listener.OnItemClickLisenter;
 import com.aibfive.sample.ui.adapter.AdapterActivity;
 import com.aibfive.sample.ui.fragment.FragmentActivity;
@@ -21,12 +22,7 @@ import com.aibfive.sample.ui.tencentmap.TencentMapActivity;
 import com.aibfive.sample.ui.webview.WebViewActivity;
 import com.aibfive.sample.util.DataCreator;
 
-public class MainActivity extends BaseActivity implements OnItemClickLisenter {
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
-    }
+public class MainActivity extends BaseActivity<ActivityMainBinding> implements OnItemClickLisenter {
 
     @Override
     public void initView(){

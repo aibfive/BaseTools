@@ -1,5 +1,6 @@
 package com.aibfive.basetools.ui
 
+import androidx.viewbinding.ViewBinding
 import com.aibfive.basetools.mvp.MvpActivity
 import com.aibfive.basetools.mvp.MvpFragment
 import com.aibfive.basetools.mvp.MvpModel
@@ -17,7 +18,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
  * Time : 16:11
  * author : Li
  */
-abstract class RefreshLoadMoreFragment<P : MvpPresenter<*, *>, M : MvpModel> : MvpFragment<P, M>() {
+abstract class RefreshLoadMoreFragment<VB : ViewBinding, P : MvpPresenter<*, *>, M : MvpModel> : MvpFragment<VB, P, M>() {
 
     var mCurrentPage : Int = START_PAGE
     /**

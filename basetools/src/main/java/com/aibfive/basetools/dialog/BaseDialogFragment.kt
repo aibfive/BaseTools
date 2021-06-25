@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.viewbinding.ViewBinding
 import com.aibfive.basetools.R
 
 /**
@@ -13,11 +14,14 @@ import com.aibfive.basetools.R
  * Time : 13:41
  * author : Li
  */
-open abstract class BaseDialogFragment : DialogFragment(){
+abstract class BaseDialogFragment<VB : ViewBinding> : DialogFragment(){
+
+    private var _binding : VB? = null
+    val binding : VB get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(getLayoutId(), container, false)
-        return view
+        _binding = getViewBinding(inflater, container)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -26,7 +30,11 @@ open abstract class BaseDialogFragment : DialogFragment(){
         init()
     }
 
-    open abstract fun getLayoutId() : Int
+    /**
+     * 获取视图绑定器
+     * @return VB
+     */
+    abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) : VB
 
     open abstract fun init()
 

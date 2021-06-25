@@ -4,8 +4,9 @@ import android.content.Context
 import android.content.Intent
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
+import com.aibfive.sample.databinding.ActivityCoroutineBinding
 
-class CoroutineActivity : BaseActivity() {
+class CoroutineActivity : BaseActivity<ActivityCoroutineBinding>() {
 
     companion object {
         @JvmStatic
@@ -13,10 +14,6 @@ class CoroutineActivity : BaseActivity() {
             val starter = Intent(context, CoroutineActivity::class.java)
             context.startActivity(starter)
         }
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_coroutine
     }
 
     override fun initData() {

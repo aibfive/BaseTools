@@ -4,18 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
-import kotlinx.android.synthetic.main.activity_tencent_map.*
+import com.aibfive.sample.databinding.ActivityTencentMapBinding
 
-class TencentMapActivity : AppCompatActivity(), View.OnClickListener {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tencent_map)
-        tv_send_location.setOnClickListener(this)
-        tv_search_address.setOnClickListener(this)
-    }
+class TencentMapActivity : BaseActivity<ActivityTencentMapBinding>(), View.OnClickListener {
     
     companion object{
 
@@ -26,6 +19,13 @@ class TencentMapActivity : AppCompatActivity(), View.OnClickListener {
         }
 
     }
+
+    override fun initView() {
+        super.initView()
+        binding.tvSendLocation.setOnClickListener(this)
+        binding.tvSearchAddress.setOnClickListener(this)
+    }
+
 
     override fun onClick(v: View?) {
         if (v != null) {

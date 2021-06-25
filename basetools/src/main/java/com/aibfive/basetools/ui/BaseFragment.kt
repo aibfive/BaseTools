@@ -5,17 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
+import java.lang.reflect.ParameterizedType
 
 /**
  * Date : 2020/12/11/011
  * Time : 14:15
  * author : Li
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment<VB: ViewBinding> : Fragment() {
+
+    private var _binding : VB? = null
+    val binding : VB get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(getLayoutId(), container, false)
-        return view
+        _binding = getViewBinding(inflater, container)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,9 +31,20 @@ abstract class BaseFragment : Fragment() {
     }
 
     /**
-     * 获取布局id
+     * 获取视图绑定器
+     * @return VB
      */
-    abstract fun getLayoutId() : Int
+    fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) : VB{
+        /**
+         * 使用反射获取VB
+         * 正常情况下获取方式为
+         * VB.inflate(inflater, container, false)
+         */
+        val type = this.javaClass.genericSuperclass
+        val cls = (type as ParameterizedType).actualTypeArguments[0] as Class<VB>
+        val method = cls.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+        return method.invoke(null, inflater, container, false) as VB
+    }
 
     /**
      * 初始化数据

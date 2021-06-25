@@ -2,18 +2,17 @@ package com.aibfive.sample.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.sample.R
+import com.aibfive.sample.databinding.ActivityAdapterBinding
 import com.aibfive.sample.ui.adapter.griditem.GridItemDecorationActivity
 import com.aibfive.sample.ui.adapter.singlemultipleselect.SingleMultipleSelectActivity
-import kotlinx.android.synthetic.main.activity_adapter.*
 
 /**
  * 适配器
  */
-class AdapterActivity : BaseActivity(), View.OnClickListener{
+class AdapterActivity : BaseActivity<ActivityAdapterBinding>(), View.OnClickListener{
 
     companion object{
         @JvmStatic
@@ -23,14 +22,10 @@ class AdapterActivity : BaseActivity(), View.OnClickListener{
         }
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_adapter
-    }
-
     override fun initView() {
         super.initView()
-        gridItemDecorationTv.setOnClickListener(this)
-        singleMultipleSelectTv.setOnClickListener(this)
+        binding.gridItemDecorationTv.setOnClickListener(this)
+        binding.singleMultipleSelectTv.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {

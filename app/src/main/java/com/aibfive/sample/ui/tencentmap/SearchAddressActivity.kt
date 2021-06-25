@@ -11,6 +11,7 @@ import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 import com.aibfive.sample.adapter.SearchAddressAdapter
 import com.aibfive.sample.bean.tencentmap.AddressBean
+import com.aibfive.sample.databinding.ActivitySearchAddressBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.tencent.lbssearch.TencentSearch
@@ -25,10 +26,9 @@ import com.tencent.map.geolocation.TencentLocationManager
 import com.tencent.map.geolocation.TencentLocationRequest
 import com.tencent.map.tools.net.http.HttpResponseListener
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng
-import kotlinx.android.synthetic.main.activity_search_address.*
 
 //https://lbs.qq.com/geosdk/doc/com/tencent/map/geolocation/package-summary.html
-class SearchAddressActivity : BaseActivity(), TencentLocationListener, OnItemClickListener {
+class SearchAddressActivity : BaseActivity<ActivitySearchAddressBinding>(), TencentLocationListener, OnItemClickListener {
 
     lateinit var addressAdapter: SearchAddressAdapter
     lateinit var tencentSearch : TencentSearch
@@ -52,13 +52,9 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, OnItemCli
         initLocation()
         tencentSearch = TencentSearch(this)
         addressAdapter = SearchAddressAdapter()
-        recyclerView.adapter = addressAdapter
+        binding.recyclerView.adapter = addressAdapter
         addressAdapter.setOnItemClickListener(this)
         startLocation()
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_search_address
     }
 
     /**
@@ -246,10 +242,10 @@ class SearchAddressActivity : BaseActivity(), TencentLocationListener, OnItemCli
      * 搜索页面
      */
     fun onSearchClick(view : View?){
-        if(searchEt.length() == 0){
+        if(binding.searchEt.length() == 0){
             Toast.makeText(this, getString(R.string.hint_input_keyword), Toast.LENGTH_SHORT).show()
         }
-        searchAddress(searchEt.text.toString())
+        searchAddress(binding.searchEt.text.toString())
     }
 
     /**

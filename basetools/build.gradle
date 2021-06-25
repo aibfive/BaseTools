@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 def ver = rootProject.ext.ver
 def library = rootProject.ext.library
@@ -31,6 +30,11 @@ android {
     dataBinding {
         enabled = true
     }
+
+    viewBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {

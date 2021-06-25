@@ -1,28 +1,28 @@
 package com.aibfive.basetools.util.loading
 
-import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
-import android.os.Build
 import android.text.TextUtils
-import android.view.WindowManager
+import android.view.LayoutInflater
 import com.aibfive.basetools.R
-import kotlinx.android.synthetic.main.dialog_loading.*
-import java.lang.reflect.Field
+import com.aibfive.basetools.databinding.DialogLoadingBinding
+import com.aibfive.basetools.dialog.BaseDialog
 
 
-class LoadingDialog : Dialog {
+class LoadingDialog : BaseDialog<DialogLoadingBinding> {
 
     constructor(context: Context) : super(context, R.style.StyleDialog){
-        setContentView(R.layout.dialog_loading)
         setCanceledOnTouchOutside(false)
+    }
+
+    override fun getViewBinding(): DialogLoadingBinding {
+        return DialogLoadingBinding.inflate(LayoutInflater.from(context))
     }
 
     fun setHint(hint : String?) {
         if (TextUtils.isEmpty(hint)) {
-            tvHint.text = context.getString(R.string.loading)
+            binding.tvHint.text = context.getString(R.string.loading)
         } else {
-            tvHint.text = hint
+            binding.tvHint.text = hint
         }
     }
 

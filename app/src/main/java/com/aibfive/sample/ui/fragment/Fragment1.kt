@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.aibfive.basetools.mvp.MvpFragment
-import com.aibfive.basetools.ui.BaseLazyFragment
 import com.aibfive.basetools.ui.RefreshFragment
-import com.aibfive.basetools.ui.RefreshLoadMoreFragment
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 import com.aibfive.sample.bean.ArticleBean
+import com.aibfive.sample.databinding.ActivityRefreshBinding
 import com.aibfive.sample.ui.refresh.RefreshContract
 import com.aibfive.sample.ui.refresh.RefreshModel
 import com.aibfive.sample.ui.refresh.RefreshPresenter
@@ -22,17 +20,13 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * Time : 15:10
  * author : Li
  */
-class Fragment1 : RefreshFragment<RefreshPresenter, RefreshModel>(), RefreshContract.View {
+class Fragment1 : RefreshFragment<ActivityRefreshBinding, RefreshPresenter, RefreshModel>(), RefreshContract.View {
 
     companion object {
         fun newInstance(): Fragment1 {
             val fragment = Fragment1()
             return fragment
         }
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_refresh
     }
 
     override fun onAttach(context: Context) {

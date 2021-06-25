@@ -6,10 +6,9 @@ import android.view.View
 import com.aibfive.basetools.ui.BaseActivity
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.basetools.widget.ClickRecyclerView
-import com.aibfive.sample.R
-import kotlinx.android.synthetic.main.activity_temporary.*
+import com.aibfive.sample.databinding.ActivityTemporaryBinding
 
-class TemporaryActivity : BaseActivity() {
+class TemporaryActivity : BaseActivity<ActivityTemporaryBinding>() {
 
     companion object {
         @JvmStatic
@@ -19,13 +18,10 @@ class TemporaryActivity : BaseActivity() {
         }
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_temporary
-    }
 
     override fun initView() {
         super.initView()
-        clickRecyclerView.setOnSingleClickListener(object : ClickRecyclerView.OnSingleClickListener{
+        binding.clickRecyclerView.setOnSingleClickListener(object : ClickRecyclerView.OnSingleClickListener{
             override fun onSingleClick(v: View?) {
                 LogUtil.v(TemporaryActivity::class.simpleName, "点击了")
             }

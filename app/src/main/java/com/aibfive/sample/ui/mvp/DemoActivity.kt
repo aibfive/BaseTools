@@ -2,12 +2,14 @@ package com.aibfive.sample.ui.mvp
 
 import android.content.Context
 import android.content.Intent
+import android.view.LayoutInflater
 import com.aibfive.basetools.mvp.MvpActivity
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
 import com.aibfive.sample.bean.ArticleBean
+import com.aibfive.sample.databinding.ActivityDemoBinding
 
-class DemoActivity : MvpActivity<DemoPresenter, DemoModel>(), DemoContract.View {
+class DemoActivity : MvpActivity<ActivityDemoBinding, DemoPresenter, DemoModel>(), DemoContract.View {
 
     companion object {
         @JvmStatic
@@ -15,10 +17,6 @@ class DemoActivity : MvpActivity<DemoPresenter, DemoModel>(), DemoContract.View 
             val starter = Intent(context, DemoActivity::class.java)
             context.startActivity(starter)
         }
-    }
-    
-    override fun getLayoutId(): Int {
-        return R.layout.activity_demo
     }
 
     override fun initData() {

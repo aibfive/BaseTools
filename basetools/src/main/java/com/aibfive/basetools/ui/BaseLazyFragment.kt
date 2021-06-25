@@ -1,12 +1,14 @@
 package com.aibfive.basetools.ui
 
+import androidx.viewbinding.ViewBinding
+
 /**
  * ViewPager的Adapter.behavior必须使用FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
  * Date : 2020/12/11/011
  * Time : 14:30
  * author : Li
  */
-abstract class BaseLazyFragment : BaseFragment() {
+abstract class BaseLazyFragment<VB : ViewBinding> : BaseFragment<VB>() {
 
     var isFirstResume = true//onResume()是否首次执行
 

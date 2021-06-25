@@ -9,6 +9,7 @@ import com.aibfive.sample.bean.network.BarInfoBean
 import com.aibfive.basetools.http.BaseBean
 import com.aibfive.basetools.http.DefaultCallback
 import com.aibfive.basetools.util.LogUtil
+import com.aibfive.sample.databinding.ActivityNetworkBinding
 import com.aibfive.sample.network.ApiService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NetworkActivity : BaseActivity() {
+class NetworkActivity : BaseActivity<ActivityNetworkBinding>() {
 
     companion object{
         @JvmStatic
@@ -24,10 +25,6 @@ class NetworkActivity : BaseActivity() {
             val starter = Intent(context, NetworkActivity::class.java)
             context.startActivity(starter)
         }
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_network
     }
 
     override fun initData() {

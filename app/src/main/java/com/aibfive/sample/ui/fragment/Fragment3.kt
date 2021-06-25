@@ -8,23 +8,21 @@ import android.view.ViewGroup
 import com.aibfive.basetools.ui.BaseLazyFragment
 import com.aibfive.basetools.util.LogUtil
 import com.aibfive.sample.R
+import com.aibfive.sample.databinding.ActivityRefreshBinding
+import com.aibfive.sample.databinding.Fragment3Binding
 
 /**
  * Date : 2020/12/11/011
  * Time : 15:24
  * author : Li
  */
-class Fragment3 : BaseLazyFragment() {
+class Fragment3 : BaseLazyFragment<Fragment3Binding>() {
 
     companion object {
         fun newInstance(): Fragment3 {
             val fragment = Fragment3()
             return fragment
         }
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_3
     }
 
     override fun onAttach(context: Context) {

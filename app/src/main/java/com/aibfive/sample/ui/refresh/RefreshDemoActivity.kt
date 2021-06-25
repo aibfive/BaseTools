@@ -9,15 +9,15 @@ import com.aibfive.basetools.ui.RefreshLoadMoreActivity
 import com.aibfive.basetools.util.ActivityManager
 import com.aibfive.basetools.util.DisplayUtil
 import com.aibfive.basetools.util.LogUtil
-import com.aibfive.sample.ui.MainActivity
 import com.aibfive.sample.R
 import com.aibfive.sample.bean.ArticleBean
+import com.aibfive.sample.databinding.ActivityRefreshBinding
+import com.aibfive.sample.ui.MainActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import kotlinx.android.synthetic.main.activity_refresh.*
 
-class RefreshDemoActivity : RefreshLoadMoreActivity<RefreshPresenter, RefreshModel>(), RefreshContract.View {
+class RefreshDemoActivity : RefreshLoadMoreActivity<ActivityRefreshBinding, RefreshPresenter, RefreshModel>(), RefreshContract.View {
 
     lateinit var mAdapter: RefreshAdapter
     override val mRefreshLayout: SmartRefreshLayout
@@ -31,10 +31,6 @@ class RefreshDemoActivity : RefreshLoadMoreActivity<RefreshPresenter, RefreshMod
         }
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_refresh
-    }
-
     override fun initData() {
         super.initData()
     }
@@ -42,8 +38,8 @@ class RefreshDemoActivity : RefreshLoadMoreActivity<RefreshPresenter, RefreshMod
     override fun initView() {
         super.initView()
         mAdapter = RefreshAdapter()
-        mRecyclerView.adapter = mAdapter
-        mRecyclerView.addItemDecoration(LinearItemDecoration(DisplayUtil.dip2px(this, 1f), ContextCompat.getColor(this, R.color.color333333), LinearItemDecoration.VERTICAL_INCLUDE_NULL))
+        binding.mRecyclerView.adapter = mAdapter
+        binding.mRecyclerView.addItemDecoration(LinearItemDecoration(DisplayUtil.dip2px(this, 1f), ContextCompat.getColor(this, R.color.color333333), LinearItemDecoration.VERTICAL_INCLUDE_NULL))
         mAdapter.setOnItemClickListener(object : OnItemClickListener{
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
                 when(position){
