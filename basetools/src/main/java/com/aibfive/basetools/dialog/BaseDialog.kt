@@ -3,7 +3,9 @@ package com.aibfive.basetools.dialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding
+import java.lang.reflect.ParameterizedType
 
 /**
  * @author: 小李
@@ -11,7 +13,7 @@ import androidx.viewbinding.ViewBinding
  */
 abstract class BaseDialog<VB : ViewBinding> : Dialog {
 
-    lateinit var binding: VB
+    var binding: VB
 
     constructor(context: Context) : super(context){
         binding = getViewBinding()
@@ -31,5 +33,19 @@ abstract class BaseDialog<VB : ViewBinding> : Dialog {
         setContentView(binding.root)
     }
 
-    abstract fun getViewBinding() : VB
+    /**
+     * 获取视图绑定器
+     * @return VB
+     */
+    fun getViewBinding() : VB {
+        /**
+         * 使用反射获取VB
+         * 正常情况下获取方式为
+         * VB.inflate(LayoutInflater.from(this))
+         */
+        val type = this.javaClass.genericSuperclass
+        val cls = (type as ParameterizedType).actualTypeArguments[0] as Class<VB>
+        val method = cls.getMethod("inflate", LayoutInflater::class.java)
+        return method.invoke(null, LayoutInflater.from(context)) as VB
+    }
 }

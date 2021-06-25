@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
 import com.aibfive.basetools.R
+import java.lang.reflect.ParameterizedType
 
 /**
  * Date : 2020/11/27/027
@@ -34,7 +35,17 @@ abstract class BaseDialogFragment<VB : ViewBinding> : DialogFragment(){
      * 获取视图绑定器
      * @return VB
      */
-    abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) : VB
+    fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) : VB{
+        /**
+         * 使用反射获取VB
+         * 正常情况下获取方式为
+         * VB.inflate(inflater, container, false)
+         */
+        val type = this.javaClass.genericSuperclass
+        val cls = (type as ParameterizedType).actualTypeArguments[0] as Class<VB>
+        val method = cls.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+        return method.invoke(null, inflater, container, false) as VB
+    }
 
     open abstract fun init()
 

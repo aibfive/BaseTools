@@ -14,10 +14,6 @@ class LoadingDialog : BaseDialog<DialogLoadingBinding> {
         setCanceledOnTouchOutside(false)
     }
 
-    override fun getViewBinding(): DialogLoadingBinding {
-        return DialogLoadingBinding.inflate(LayoutInflater.from(context))
-    }
-
     fun setHint(hint : String?) {
         if (TextUtils.isEmpty(hint)) {
             binding.tvHint.text = context.getString(R.string.loading)

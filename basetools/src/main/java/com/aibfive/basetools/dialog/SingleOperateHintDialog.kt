@@ -28,13 +28,6 @@ private constructor () : BaseDialogFragment<DialogSingleOperateHintBinding>(), V
 
     }
 
-    override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): DialogSingleOperateHintBinding {
-        return DialogSingleOperateHintBinding.inflate(inflater, container, false)
-    }
-
     override fun init() {
         if(builder.background != -1) {
             binding.clContainer.setBackgroundResource(builder.background)
