@@ -7,27 +7,35 @@
             type="com.aibfive.wanandroid.ui.home.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_200"
-            app:layout_constraintTop_toTopOf="parent"
-            app:data="@{view_model.bannerList}"/>
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0"
-            app:layout_constraintTop_toBottomOf="@id/banner"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"
+                app:layout_constraintTop_toTopOf="parent"
+                app:data="@{view_model.bannerList}"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:refreshLoadData="@{view_model.article}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </layout>

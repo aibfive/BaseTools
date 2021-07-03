@@ -8,14 +8,17 @@ import com.aibfive.wanandroid.network.Callback
 import com.aibfive.wanandroid.network.DefaultRepository
 import com.aibfive.wanandroid.network.HomeService
 import com.aibfive.wanandroid.network.RetrofitClient
+import com.aibfive.wanandroid.ui.base.PageModel
 import kotlinx.coroutines.withContext
 
 class HomeViewModel : BaseViewModel {
 
     var bannerList : MutableLiveData<List<BannerModel>>
+    val article : MutableLiveData<PageModel<ArticleModel>>
 
     constructor() : super(){
         bannerList = MutableLiveData()
+        article = MutableLiveData()
     }
 
     fun getBanner(){
@@ -33,5 +36,20 @@ class HomeViewModel : BaseViewModel {
             }
         )
     }
+
+    fun getHomeArticle(page : Int){
+        DefaultRepository.getData(false, {
+            RetrofitClient.getService<HomeService>().getHomeArticle(page)
+        }, object : Callback<PageModel<ArticleModel>>{
+            override fun onSuccess(data: PageModel<ArticleModel>) {
+                article.postValue(data)
+            }
+
+            override fun onFailed(errorCode: String, errorMsg: String) {
+                LogUtil.v(HomeViewModel::class.simpleName, "errorMsg-->$errorMsg")
+            }
+        })
+    }
+
 
 }

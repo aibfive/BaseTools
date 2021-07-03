@@ -26,6 +26,7 @@ class HomeFragment : MvvmFragment<FragmentHomeBinding, HomeViewModel>() {
     override fun handleData() {
         super.handleData()
         viewModel.getBanner()
+        viewModel.getHomeArticle(0)
     }
 
     override fun getViewModelClass(): Class<HomeViewModel> {
